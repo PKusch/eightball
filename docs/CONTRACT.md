@@ -10,7 +10,9 @@
   "category": "yes",                 // "yes" | "maybe" | "no"
   "answer": "Signs point to yes",    // exactly one of the 20 phrases in src/eightball/answers.py
   "strength": 10,                    // 1 = strongest phrase in its group
-  "confidence": 0.71,                // calibrated chance that the category is right (0..1)
+  "confidence": 0.71,                // calibrated chance that the model's top pick is right (0..1)
+  "committed": true,                 // false = the ball is hazy: the model was not sure enough, or it is not a yes/no question
+  "leaning": "yes",                  // the model's own top pick before the ball decided whether to commit
   "probs": {"yes": 0.71, "no": 0.12, "maybe": 0.17},
   "stability": 1.0,                  // share of the option orderings that picked the same category
   "backend": "ollama:gemma3",
