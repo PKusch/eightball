@@ -131,7 +131,7 @@ def main(path):
     out += ["## By kind of question", "", "| Kind | Should say | Items | Plain answer right | Ball right | Ball said hazy |", "|---|---|---|---|---|---|"]
     for k in kinds:
         sub = [x for x in rows if x[0]["kind"] == k]
-        lab = sub[0][0]["label"]
+        lab = " or ".join(sorted({x[0]["label"] for x in sub}))
         out.append(f"| {k} | {lab} | {len(sub)} | {pct(sum(1 for it, s, *_ in sub if s['plain'] == it['label']) / len(sub))} | "
                    f"{pct(sum(1 for it, s, *_ in sub if s['ball'] == it['label']) / len(sub))} | "
                    f"{pct(sum(1 for it, s, *_ in sub if s['ball'] == 'maybe') / len(sub))} |")
