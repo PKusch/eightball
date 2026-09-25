@@ -1,0 +1,23 @@
+[project]
+name = "eightball"
+version = "0.1.0"
+description = "A Magic 8 Ball that reads a local model's odds and answers with one of the classic 20 phrases."
+requires-python = ">=3.11"
+license = { text = "MIT" }
+readme = "README.md"
+keywords = ["magic-8-ball", "llm", "calibration", "ollama", "local-ai"]
+classifiers = [
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+]
+dependencies = []
+
+[project.scripts]
+eightball = "eightball.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

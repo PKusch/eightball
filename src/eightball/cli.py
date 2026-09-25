@@ -1,0 +1,81 @@
+"""Command line: ask a question, run the web page, or fit calibration from saved benchmark receipts."""
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+from .backend import BackendError, OllamaBackend
+from .calibrate import Calibration, fit
+from .engine import Ball
+from .mock import MockBackend
+
+CAL_DIR = Path(__file__).resolve().parents[2] / "calibration"
+
+
+def _slug(model: str) -> str:
+    return model.replace(":", "-").replace("/", "-")
+
+
+def _backend(a):
+    return MockBackend() if a.backend == "mock" else OllamaBackend(a.model, a.host)
+
+
+def _calibration(a) -> Calibration:
+    if a.calibration == "none":
+        return Calibration()
+    path = Path(a.calibration) if a.calibration else CAL_DIR / f"{_slug(a.model)}.json"
+    if path.exists():
+        return Calibration.load(path)
+    if a.calibration:
+        sys.exit(f"eightball: calibration file not found: {path}")
+    print(f"eightball: no calibration for {a.model} (looked for {path}); running uncalibrated", file=sys.stderr)
+    return Calibration()
+
+
+def _common(p):
+    p.add_argument("--backend", choices=["ollama", "mock"], default="ollama")
+    p.add_argument("--model", default="gemma3")
+    p.add_argument("--host", default="http://127.0.0.1:11434", help="where Ollama is listening")
+    p.add_argument("--calibration", help='a calibration file, or "none"; default: calibration/<model>.json if present')
+
+
+def main(argv: list[str] | None = None) -> None:
+    ap = argparse.ArgumentParser(prog="eightball", description="A Magic 8 Ball that reads a local model's odds.")
+    sub = ap.add_subparsers(dest="cmd", required=True)
+
+    a = sub.add_parser("ask", help="ask one question")
+    a.add_argument("question", nargs="+")
+    a.add_argument("--json", action="store_true", help="print the full answer as JSON")
+    _common(a)
+
+    s = sub.add_parser("serve", help="run the web page and the API")
+    s.add_argument("--port", type=int, default=8787)
+    s.add_argument("--bind", default="127.0.0.1")
+    s.add_argument("--cors", action="store_true", help="let other web pages call this server (off by default)")
+    _common(s)
+
+    c = sub.add_parser("calibrate", help="fit calibration from benchmark receipts (dev items only)")
+    c.add_argument("--receipts", required=True)
+    c.add_argument("--out", required=True)
+    c.add_argument("--target", type=float, default=0.9, help="accuracy wanted when the ball commits to yes or no")
+
+    args = ap.parse_args(argv)
+    try:
+        if args.cmd == "calibrate":
+            from .receipts import dev_samples
+            samples, model = dev_samples(args.receipts)
+            cal = fit(samples, model, args.target)
+            cal.save(args.out)
+            print(f"fitted on {cal.n_dev} dev items: temperature {cal.temperature}, threshold {cal.threshold} -> {args.out}")
+            return
+        ball = Ball(_backend(args), _calibration(args))
+        if args.cmd == "ask":
+            r = ball.ask(" ".join(args.question))
+            print(json.dumps(r, indent=2) if args.json else f"{r['answer']}   ({r['category']}, {round(r['confidence'] * 100)}% sure)")
+        else:
+            from .server import serve
+            serve(ball, args.bind, args.port, args.cors)
+    except (BackendError, ValueError) as e:
+        sys.exit(f"eightball: {e}")
