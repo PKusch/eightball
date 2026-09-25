@@ -1,0 +1,900 @@
+{"id": "wor-0001", "question": "Does the letter A come after the letter W in the alphabet?", "label": "no", "kind": "word", "split": "test"}
+{"id": "che-0001", "question": "Is lithium written as Li in chemistry?", "label": "yes", "kind": "chemistry", "split": "test"}
+{"id": "phy-0001", "question": "Is the freezing point of water 0 degrees Fahrenheit?", "label": "no", "kind": "physical", "split": "test"}
+{"id": "num-0001", "question": "Would 613 count as a prime number?", "label": "yes", "kind": "number", "split": "dev"}
+{"id": "cmp-0001", "question": "Would Mount Kilimanjaro be shorter than Ben Nevis?", "label": "no", "kind": "compare", "split": "dev"}
+{"id": "fut-0001", "question": "Is it going to rain in Manchester on 13 March 2028?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "cmp-0002", "question": "Is Russia smaller than Australia in area?", "label": "no", "kind": "compare", "split": "test"}
+{"id": "ope-0001", "question": "Tell me a joke", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "ari-0001", "question": "Will 687 - 71 come out at 616?", "label": "yes", "kind": "arithmetic", "split": "test"}
+{"id": "geo-0001", "question": "Does Helsinki lie north of Melbourne?", "label": "yes", "kind": "geo", "split": "dev"}
+{"id": "cal-0001", "question": "Are there 29 days in August?", "label": "no", "kind": "calendar", "split": "test"}
+{"id": "ani-0001", "question": "Does a bear count as a mammal?", "label": "yes", "kind": "animal", "split": "test"}
+{"id": "fut-0002", "question": "Is the next coin flip going to land on heads?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "che-0002", "question": "Is iron a solid at room temperature?", "label": "yes", "kind": "chemistry", "split": "test"}
+{"id": "tas-0001", "question": "Is sushi overrated?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "fut-0003", "question": "Does Bitcoin finish next month higher than it starts?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "geo-0002", "question": "Is Buenos Aires further north than Singapore?", "label": "no", "kind": "geo", "split": "dev"}
+{"id": "ope-0002", "question": "Tell me a poem about the sea", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "tas-0002", "question": "Is it a good idea to go camping in October?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "geo-0003", "question": "Is Oslo in the Southern Hemisphere?", "label": "no", "kind": "geo", "split": "test"}
+{"id": "pri-0001", "question": "Is my passport still in my desk?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "che-0003", "question": "Is the atomic number of lithium lower than that of bromine?", "label": "yes", "kind": "chemistry", "split": "dev"}
+{"id": "tas-0003", "question": "Is it boring to eat the same lunch every day?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "pri-0002", "question": "Is my brother at home right now?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "phy-0002", "question": "Are there 10,000 feet in a mile?", "label": "no", "kind": "physical", "split": "test"}
+{"id": "che-0004", "question": "Does Zn stand for zinc on the periodic table?", "label": "yes", "kind": "chemistry", "split": "test"}
+{"id": "cal-0002", "question": "Did 25 March 2004 fall on a Monday?", "label": "no", "kind": "calendar", "split": "dev"}
+{"id": "pri-0003", "question": "Does my date like my cooking?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "che-0005", "question": "Is silver a solid at room temperature?", "label": "yes", "kind": "chemistry", "split": "test"}
+{"id": "his-0001", "question": "Did the Great Fire of London happen in 1646?", "label": "no", "kind": "history", "split": "test"}
+{"id": "fut-0004", "question": "Will the temperature in Paris reach 25 degrees Celsius on 9 August 2028?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "pri-0004", "question": "Is there any milk left in my pantry?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "phy-0003", "question": "Is normal human body temperature about 20 degrees Celsius?", "label": "no", "kind": "physical", "split": "test"}
+{"id": "num-0002", "question": "Is 361 the square of a whole number?", "label": "yes", "kind": "number", "split": "test"}
+{"id": "phy-0004", "question": "Does a soccer team have 11 players on the pitch?", "label": "yes", "kind": "physical", "split": "test"}
+{"id": "tas-0004", "question": "Is pizza better than pasta?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "cal-0003", "question": "Does December come after March in the calendar year?", "label": "yes", "kind": "calendar", "split": "test"}
+{"id": "ani-0002", "question": "Would a zoologist call a turtle an amphibian?", "label": "no", "kind": "animal", "split": "test"}
+{"id": "pri-0005", "question": "Does my mother like my garden?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "num-0003", "question": "Is 585 a multiple of 13?", "label": "yes", "kind": "number", "split": "test"}
+{"id": "tas-0005", "question": "Does mint belong in chocolate?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "ari-0002", "question": "Would 72 divided by 4 come to 18?", "label": "yes", "kind": "arithmetic", "split": "dev"}
+{"id": "ani-0003", "question": "Does an eel count as a fish?", "label": "yes", "kind": "animal", "split": "test"}
+{"id": "geo-0004", "question": "Is London further north than Santiago?", "label": "yes", "kind": "geo", "split": "test"}
+{"id": "tas-0006", "question": "Should I move to a bigger city?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "ope-0003", "question": "Tuesday", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "fut-0005", "question": "Is the next playing card dealt to me going to be a spade or a club?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "tas-0007", "question": "Is football better than rugby?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "tas-0008", "question": "Is Star Wars the best film series?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "ope-0004", "question": "How many legs does a spider have?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "big-0001", "question": "Is 1.59 greater than 1.5?", "label": "yes", "kind": "bigger", "split": "test"}
+{"id": "phy-0005", "question": "Does light travel at about 300,000 kilometres per second?", "label": "yes", "kind": "physical", "split": "test"}
+{"id": "fut-0006", "question": "Does the next the Irish Lotto draw include the number 7?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "wor-0002", "question": "Is L the first letter of the word 'library'?", "label": "yes", "kind": "word", "split": "test"}
+{"id": "big-0002", "question": "Is 9531 larger than 5931?", "label": "yes", "kind": "bigger", "split": "test"}
+{"id": "che-0006", "question": "Does glucose have the formula O3?", "label": "no", "kind": "chemistry", "split": "dev"}
+{"id": "cmp-0003", "question": "Would the Eiffel Tower be shorter than the Burj Khalifa?", "label": "yes", "kind": "compare", "split": "test"}
+{"id": "ari-0003", "question": "Does 880 divided by 11 give 180?", "label": "no", "kind": "arithmetic", "split": "test"}
+{"id": "pri-0006", "question": "Is my uncle in a meeting right now?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "tas-0009", "question": "Is it a good idea to cut my own hair?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "ope-0005", "question": "What is the capital of Japan?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "num-0004", "question": "Is 3856 an even number?", "label": "yes", "kind": "number", "split": "test"}
+{"id": "che-0007", "question": "Is neon a gas at room temperature?", "label": "yes", "kind": "chemistry", "split": "dev"}
+{"id": "tas-0010", "question": "Should I quit my job?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "cap-0001", "question": "Is Amman the capital city of Jordan?", "label": "yes", "kind": "capital", "split": "test"}
+{"id": "ari-0004", "question": "Will 690 + 623 come out at 1323?", "label": "no", "kind": "arithmetic", "split": "test"}
+{"id": "tas-0011", "question": "Does cheese belong in an apple pie?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "ari-0005", "question": "Would 378 divided by 14 come to 27?", "label": "yes", "kind": "arithmetic", "split": "dev"}
+{"id": "ari-0006", "question": "Will 838 - 799 come out at 28?", "label": "no", "kind": "arithmetic", "split": "dev"}
+{"id": "fut-0007", "question": "Does the next Mega Millions draw include the number 9?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "wor-0003", "question": "Is there a letter L in the word 'candle'?", "label": "yes", "kind": "word", "split": "test"}
+{"id": "his-0002", "question": "Did the independence of India happen after the start of the First World War?", "label": "yes", "kind": "history", "split": "test"}
+{"id": "geo-0005", "question": "Does Morocco lie in Oceania?", "label": "no", "kind": "geo", "split": "test"}
+{"id": "tas-0012", "question": "Is it a good idea to get a tattoo on my arm?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "pri-0007", "question": "Will my exam results arrive this week?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "fut-0008", "question": "Will it rain in Vancouver on 24 December 2027?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "ani-0004", "question": "Would a zoologist call a kangaroo a mammal?", "label": "yes", "kind": "animal", "split": "test"}
+{"id": "ari-0007", "question": "Will 49 x 19 come out at 931?", "label": "yes", "kind": "arithmetic", "split": "dev"}
+{"id": "pri-0008", "question": "Is my ex thinking about me right now?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "che-0008", "question": "Does lead have a lower atomic number than bromine?", "label": "no", "kind": "chemistry", "split": "test"}
+{"id": "wor-0004", "question": "Is the word 'winter' longer than 4 letters?", "label": "yes", "kind": "word", "split": "dev"}
+{"id": "ope-0006", "question": "thanks", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "tas-0013", "question": "Is it rude to wear shoes inside someone's home?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "ani-0005", "question": "Can a lion lay eggs?", "label": "no", "kind": "animal", "split": "dev"}
+{"id": "geo-0006", "question": "Is Singapore further north than Madrid?", "label": "no", "kind": "geo", "split": "test"}
+{"id": "tas-0014", "question": "Would a front door look nicer in yellow than in orange?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "big-0003", "question": "Is 0.04 smaller than 0.1?", "label": "yes", "kind": "bigger", "split": "test"}
+{"id": "wor-0005", "question": "Does 'rotor' read the same backwards as forwards?", "label": "yes", "kind": "word", "split": "test"}
+{"id": "big-0004", "question": "Is 1498 more than 1948?", "label": "no", "kind": "bigger", "split": "test"}
+{"id": "ari-0008", "question": "Would 434 divided by 14 come to 31?", "label": "yes", "kind": "arithmetic", "split": "dev"}
+{"id": "num-0005", "question": "Is 2307 the square of a whole number?", "label": "no", "kind": "number", "split": "test"}
+{"id": "tas-0015", "question": "Is it fair to split the bill equally when one person drank more?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "tas-0016", "question": "Is coffee overrated?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "fut-0009", "question": "Does Tesla shares finish next month higher than it starts?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "cmp-0004", "question": "Would the Moon be bigger than the Sun?", "label": "no", "kind": "compare", "split": "dev"}
+{"id": "geo-0007", "question": "Is Norway located in Asia?", "label": "no", "kind": "geo", "split": "dev"}
+{"id": "ani-0006", "question": "Does a shark count as a mammal?", "label": "no", "kind": "animal", "split": "test"}
+{"id": "ope-0007", "question": "Write a poem about my grandmother", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "ari-0009", "question": "Does 44 x 9 make 396?", "label": "yes", "kind": "arithmetic", "split": "test"}
+{"id": "cap-0002", "question": "Is the capital of Angola Harare?", "label": "no", "kind": "capital", "split": "dev"}
+{"id": "che-0009", "question": "Is nickel written as Ni in chemistry?", "label": "yes", "kind": "chemistry", "split": "test"}
+{"id": "ani-0007", "question": "Is a lizard classed as a reptile?", "label": "yes", "kind": "animal", "split": "test"}
+{"id": "fut-0010", "question": "Would New Zealand win the Rugby World Cup if it were held next year?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "pri-0009", "question": "Will my tutor reply to my WhatsApp message today?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "cmp-0005", "question": "Would an elephant be lighter than an adult human?", "label": "no", "kind": "compare", "split": "test"}
+{"id": "ari-0010", "question": "Will 204 divided by 6 come out at 45?", "label": "no", "kind": "arithmetic", "split": "test"}
+{"id": "big-0005", "question": "Is 4907 more than 9407?", "label": "no", "kind": "bigger", "split": "test"}
+{"id": "num-0006", "question": "Is 1024 a perfect square?", "label": "yes", "kind": "number", "split": "test"}
+{"id": "fut-0011", "question": "Is Atletico Madrid going to score more goals than Sevilla the next time they meet?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "cmp-0006", "question": "Is Saturn farther from Earth than Jupiter?", "label": "yes", "kind": "compare", "split": "dev"}
+{"id": "cap-0003", "question": "Would a traveller find the capital of Italy in Sofia?", "label": "no", "kind": "capital", "split": "dev"}
+{"id": "fut-0012", "question": "Is the next card I draw from a shuffled deck going to be red?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "fut-0013", "question": "Is it going to rain in Portland on 28 June 2028?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "ani-0008", "question": "Does a bat count as a bird?", "label": "no", "kind": "animal", "split": "dev"}
+{"id": "cal-0004", "question": "Was 1900 a leap year?", "label": "no", "kind": "calendar", "split": "dev"}
+{"id": "wor-0006", "question": "Is B the first letter of the word 'bridge'?", "label": "yes", "kind": "word", "split": "dev"}
+{"id": "fut-0014", "question": "Will Brazil beat Argentina in their next match?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "cap-0004", "question": "Is Lima the capital city of Brazil?", "label": "no", "kind": "capital", "split": "dev"}
+{"id": "ani-0009", "question": "Can a monkey lay eggs?", "label": "no", "kind": "animal", "split": "test"}
+{"id": "pri-0010", "question": "Did I leave the washing machine on?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "cal-0005", "question": "Is November earlier in the year than January?", "label": "no", "kind": "calendar", "split": "test"}
+{"id": "pri-0011", "question": "Was my old friend online last night?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "cap-0005", "question": "Would a traveller find the capital of Croatia in Prague?", "label": "no", "kind": "capital", "split": "dev"}
+{"id": "tas-0017", "question": "Would a front door look nicer in purple than in pink?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "tas-0018", "question": "Is autumn the best season?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "wor-0007", "question": "Does the letter D come after the letter U in the alphabet?", "label": "no", "kind": "word", "split": "dev"}
+{"id": "cal-0006", "question": "Will 13 January 2035 be a Saturday?", "label": "yes", "kind": "calendar", "split": "test"}
+{"id": "pri-0012", "question": "Will my new sofa arrive by Friday?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "his-0003", "question": "Did the first voyage of Columbus across the Atlantic happen before the September 11 attacks?", "label": "yes", "kind": "history", "split": "test"}
+{"id": "tas-0019", "question": "Are books better than films?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "tas-0020", "question": "Should I write a novel?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "geo-0008", "question": "Would you find Poland in North America?", "label": "no", "kind": "geo", "split": "test"}
+{"id": "geo-0009", "question": "Is Stockholm north of Lima?", "label": "yes", "kind": "geo", "split": "test"}
+{"id": "wor-0008", "question": "Is N the first letter of the word 'bridge'?", "label": "no", "kind": "word", "split": "test"}
+{"id": "che-0010", "question": "Is zinc written as Zn in chemistry?", "label": "yes", "kind": "chemistry", "split": "test"}
+{"id": "cap-0006", "question": "Is Abuja the capital of Libya?", "label": "no", "kind": "capital", "split": "test"}
+{"id": "geo-0010", "question": "Is Slovakia a landlocked country?", "label": "yes", "kind": "geo", "split": "test"}
+{"id": "phy-0006", "question": "Does a soccer team have 15 players on the pitch?", "label": "no", "kind": "physical", "split": "test"}
+{"id": "pri-0013", "question": "Was my flatmate out drinking last night?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "ope-0008", "question": "Write a limerick about a baker", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "tas-0021", "question": "Would a front door look nicer in teal than in grey?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "ari-0011", "question": "Is the product of 37 and 82 equal to 3034?", "label": "yes", "kind": "arithmetic", "split": "test"}
+{"id": "cap-0007", "question": "Does Denmark have Copenhagen as its capital?", "label": "yes", "kind": "capital", "split": "dev"}
+{"id": "ari-0012", "question": "Does 840 divided by 15 give 45?", "label": "no", "kind": "arithmetic", "split": "test"}
+{"id": "che-0011", "question": "Is the atomic number of gold lower than that of iron?", "label": "no", "kind": "chemistry", "split": "dev"}
+{"id": "cap-0008", "question": "Is the capital of Chile Santiago?", "label": "yes", "kind": "capital", "split": "dev"}
+{"id": "wor-0009", "question": "Does the word 'garden' contain the letter E?", "label": "yes", "kind": "word", "split": "dev"}
+{"id": "cal-0007", "question": "Does May last 28 days?", "label": "no", "kind": "calendar", "split": "test"}
+{"id": "che-0012", "question": "Is Br the chemical symbol for bromine?", "label": "yes", "kind": "chemistry", "split": "test"}
+{"id": "phy-0007", "question": "Does a pentagon have 7 sides?", "label": "no", "kind": "physical", "split": "test"}
+{"id": "phy-0008", "question": "Is the freezing point of water 50 degrees Fahrenheit?", "label": "no", "kind": "physical", "split": "dev"}
+{"id": "tas-0022", "question": "Should I get a dog?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "cmp-0007", "question": "Is Neptune closer to Earth than the Moon?", "label": "no", "kind": "compare", "split": "dev"}
+{"id": "tas-0023", "question": "Should I learn the piano?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "wor-0010", "question": "Does the word 'pepper' end with the letter B?", "label": "no", "kind": "word", "split": "test"}
+{"id": "his-0004", "question": "Did the Great Fire of London happen in 1666?", "label": "yes", "kind": "history", "split": "dev"}
+{"id": "wor-0011", "question": "Can you find the letter D in 'pencil'?", "label": "no", "kind": "word", "split": "dev"}
+{"id": "geo-0011", "question": "Would you find Uluru in South America?", "label": "no", "kind": "geo", "split": "test"}
+{"id": "cap-0009", "question": "Would a traveller find the capital of Russia in Moscow?", "label": "yes", "kind": "capital", "split": "test"}
+{"id": "ope-0009", "question": "Why do leaves fall in autumn?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "wor-0012", "question": "Does the word 'button' start with the letter B?", "label": "yes", "kind": "word", "split": "test"}
+{"id": "tas-0024", "question": "Is Christmas overrated?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "phy-0009", "question": "Does a week have 7 days?", "label": "yes", "kind": "physical", "split": "test"}
+{"id": "wor-0013", "question": "Is the word 'lantern' longer than 9 letters?", "label": "no", "kind": "word", "split": "test"}
+{"id": "num-0007", "question": "Would 1024 be a perfect square?", "label": "yes", "kind": "number", "split": "test"}
+{"id": "pri-0014", "question": "Does my neighbour still have my drill?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "cal-0008", "question": "Will 2 January 2028 fall on a Sunday?", "label": "yes", "kind": "calendar", "split": "test"}
+{"id": "phy-0010", "question": "Is normal human body temperature about 37 degrees Celsius?", "label": "yes", "kind": "physical", "split": "test"}
+{"id": "wor-0014", "question": "Does the word 'shadow' start with the letter S?", "label": "yes", "kind": "word", "split": "dev"}
+{"id": "che-0013", "question": "Would you find hydrogen as a solid at room temperature?", "label": "no", "kind": "chemistry", "split": "test"}
+{"id": "geo-0012", "question": "Does the Great Barrier Reef lie in Oceania?", "label": "yes", "kind": "geo", "split": "test"}
+{"id": "pri-0015", "question": "Will my pizza arrive today?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "cmp-0008", "question": "Is Mount Everest shorter than Mount Fuji?", "label": "no", "kind": "compare", "split": "test"}
+{"id": "ope-0010", "question": "How many players are on a football team?", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "cmp-0009", "question": "Is Mount Kosciuszko shorter than Mount Everest?", "label": "yes", "kind": "compare", "split": "test"}
+{"id": "che-0014", "question": "Would you find lead as a solid at room temperature?", "label": "yes", "kind": "chemistry", "split": "test"}
+{"id": "cal-0009", "question": "Did 1900 have 366 days?", "label": "no", "kind": "calendar", "split": "test"}
+{"id": "fut-0015", "question": "Does crude oil finish next month higher than it starts?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "cal-0010", "question": "Will 19 June 2030 be a Wednesday?", "label": "yes", "kind": "calendar", "split": "test"}
+{"id": "ope-0011", "question": "How do I change a tyre?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "cap-0010", "question": "Does Spain have Stockholm as its capital?", "label": "no", "kind": "capital", "split": "test"}
+{"id": "geo-0013", "question": "Does Jakarta lie south of Rome?", "label": "yes", "kind": "geo", "split": "dev"}
+{"id": "ani-0010", "question": "Is a chameleon a reptile?", "label": "yes", "kind": "animal", "split": "dev"}
+{"id": "fut-0016", "question": "Does the next roll of two dice add up to more than seven?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "cap-0011", "question": "Does Jordan have Baghdad as its capital?", "label": "no", "kind": "capital", "split": "dev"}
+{"id": "fut-0017", "question": "Does the next Powerball draw include the number 11?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "ope-0012", "question": "Why do birds sing?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "fut-0018", "question": "Would Spain beat Germany if they met in a rematch next season?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "pri-0016", "question": "Is my teacher at work right now?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "pri-0017", "question": "Is there any coffee left in my bread bin?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "phy-0011", "question": "Are there 11 months in a year?", "label": "no", "kind": "physical", "split": "dev"}
+{"id": "num-0008", "question": "Is 78981 an even number?", "label": "no", "kind": "number", "split": "test"}
+{"id": "ari-0013", "question": "Is 650 divided by 10 equal to 66?", "label": "no", "kind": "arithmetic", "split": "dev"}
+{"id": "tas-0025", "question": "Is it wrong to eat meat?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "geo-0014", "question": "Does Lake Victoria lie in Asia?", "label": "no", "kind": "geo", "split": "test"}
+{"id": "cal-0011", "question": "Did 29 July 2006 fall on a Saturday?", "label": "yes", "kind": "calendar", "split": "dev"}
+{"id": "fut-0019", "question": "Is Juventus going to score more goals than Inter Milan the next time they meet?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "pri-0018", "question": "Will my mother-in-law reply to my note today?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "pri-0019", "question": "Has my aunt noticed my sunburn?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "phy-0012", "question": "Does a decade last 50 years?", "label": "no", "kind": "physical", "split": "dev"}
+{"id": "his-0005", "question": "Did the sealing of Magna Carta happen before the launch of Sputnik 1?", "label": "yes", "kind": "history", "split": "test"}
+{"id": "ani-0011", "question": "Does a flamingo count as a bird?", "label": "yes", "kind": "animal", "split": "test"}
+{"id": "cmp-0010", "question": "Is Argentina smaller than Brazil in area?", "label": "yes", "kind": "compare", "split": "dev"}
+{"id": "big-0006", "question": "Is 8.72 greater than 8.7?", "label": "yes", "kind": "bigger", "split": "dev"}
+{"id": "ope-0013", "question": "List three fruits", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "ope-0014", "question": "What colour is the sun?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "num-0009", "question": "Does 7 divide evenly into 125?", "label": "no", "kind": "number", "split": "dev"}
+{"id": "cap-0012", "question": "Does Vietnam have Hanoi as its capital?", "label": "yes", "kind": "capital", "split": "test"}
+{"id": "geo-0015", "question": "Would you find the Rocky Mountains in North America?", "label": "yes", "kind": "geo", "split": "dev"}
+{"id": "ari-0014", "question": "Is the sum of 181 and 483 equal to 663?", "label": "no", "kind": "arithmetic", "split": "test"}
+{"id": "cal-0012", "question": "Did 1916 have 366 days?", "label": "yes", "kind": "calendar", "split": "test"}
+{"id": "cal-0013", "question": "Does October come after December in the calendar year?", "label": "no", "kind": "calendar", "split": "dev"}
+{"id": "che-0015", "question": "Would you find copper as a solid at room temperature?", "label": "yes", "kind": "chemistry", "split": "test"}
+{"id": "tas-0026", "question": "Is New Year's Eve overrated?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "cal-0014", "question": "Did 3 March 1996 fall on a Sunday?", "label": "yes", "kind": "calendar", "split": "test"}
+{"id": "num-0010", "question": "Is 18142 an even number?", "label": "yes", "kind": "number", "split": "test"}
+{"id": "his-0006", "question": "Did the start of the First World War happen before the end of the Second World War?", "label": "yes", "kind": "history", "split": "test"}
+{"id": "fut-0020", "question": "Would France win the Rugby World Cup if it were held next year?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "cmp-0011", "question": "Is Jupiter farther from Earth than the Sun?", "label": "yes", "kind": "compare", "split": "test"}
+{"id": "his-0007", "question": "Did the Great Fire of London happen in 1636?", "label": "no", "kind": "history", "split": "test"}
+{"id": "num-0011", "question": "Is 144 a multiple of 8?", "label": "yes", "kind": "number", "split": "test"}
+{"id": "phy-0013", "question": "Does a decade last 12 years?", "label": "no", "kind": "physical", "split": "dev"}
+{"id": "fut-0021", "question": "Is the S&P 500 going to close higher tomorrow than it did today?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "ope-0015", "question": "What time is it in Tokyo?", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "cap-0013", "question": "Is the capital of Senegal Dakar?", "label": "yes", "kind": "capital", "split": "test"}
+{"id": "his-0008", "question": "Did the first voyage of Columbus across the Atlantic happen before the break-up of the Soviet Union?", "label": "yes", "kind": "history", "split": "test"}
+{"id": "ani-0012", "question": "Is a dolphin a fish?", "label": "no", "kind": "animal", "split": "test"}
+{"id": "his-0009", "question": "Did the assassination of Abraham Lincoln happen before the first powered flight by the Wright brothers?", "label": "yes", "kind": "history", "split": "test"}
+{"id": "num-0012", "question": "Is 117 a multiple of 3?", "label": "yes", "kind": "number", "split": "test"}
+{"id": "fut-0022", "question": "Is Real Madrid going to score more goals than Barcelona the next time they meet?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "fut-0023", "question": "Is it going to rain in Paris on 26 January 2028?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "che-0016", "question": "Is P the chemical symbol for silver?", "label": "no", "kind": "chemistry", "split": "test"}
+{"id": "cap-0014", "question": "Is Abuja the capital city of Angola?", "label": "no", "kind": "capital", "split": "test"}
+{"id": "ari-0015", "question": "Does 491 minus 172 leave 328?", "label": "no", "kind": "arithmetic", "split": "dev"}
+{"id": "cmp-0012", "question": "Is Canada larger than Mexico in area?", "label": "yes", "kind": "compare", "split": "test"}
+{"id": "tas-0027", "question": "Is it rude to reply to messages a week late?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "cmp-0013", "question": "Is Saturn closer to Earth than the Sun?", "label": "no", "kind": "compare", "split": "test"}
+{"id": "wor-0015", "question": "Is there a letter G in the word 'bridge'?", "label": "yes", "kind": "word", "split": "dev"}
+{"id": "fut-0024", "question": "Is the temperature in Berlin going to reach 25 degrees Celsius on 17 August 2028?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "pri-0020", "question": "Is my roommate out walking the dog right now?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "cmp-0014", "question": "Is Mount Kosciuszko shorter than Mount Kilimanjaro?", "label": "yes", "kind": "compare", "split": "dev"}
+{"id": "cmp-0015", "question": "Is a tortoise faster than a walking person?", "label": "no", "kind": "compare", "split": "dev"}
+{"id": "fut-0025", "question": "Does silver finish next month higher than it starts?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "ani-0013", "question": "Does a toad count as a mammal?", "label": "no", "kind": "animal", "split": "test"}
+{"id": "ani-0014", "question": "Does a chicken lay eggs?", "label": "yes", "kind": "animal", "split": "test"}
+{"id": "cal-0015", "question": "Did 27 September 1982 fall on a Monday?", "label": "yes", "kind": "calendar", "split": "dev"}
+{"id": "geo-0016", "question": "Would you find the Himalayas in Asia?", "label": "yes", "kind": "geo", "split": "dev"}
+{"id": "tas-0028", "question": "Is the Mona Lisa overrated?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "his-0010", "question": "Was Sputnik 1 launched in 1942?", "label": "no", "kind": "history", "split": "test"}
+{"id": "pri-0021", "question": "Is my wallet still in my drawer?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "cal-0016", "question": "Does February 2024 have 28 days?", "label": "no", "kind": "calendar", "split": "test"}
+{"id": "ope-0016", "question": "Where is Mount Everest?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "cmp-0016", "question": "Is Japan larger than Luxembourg in area?", "label": "yes", "kind": "compare", "split": "test"}
+{"id": "fut-0026", "question": "Will the next die roll be higher than three?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "fut-0027", "question": "Would France beat England if they met in a rematch next season?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "ope-0017", "question": "How many minutes are in a day?", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "ope-0018", "question": "Why is the sea salty?", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "fut-0028", "question": "Will France win the next football World Cup?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "ari-0016", "question": "Would 684 divided by 9 come to 78?", "label": "no", "kind": "arithmetic", "split": "dev"}
+{"id": "tas-0029", "question": "Is Friday the best day of the week?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "ani-0015", "question": "Does a duck lay eggs?", "label": "yes", "kind": "animal", "split": "test"}
+{"id": "ope-0019", "question": "Who composed the Four Seasons?", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "wor-0016", "question": "Does the word 'ticket' have more than 7 letters?", "label": "no", "kind": "word", "split": "dev"}
+{"id": "cmp-0017", "question": "Would the Eiffel Tower be taller than the Great Pyramid of Giza?", "label": "yes", "kind": "compare", "split": "test"}
+{"id": "pri-0022", "question": "Is my diary still in my coat pocket?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "che-0017", "question": "Would a chemist write sulfuric acid as HCl?", "label": "no", "kind": "chemistry", "split": "test"}
+{"id": "pri-0023", "question": "Will my manager reply to my note today?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "tas-0030", "question": "Is reality television overrated?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "ope-0020", "question": "How many days are in a leap year?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "num-0013", "question": "Is 17858 an odd number?", "label": "no", "kind": "number", "split": "dev"}
+{"id": "his-0011", "question": "Did Columbus first sail across the Atlantic in 1462?", "label": "no", "kind": "history", "split": "test"}
+{"id": "fut-0029", "question": "Does the next roll of a die show an even number?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "ope-0021", "question": "Who invented the telephone?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "cal-0017", "question": "Is March earlier in the year than December?", "label": "yes", "kind": "calendar", "split": "dev"}
+{"id": "wor-0017", "question": "Is the word 'summer' longer than 6 letters?", "label": "no", "kind": "word", "split": "test"}
+{"id": "geo-0017", "question": "Is Oslo north of Miami?", "label": "yes", "kind": "geo", "split": "test"}
+{"id": "phy-0014", "question": "Are there 360 degrees in a full circle?", "label": "yes", "kind": "physical", "split": "dev"}
+{"id": "fut-0030", "question": "Does the Nikkei 225 finish next month higher than it starts?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "wor-0018", "question": "Does 'blanket' begin with B?", "label": "yes", "kind": "word", "split": "test"}
+{"id": "fut-0031", "question": "Is the roulette ball going to land on black at the next spin?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "ani-0016", "question": "Does a pigeon count as a bird?", "label": "yes", "kind": "animal", "split": "test"}
+{"id": "phy-0015", "question": "Does a decade last 10 years?", "label": "yes", "kind": "physical", "split": "test"}
+{"id": "geo-0018", "question": "Does Helsinki lie in the Southern Hemisphere?", "label": "no", "kind": "geo", "split": "test"}
+{"id": "his-0012", "question": "Was Abraham Lincoln assassinated in 1865?", "label": "yes", "kind": "history", "split": "dev"}
+{"id": "cap-0015", "question": "Is the capital of Russia Rome?", "label": "no", "kind": "capital", "split": "test"}
+{"id": "pri-0024", "question": "Has my aunt noticed my new shoes?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "tas-0031", "question": "Is camping overrated?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "fut-0032", "question": "Is the next card I turn over going to be a black card?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "cap-0016", "question": "Does Poland have Rome as its capital?", "label": "no", "kind": "capital", "split": "test"}
+{"id": "che-0018", "question": "Would you find mercury as a solid at room temperature?", "label": "no", "kind": "chemistry", "split": "dev"}
+{"id": "geo-0019", "question": "Does Norway have a sea coastline?", "label": "yes", "kind": "geo", "split": "dev"}
+{"id": "che-0019", "question": "Does glucose have the formula CH4?", "label": "no", "kind": "chemistry", "split": "test"}
+{"id": "che-0020", "question": "Does iodine have a higher atomic number than helium?", "label": "yes", "kind": "chemistry", "split": "dev"}
+{"id": "cap-0017", "question": "Is Canberra the capital of Australia?", "label": "yes", "kind": "capital", "split": "test"}
+{"id": "cal-0018", "question": "Did 29 August 2013 fall on a Thursday?", "label": "yes", "kind": "calendar", "split": "test"}
+{"id": "ope-0022", "question": "chocolate", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "cal-0019", "question": "Was 2025 a leap year?", "label": "no", "kind": "calendar", "split": "test"}
+{"id": "ari-0017", "question": "Would 30 x 71 come to 2140?", "label": "no", "kind": "arithmetic", "split": "test"}
+{"id": "che-0021", "question": "Would you find silver as a gas at room temperature?", "label": "no", "kind": "chemistry", "split": "test"}
+{"id": "num-0014", "question": "Is 403 a prime number?", "label": "no", "kind": "number", "split": "test"}
+{"id": "phy-0016", "question": "Does a standard piano have 88 keys?", "label": "yes", "kind": "physical", "split": "test"}
+{"id": "ari-0018", "question": "Would 46 x 13 come to 598?", "label": "yes", "kind": "arithmetic", "split": "test"}
+{"id": "che-0022", "question": "Would a chemist write table salt as NaCl?", "label": "yes", "kind": "chemistry", "split": "dev"}
+{"id": "ani-0017", "question": "Is a chicken classed as a reptile?", "label": "no", "kind": "animal", "split": "dev"}
+{"id": "cap-0018", "question": "Does Nepal have Kathmandu as its capital?", "label": "yes", "kind": "capital", "split": "test"}
+{"id": "tas-0032", "question": "Does mayonnaise belong on chips?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "cmp-0018", "question": "Is the Seine shorter than the Rhine?", "label": "yes", "kind": "compare", "split": "dev"}
+{"id": "ari-0019", "question": "Would 201 + 358 come to 559?", "label": "yes", "kind": "arithmetic", "split": "dev"}
+{"id": "cap-0019", "question": "Is the capital of Nigeria Kampala?", "label": "no", "kind": "capital", "split": "dev"}
+{"id": "ope-0023", "question": "Describe your perfect day", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "tas-0033", "question": "Are mountains better than beaches?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "geo-0020", "question": "Is the Amazon rainforest located in North America?", "label": "no", "kind": "geo", "split": "dev"}
+{"id": "tas-0034", "question": "Would a front door look nicer in red than in black?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "his-0013", "question": "Did the Soviet Union break up in 1991?", "label": "yes", "kind": "history", "split": "test"}
+{"id": "ani-0018", "question": "Does a dolphin lay eggs?", "label": "no", "kind": "animal", "split": "test"}
+{"id": "cmp-0019", "question": "Is Mont Blanc shorter than Mount Kosciuszko?", "label": "no", "kind": "compare", "split": "test"}
+{"id": "ope-0024", "question": "What is the capital of Australia?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "fut-0033", "question": "Will Microsoft shares close higher next Friday than it did this Friday?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "geo-0021", "question": "Is the Ganges located in Oceania?", "label": "no", "kind": "geo", "split": "test"}
+{"id": "cmp-0020", "question": "Would Mont Blanc be taller than Ben Nevis?", "label": "yes", "kind": "compare", "split": "test"}
+{"id": "geo-0022", "question": "Is Melbourne further south than Stockholm?", "label": "yes", "kind": "geo", "split": "test"}
+{"id": "phy-0017", "question": "Does a kilometre contain 100 metres?", "label": "no", "kind": "physical", "split": "test"}
+{"id": "cal-0020", "question": "Does June come before January in the year?", "label": "no", "kind": "calendar", "split": "test"}
+{"id": "tas-0035", "question": "Would a front door look nicer in navy than in brown?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "geo-0023", "question": "Is Lake Victoria in Africa?", "label": "yes", "kind": "geo", "split": "test"}
+{"id": "ari-0020", "question": "Would 989 + 787 come to 1776?", "label": "yes", "kind": "arithmetic", "split": "test"}
+{"id": "cmp-0021", "question": "Would the Moon be bigger than Jupiter?", "label": "no", "kind": "compare", "split": "test"}
+{"id": "ope-0025", "question": "What is the boiling point of water?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "ani-0019", "question": "Is a cow able to fly?", "label": "no", "kind": "animal", "split": "dev"}
+{"id": "geo-0024", "question": "Is Madrid south of London?", "label": "yes", "kind": "geo", "split": "test"}
+{"id": "cap-0020", "question": "Is the capital of Fiji Suva?", "label": "yes", "kind": "capital", "split": "test"}
+{"id": "ope-0026", "question": "Why do onions make us cry?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "pri-0025", "question": "Has my landlady noticed my mistake?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "num-0015", "question": "Is 239 a prime number?", "label": "yes", "kind": "number", "split": "test"}
+{"id": "wor-0019", "question": "Does the word 'velvet' start with the letter N?", "label": "no", "kind": "word", "split": "test"}
+{"id": "pri-0026", "question": "Will my landlord reply to my email today?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "his-0014", "question": "Was Magna Carta sealed in 1215?", "label": "yes", "kind": "history", "split": "test"}
+{"id": "pri-0027", "question": "Did I lock the front door?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "ope-0027", "question": "Why is the moon round?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "cap-0021", "question": "Is Madrid the capital city of Sweden?", "label": "no", "kind": "capital", "split": "test"}
+{"id": "ope-0028", "question": "Tell me a secret", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "fut-0034", "question": "Is Spain going to win the next football World Cup?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "fut-0035", "question": "Will Argentina win the next football World Cup?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "ari-0021", "question": "Is 44 x 19 equal to 836?", "label": "yes", "kind": "arithmetic", "split": "dev"}
+{"id": "tas-0036", "question": "Should I dye my hair blue?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "cmp-0022", "question": "Would the Great Pyramid of Giza be shorter than Big Ben?", "label": "no", "kind": "compare", "split": "dev"}
+{"id": "pri-0028", "question": "Did I leave the coffee machine on?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "his-0015", "question": "Did the sealing of Magna Carta happen after the adoption of the US Declaration of Independence?", "label": "no", "kind": "history", "split": "dev"}
+{"id": "tas-0037", "question": "Should I learn French?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "geo-0025", "question": "Does Lake Victoria lie in Oceania?", "label": "no", "kind": "geo", "split": "dev"}
+{"id": "ani-0020", "question": "Is a seal classed as a fish?", "label": "no", "kind": "animal", "split": "test"}
+{"id": "ari-0022", "question": "Will 325 - 212 come out at 113?", "label": "yes", "kind": "arithmetic", "split": "test"}
+{"id": "cap-0022", "question": "Is the capital of Romania Bucharest?", "label": "yes", "kind": "capital", "split": "dev"}
+{"id": "num-0016", "question": "Would 3025 be a perfect square?", "label": "yes", "kind": "number", "split": "test"}
+{"id": "tas-0038", "question": "Is Italy the best country to visit?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "fut-0036", "question": "Does the next Thunderball draw include the number 22?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "ope-0029", "question": "Who discovered penicillin?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "cap-0023", "question": "Is the capital of Saudi Arabia Seoul?", "label": "no", "kind": "capital", "split": "test"}
+{"id": "pri-0029", "question": "Did I leave the tumble dryer on?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "geo-0026", "question": "Is Switzerland a landlocked country?", "label": "yes", "kind": "geo", "split": "test"}
+{"id": "cal-0021", "question": "Does January have 31 days?", "label": "yes", "kind": "calendar", "split": "test"}
+{"id": "ani-0021", "question": "Can a duck lay eggs?", "label": "yes", "kind": "animal", "split": "dev"}
+{"id": "pri-0030", "question": "Did I lock the back door?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "ari-0023", "question": "Does 87 x 19 make 1652?", "label": "no", "kind": "arithmetic", "split": "test"}
+{"id": "ani-0022", "question": "Does a dolphin count as a fish?", "label": "no", "kind": "animal", "split": "dev"}
+{"id": "ope-0030", "question": "Write a poem about autumn", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "tas-0039", "question": "Is Beethoven better than Mozart?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "phy-0018", "question": "Does pure water freeze at 0 degrees Celsius?", "label": "yes", "kind": "physical", "split": "test"}
+{"id": "his-0016", "question": "Was Magna Carta sealed in 1230?", "label": "no", "kind": "history", "split": "test"}
+{"id": "cap-0024", "question": "Would a traveller find the capital of Cuba in Havana?", "label": "yes", "kind": "capital", "split": "dev"}
+{"id": "num-0017", "question": "Is 3826 an even number?", "label": "yes", "kind": "number", "split": "dev"}
+{"id": "ope-0031", "question": "Tell me a riddle", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "ani-0023", "question": "Is a mosquito able to fly?", "label": "yes", "kind": "animal", "split": "test"}
+{"id": "che-0023", "question": "Is sodium a gas at room temperature?", "label": "no", "kind": "chemistry", "split": "test"}
+{"id": "pri-0031", "question": "Can I trust my new boss with a secret?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "ari-0024", "question": "Does 928 plus 917 make 1945?", "label": "no", "kind": "arithmetic", "split": "test"}
+{"id": "cal-0022", "question": "Will 5 December 2026 be a Saturday?", "label": "yes", "kind": "calendar", "split": "test"}
+{"id": "cmp-0023", "question": "Would the Nile be shorter than the Seine?", "label": "no", "kind": "compare", "split": "test"}
+{"id": "cal-0023", "question": "Was 15 December 1983 a Thursday?", "label": "yes", "kind": "calendar", "split": "test"}
+{"id": "fut-0037", "question": "Will Brazil win the next football World Cup?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "cal-0024", "question": "Is 2040 a leap year?", "label": "yes", "kind": "calendar", "split": "test"}
+{"id": "geo-0027", "question": "Is Vienna south of Johannesburg?", "label": "no", "kind": "geo", "split": "dev"}
+{"id": "cmp-0024", "question": "Does the United States have fewer people than Germany?", "label": "no", "kind": "compare", "split": "test"}
+{"id": "wor-0020", "question": "Does the letter X come after the letter A in the alphabet?", "label": "yes", "kind": "word", "split": "test"}
+{"id": "ani-0024", "question": "Is a kangaroo an arachnid?", "label": "no", "kind": "animal", "split": "test"}
+{"id": "big-0007", "question": "Is 1.79 smaller than 1.7?", "label": "no", "kind": "bigger", "split": "test"}
+{"id": "ope-0032", "question": "When was the printing press invented?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "wor-0021", "question": "Is there a letter T in the word 'castle'?", "label": "yes", "kind": "word", "split": "dev"}
+{"id": "pri-0032", "question": "Will my delivery arrive before noon?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "phy-0019", "question": "Does a century last 100 years?", "label": "yes", "kind": "physical", "split": "test"}
+{"id": "tas-0040", "question": "Would a front door look nicer in green than in blue?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "cal-0025", "question": "Was 11 May 1971 a Sunday?", "label": "no", "kind": "calendar", "split": "test"}
+{"id": "pri-0033", "question": "Does my neighbour like my new flat?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "phy-0020", "question": "Are there 180 degrees in a full circle?", "label": "no", "kind": "physical", "split": "test"}
+{"id": "tas-0041", "question": "Is modern art overrated?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "fut-0038", "question": "Will it snow in Toronto on 12 January 2027?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "ani-0025", "question": "Would a zoologist call a gecko a reptile?", "label": "yes", "kind": "animal", "split": "test"}
+{"id": "big-0008", "question": "Is 3507 larger than 3057?", "label": "yes", "kind": "bigger", "split": "dev"}
+{"id": "wor-0022", "question": "Does the word 'carpet' have more than 6 letters?", "label": "no", "kind": "word", "split": "test"}
+{"id": "cap-0025", "question": "Is the capital of Australia Suva?", "label": "no", "kind": "capital", "split": "test"}
+{"id": "tas-0042", "question": "Is it lazy to order takeaway every Friday?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "cap-0026", "question": "Would a traveller find the capital of Pakistan in Ankara?", "label": "no", "kind": "capital", "split": "test"}
+{"id": "ari-0025", "question": "Will 67 x 20 come out at 1240?", "label": "no", "kind": "arithmetic", "split": "dev"}
+{"id": "cmp-0025", "question": "Is the Sun bigger than Neptune?", "label": "yes", "kind": "compare", "split": "test"}
+{"id": "phy-0021", "question": "Does a week have 10 days?", "label": "no", "kind": "physical", "split": "dev"}
+{"id": "ani-0026", "question": "Can a pigeon fly?", "label": "yes", "kind": "animal", "split": "test"}
+{"id": "pri-0034", "question": "Is there any rice left in my cupboard?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "wor-0023", "question": "Is the word 'kitchen' shorter than 5 letters?", "label": "no", "kind": "word", "split": "dev"}
+{"id": "pri-0035", "question": "Is my grandfather thinking about me right now?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "pri-0036", "question": "Is my old teacher thinking about me right now?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "fut-0039", "question": "Will Boca Juniors beat River Plate in their next match?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "big-0009", "question": "Is 8934 less than 9834?", "label": "yes", "kind": "bigger", "split": "test"}
+{"id": "tas-0043", "question": "Should I start a podcast?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "ani-0027", "question": "Is a turtle classed as an amphibian?", "label": "no", "kind": "animal", "split": "test"}
+{"id": "cal-0026", "question": "Does December have 28 days?", "label": "no", "kind": "calendar", "split": "test"}
+{"id": "cal-0027", "question": "Does September last 30 days?", "label": "yes", "kind": "calendar", "split": "test"}
+{"id": "cal-0028", "question": "Will 27 January 2035 fall on a Saturday?", "label": "yes", "kind": "calendar", "split": "test"}
+{"id": "pri-0037", "question": "Did I leave the kettle on?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "his-0017", "question": "Did the French Revolution begin in 1799?", "label": "no", "kind": "history", "split": "test"}
+{"id": "big-0010", "question": "Is 3637 greater than 3367?", "label": "yes", "kind": "bigger", "split": "test"}
+{"id": "ope-0033", "question": "What is the capital of Canada?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "tas-0044", "question": "Is chess better than draughts?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "ari-0026", "question": "Does 833 minus 747 leave 84?", "label": "no", "kind": "arithmetic", "split": "test"}
+{"id": "big-0011", "question": "Is 9.5 more than 9.57?", "label": "no", "kind": "bigger", "split": "test"}
+{"id": "ari-0027", "question": "Is 723 - 676 equal to 47?", "label": "yes", "kind": "arithmetic", "split": "test"}
+{"id": "che-0024", "question": "Is sulfur written as Ar in chemistry?", "label": "no", "kind": "chemistry", "split": "test"}
+{"id": "cap-0027", "question": "Is the capital of Venezuela Caracas?", "label": "yes", "kind": "capital", "split": "test"}
+{"id": "che-0025", "question": "Is H2O the chemical formula for water?", "label": "yes", "kind": "chemistry", "split": "test"}
+{"id": "ari-0028", "question": "Is the product of 77 and 39 equal to 3103?", "label": "no", "kind": "arithmetic", "split": "test"}
+{"id": "fut-0040", "question": "Will the United States win the next Women's World Cup?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "wor-0024", "question": "Does the letter W come before the letter D in the alphabet?", "label": "no", "kind": "word", "split": "test"}
+{"id": "big-0012", "question": "Is 4363 more than 4633?", "label": "no", "kind": "bigger", "split": "dev"}
+{"id": "cal-0029", "question": "Did 21 March 1966 fall on a Wednesday?", "label": "no", "kind": "calendar", "split": "dev"}
+{"id": "big-0013", "question": "Is 2.5 larger than 2.43?", "label": "yes", "kind": "bigger", "split": "test"}
+{"id": "wor-0025", "question": "Is the word 'blanket' longer than 9 letters?", "label": "no", "kind": "word", "split": "test"}
+{"id": "che-0026", "question": "Does carbon monoxide have the formula CO2?", "label": "no", "kind": "chemistry", "split": "test"}
+{"id": "wor-0026", "question": "Does the word 'carpet' contain the letter U?", "label": "no", "kind": "word", "split": "dev"}
+{"id": "wor-0027", "question": "Is V earlier in the alphabet than A?", "label": "no", "kind": "word", "split": "test"}
+{"id": "ope-0034", "question": "How many hearts does an octopus have?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "ari-0029", "question": "Would 351 + 523 come to 873?", "label": "no", "kind": "arithmetic", "split": "dev"}
+{"id": "wor-0028", "question": "Does the word 'market' start with the letter Y?", "label": "no", "kind": "word", "split": "dev"}
+{"id": "ope-0035", "question": "Who wrote Pride and Prejudice?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "tas-0045", "question": "Should I buy a bike?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "pri-0038", "question": "Did I lock the garage?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "phy-0022", "question": "Does a cube have 6 faces?", "label": "yes", "kind": "physical", "split": "dev"}
+{"id": "geo-0028", "question": "Does the Sahara Desert lie in North America?", "label": "no", "kind": "geo", "split": "dev"}
+{"id": "fut-0041", "question": "Would Portugal beat Croatia if they met in a rematch next season?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "cmp-0026", "question": "Is Japan larger than Canada in area?", "label": "no", "kind": "compare", "split": "test"}
+{"id": "pri-0039", "question": "Is my boss thinking about me right now?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "num-0018", "question": "Would 137 count as a prime number?", "label": "yes", "kind": "number", "split": "test"}
+{"id": "cmp-0027", "question": "Is the Sun bigger than Mars?", "label": "yes", "kind": "compare", "split": "test"}
+{"id": "cap-0028", "question": "Is Nairobi the capital city of Libya?", "label": "no", "kind": "capital", "split": "test"}
+{"id": "cmp-0028", "question": "Would Australia have fewer people than Germany?", "label": "yes", "kind": "compare", "split": "dev"}
+{"id": "his-0018", "question": "Was Abraham Lincoln assassinated in 1850?", "label": "no", "kind": "history", "split": "test"}
+{"id": "ani-0028", "question": "Does a penguin lay eggs?", "label": "yes", "kind": "animal", "split": "dev"}
+{"id": "cmp-0029", "question": "Would the Thames be longer than the Danube?", "label": "no", "kind": "compare", "split": "dev"}
+{"id": "wor-0029", "question": "Is K earlier in the alphabet than E?", "label": "no", "kind": "word", "split": "dev"}
+{"id": "ani-0029", "question": "Would a zoologist call a frog an amphibian?", "label": "yes", "kind": "animal", "split": "test"}
+{"id": "cal-0030", "question": "Did 1954 have 366 days?", "label": "no", "kind": "calendar", "split": "test"}
+{"id": "ani-0030", "question": "Would a butterfly be able to fly?", "label": "yes", "kind": "animal", "split": "test"}
+{"id": "phy-0023", "question": "Are there 16 ounces in a pound?", "label": "yes", "kind": "physical", "split": "test"}
+{"id": "num-0019", "question": "Is 63363 an even number?", "label": "no", "kind": "number", "split": "dev"}
+{"id": "geo-0029", "question": "Is Mexico a landlocked country?", "label": "no", "kind": "geo", "split": "test"}
+{"id": "cmp-0030", "question": "Is Big Ben shorter than the Burj Khalifa?", "label": "yes", "kind": "compare", "split": "test"}
+{"id": "his-0019", "question": "Did the assassination of Abraham Lincoln happen after the sealing of Magna Carta?", "label": "yes", "kind": "history", "split": "test"}
+{"id": "wor-0030", "question": "Is N the last letter of 'morning'?", "label": "no", "kind": "word", "split": "dev"}
+{"id": "cap-0029", "question": "Does Jordan have Beirut as its capital?", "label": "no", "kind": "capital", "split": "dev"}
+{"id": "fut-0042", "question": "Will Arsenal beat Chelsea in their next match?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "pri-0040", "question": "Is my laptop still in my bag?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "cap-0030", "question": "Does Ghana have Rabat as its capital?", "label": "no", "kind": "capital", "split": "dev"}
+{"id": "pri-0041", "question": "Is my cousin thinking about me right now?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "wor-0031", "question": "Is D earlier in the alphabet than T?", "label": "yes", "kind": "word", "split": "test"}
+{"id": "ari-0030", "question": "Would 90 x 65 come to 5850?", "label": "yes", "kind": "arithmetic", "split": "test"}
+{"id": "phy-0024", "question": "Does a century last 200 years?", "label": "no", "kind": "physical", "split": "test"}
+{"id": "tas-0046", "question": "Is it a good idea to paint my front door red?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "ope-0036", "question": "elephant", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "cmp-0031", "question": "Does Germany have more people than Iceland?", "label": "yes", "kind": "compare", "split": "test"}
+{"id": "che-0027", "question": "Is the atomic number of helium lower than that of sodium?", "label": "yes", "kind": "chemistry", "split": "dev"}
+{"id": "big-0014", "question": "Is 4252 greater than 4522?", "label": "no", "kind": "bigger", "split": "test"}
+{"id": "ari-0031", "question": "Is the product of 44 and 26 equal to 1144?", "label": "yes", "kind": "arithmetic", "split": "dev"}
+{"id": "geo-0030", "question": "Is Moscow north of Mexico City?", "label": "yes", "kind": "geo", "split": "test"}
+{"id": "phy-0025", "question": "Does an octagon have 8 sides?", "label": "yes", "kind": "physical", "split": "dev"}
+{"id": "pri-0042", "question": "Will my tax refund arrive tomorrow morning?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "cap-0031", "question": "Is the capital of Afghanistan Kabul?", "label": "yes", "kind": "capital", "split": "dev"}
+{"id": "phy-0026", "question": "Does water boil at 200 degrees Celsius at sea level?", "label": "no", "kind": "physical", "split": "test"}
+{"id": "cap-0032", "question": "Is the capital of Belgium Athens?", "label": "no", "kind": "capital", "split": "test"}
+{"id": "ope-0037", "question": "How do I learn to swim?", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "cap-0033", "question": "Is Cairo the capital of Egypt?", "label": "yes", "kind": "capital", "split": "dev"}
+{"id": "phy-0027", "question": "Does a kilometre contain 1,000 metres?", "label": "yes", "kind": "physical", "split": "dev"}
+{"id": "ari-0032", "question": "Will 64 x 90 come out at 5760?", "label": "yes", "kind": "arithmetic", "split": "dev"}
+{"id": "ope-0038", "question": "Tell me a fun fact", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "pri-0043", "question": "Is my umbrella still in my hallway?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "cmp-0032", "question": "Is a cheetah slower than a galloping horse?", "label": "no", "kind": "compare", "split": "dev"}
+{"id": "cal-0031", "question": "Does March come before June in the year?", "label": "yes", "kind": "calendar", "split": "test"}
+{"id": "big-0015", "question": "Is 3167 greater than 3617?", "label": "no", "kind": "bigger", "split": "test"}
+{"id": "cap-0034", "question": "Is Lima the capital of Peru?", "label": "yes", "kind": "capital", "split": "test"}
+{"id": "che-0028", "question": "Would you find oxygen as a solid at room temperature?", "label": "no", "kind": "chemistry", "split": "dev"}
+{"id": "tas-0047", "question": "Is summer better than winter?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "geo-0031", "question": "Does Hungary have a sea coastline?", "label": "no", "kind": "geo", "split": "test"}
+{"id": "fut-0043", "question": "Will Japan beat South Korea in their next match?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "cal-0032", "question": "Will 20 October 2026 be a Saturday?", "label": "no", "kind": "calendar", "split": "dev"}
+{"id": "cmp-0033", "question": "Is the Moon closer to Earth than Saturn?", "label": "yes", "kind": "compare", "split": "test"}
+{"id": "geo-0032", "question": "Is Reykjavik in the Northern Hemisphere?", "label": "yes", "kind": "geo", "split": "dev"}
+{"id": "pri-0044", "question": "Did I lock the office?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "pri-0045", "question": "Did I leave the hair straighteners on?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "pri-0046", "question": "Is my dentist having lunch right now?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "wor-0032", "question": "Is the word 'radar' the same when spelled backwards?", "label": "yes", "kind": "word", "split": "dev"}
+{"id": "pri-0047", "question": "Was my landlord awake at midnight last night?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "pri-0048", "question": "Did I leave the radio on?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "ari-0033", "question": "Is 63 x 9 equal to 567?", "label": "yes", "kind": "arithmetic", "split": "test"}
+{"id": "fut-0044", "question": "Is the roulette wheel going to stop on an odd number at the next spin?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "num-0020", "question": "Is 143 a prime number?", "label": "no", "kind": "number", "split": "dev"}
+{"id": "ani-0031", "question": "Would a dog be able to fly?", "label": "no", "kind": "animal", "split": "test"}
+{"id": "ani-0032", "question": "Is a penguin a fish?", "label": "no", "kind": "animal", "split": "test"}
+{"id": "geo-0033", "question": "Is Beijing in the Southern Hemisphere?", "label": "no", "kind": "geo", "split": "test"}
+{"id": "cap-0035", "question": "Does Peru have Lima as its capital?", "label": "yes", "kind": "capital", "split": "test"}
+{"id": "fut-0045", "question": "Is the FTSE 100 going to close higher tomorrow than it did today?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "che-0029", "question": "Is Pb the chemical symbol for platinum?", "label": "no", "kind": "chemistry", "split": "test"}
+{"id": "phy-0028", "question": "Will a bucket of water left outside for a week freeze if the air stays at -20 degrees Celsius?", "label": "yes", "kind": "physical", "split": "dev"}
+{"id": "ani-0033", "question": "Would a zoologist call a cat a mammal?", "label": "yes", "kind": "animal", "split": "test"}
+{"id": "phy-0029", "question": "Does a week have 14 days?", "label": "no", "kind": "physical", "split": "dev"}
+{"id": "cal-0033", "question": "Will 2087 have 366 days?", "label": "no", "kind": "calendar", "split": "test"}
+{"id": "cal-0034", "question": "Will 31 December 2028 be a Sunday?", "label": "yes", "kind": "calendar", "split": "dev"}
+{"id": "geo-0034", "question": "Is Lake Victoria located in Africa?", "label": "yes", "kind": "geo", "split": "dev"}
+{"id": "ope-0039", "question": "Define the word serendipity", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "ani-0034", "question": "Is a grasshopper a bird?", "label": "no", "kind": "animal", "split": "dev"}
+{"id": "ani-0035", "question": "Is a monkey classed as a mammal?", "label": "yes", "kind": "animal", "split": "test"}
+{"id": "wor-0033", "question": "Does the word 'orange' end with the letter E?", "label": "yes", "kind": "word", "split": "test"}
+{"id": "ani-0036", "question": "Would a zoologist call a trout a fish?", "label": "yes", "kind": "animal", "split": "test"}
+{"id": "cap-0036", "question": "Is the capital of New Zealand Suva?", "label": "no", "kind": "capital", "split": "test"}
+{"id": "che-0030", "question": "Is Hg the chemical symbol for mercury?", "label": "yes", "kind": "chemistry", "split": "test"}
+{"id": "cmp-0034", "question": "Would an adult human be lighter than a hippopotamus?", "label": "yes", "kind": "compare", "split": "test"}
+{"id": "num-0021", "question": "Is 70274 an odd number?", "label": "no", "kind": "number", "split": "test"}
+{"id": "pri-0049", "question": "Can I trust my nephew with a secret?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "ope-0040", "question": "Write a haiku about the sea", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "tas-0048", "question": "Does jam belong on a cheese sandwich?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "che-0031", "question": "Does gold have a higher atomic number than phosphorus?", "label": "yes", "kind": "chemistry", "split": "dev"}
+{"id": "tas-0049", "question": "Is it selfish to spend all my savings on a holiday?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "geo-0035", "question": "Is Anchorage further south than Buenos Aires?", "label": "no", "kind": "geo", "split": "test"}
+{"id": "tas-0050", "question": "Should I sell my car?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "ari-0034", "question": "Is the product of 83 and 51 equal to 4235?", "label": "no", "kind": "arithmetic", "split": "test"}
+{"id": "cap-0037", "question": "Is Dublin the capital of Ireland?", "label": "yes", "kind": "capital", "split": "test"}
+{"id": "che-0032", "question": "Would you find bromine as a liquid at room temperature?", "label": "yes", "kind": "chemistry", "split": "test"}
+{"id": "tas-0051", "question": "Does honey belong on pizza?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "num-0022", "question": "Is 223 the square of a whole number?", "label": "no", "kind": "number", "split": "dev"}
+{"id": "pri-0050", "question": "Does my father like my new haircut?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "che-0033", "question": "Is lead a liquid at room temperature?", "label": "no", "kind": "chemistry", "split": "test"}
+{"id": "cmp-0035", "question": "Is Mount Everest taller than Mont Blanc?", "label": "yes", "kind": "compare", "split": "test"}
+{"id": "fut-0046", "question": "Does the next die roll show a number lower than four?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "fut-0047", "question": "Will it rain in Dublin on 26 August 2028?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "geo-0036", "question": "Would you find India in Oceania?", "label": "no", "kind": "geo", "split": "dev"}
+{"id": "fut-0048", "question": "Will it snow in Denver on 5 February 2027?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "tas-0052", "question": "Should I take up running?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "che-0034", "question": "Is O the chemical symbol for oxygen?", "label": "yes", "kind": "chemistry", "split": "dev"}
+{"id": "ope-0041", "question": "Write a short story about a lighthouse", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "wor-0034", "question": "Does 'civic' read the same backwards as forwards?", "label": "yes", "kind": "word", "split": "test"}
+{"id": "cmp-0036", "question": "Would a passenger jet be faster than a galloping horse?", "label": "yes", "kind": "compare", "split": "dev"}
+{"id": "cal-0035", "question": "Will 30 August 2035 be a Thursday?", "label": "yes", "kind": "calendar", "split": "test"}
+{"id": "cal-0036", "question": "Did 1 August 1969 fall on a Friday?", "label": "yes", "kind": "calendar", "split": "test"}
+{"id": "ope-0042", "question": "Who was the first person on the Moon?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "fut-0049", "question": "Would Napoli beat AC Milan if they met in a rematch next season?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "num-0023", "question": "Is 71025 an even number?", "label": "no", "kind": "number", "split": "test"}
+{"id": "geo-0037", "question": "Does London lie south of Reykjavik?", "label": "yes", "kind": "geo", "split": "test"}
+{"id": "cal-0037", "question": "Is August earlier in the year than May?", "label": "no", "kind": "calendar", "split": "dev"}
+{"id": "ope-0043", "question": "Tell me about your day", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "ope-0044", "question": "Why is the sky blue?", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "wor-0035", "question": "Is the word 'needle' longer than 5 letters?", "label": "yes", "kind": "word", "split": "test"}
+{"id": "fut-0050", "question": "Will Apple shares close higher next Friday than it did this Friday?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "che-0035", "question": "Is Ni the chemical symbol for bromine?", "label": "no", "kind": "chemistry", "split": "dev"}
+{"id": "ani-0037", "question": "Would a horse be able to fly?", "label": "no", "kind": "animal", "split": "test"}
+{"id": "geo-0038", "question": "Does Thailand have a sea coastline?", "label": "yes", "kind": "geo", "split": "dev"}
+{"id": "fut-0051", "question": "Will Celtic beat Rangers in their next match?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "pri-0051", "question": "Has my flatmate noticed my new phone?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "ani-0038", "question": "Would an eagle be able to fly?", "label": "yes", "kind": "animal", "split": "test"}
+{"id": "fut-0052", "question": "Is Italy going to score more goals than the Netherlands the next time they meet?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "phy-0030", "question": "Does a leap year have 364 days?", "label": "no", "kind": "physical", "split": "test"}
+{"id": "his-0020", "question": "Did the September 11 attacks happen before the start of the French Revolution?", "label": "no", "kind": "history", "split": "test"}
+{"id": "num-0024", "question": "Is 102 a multiple of 6?", "label": "yes", "kind": "number", "split": "dev"}
+{"id": "ari-0035", "question": "Does 35 x 23 make 805?", "label": "yes", "kind": "arithmetic", "split": "test"}
+{"id": "ope-0045", "question": "Why is grass green?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "ope-0046", "question": "umbrella", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "tas-0053", "question": "Does ketchup belong on a steak?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "cap-0038", "question": "Is the capital of Uruguay Montevideo?", "label": "yes", "kind": "capital", "split": "test"}
+{"id": "cal-0038", "question": "Was 12 June 2021 a Saturday?", "label": "yes", "kind": "calendar", "split": "test"}
+{"id": "his-0021", "question": "Did the Battle of Waterloo happen before the adoption of the US Declaration of Independence?", "label": "no", "kind": "history", "split": "dev"}
+{"id": "geo-0039", "question": "Is the Grand Canyon in North America?", "label": "yes", "kind": "geo", "split": "test"}
+{"id": "ope-0047", "question": "Write a song about the rain", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "wor-0036", "question": "Does 'journey' begin with D?", "label": "no", "kind": "word", "split": "test"}
+{"id": "ani-0039", "question": "Would a zoologist call a mouse a reptile?", "label": "no", "kind": "animal", "split": "test"}
+{"id": "tas-0054", "question": "Is city life better than country life?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "ani-0040", "question": "Can a penguin lay eggs?", "label": "yes", "kind": "animal", "split": "test"}
+{"id": "fut-0053", "question": "Is the temperature in Madrid going to reach 35 degrees Celsius on 20 July 2027?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "big-0016", "question": "Is 8643 more than 8641?", "label": "yes", "kind": "bigger", "split": "dev"}
+{"id": "cmp-0037", "question": "Would the Danube be longer than the Rhine?", "label": "yes", "kind": "compare", "split": "dev"}
+{"id": "geo-0040", "question": "Is Japan located in Africa?", "label": "no", "kind": "geo", "split": "test"}
+{"id": "ope-0048", "question": "What rhymes with orange?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "num-0025", "question": "Is 168 a perfect square?", "label": "no", "kind": "number", "split": "test"}
+{"id": "fut-0054", "question": "Does the next Lotto draw include the number 38?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "his-0022", "question": "Did the Battle of Hastings take place in 1096?", "label": "no", "kind": "history", "split": "dev"}
+{"id": "pri-0052", "question": "Has my landlady noticed my weight loss?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "cal-0039", "question": "Does August come after March in the calendar year?", "label": "yes", "kind": "calendar", "split": "test"}
+{"id": "ope-0049", "question": "Who painted the Sistine Chapel ceiling?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "ari-0036", "question": "Would 41 x 52 come to 2132?", "label": "yes", "kind": "arithmetic", "split": "test"}
+{"id": "che-0036", "question": "Would you find helium as a gas at room temperature?", "label": "yes", "kind": "chemistry", "split": "test"}
+{"id": "che-0037", "question": "Is the atomic number of hydrogen higher than that of lead?", "label": "no", "kind": "chemistry", "split": "test"}
+{"id": "cmp-0038", "question": "Is Canada smaller than Belgium in area?", "label": "no", "kind": "compare", "split": "test"}
+{"id": "fut-0055", "question": "Does the next EuroMillions draw include the number 35?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "ari-0037", "question": "Does 155 plus 745 make 911?", "label": "no", "kind": "arithmetic", "split": "test"}
+{"id": "phy-0031", "question": "Does a soccer team have 9 players on the pitch?", "label": "no", "kind": "physical", "split": "test"}
+{"id": "cal-0040", "question": "Will 16 June 2029 be a Wednesday?", "label": "no", "kind": "calendar", "split": "test"}
+{"id": "cmp-0039", "question": "Would a horse be heavier than a blue whale?", "label": "no", "kind": "compare", "split": "test"}
+{"id": "che-0038", "question": "Is bromine a liquid at room temperature?", "label": "yes", "kind": "chemistry", "split": "test"}
+{"id": "ope-0050", "question": "hello", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "ari-0038", "question": "Will 120 divided by 10 come out at 22?", "label": "no", "kind": "arithmetic", "split": "test"}
+{"id": "ani-0041", "question": "Would a zoologist call a dragonfly an amphibian?", "label": "no", "kind": "animal", "split": "test"}
+{"id": "cal-0041", "question": "Are there 29 days in January?", "label": "no", "kind": "calendar", "split": "test"}
+{"id": "his-0023", "question": "Did the Battle of Waterloo happen before the break-up of the Soviet Union?", "label": "yes", "kind": "history", "split": "dev"}
+{"id": "phy-0032", "question": "Does an adult human skeleton have 206 bones?", "label": "yes", "kind": "physical", "split": "test"}
+{"id": "fut-0056", "question": "Is Bayern Munich going to score more goals than Borussia Dortmund the next time they meet?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "cal-0042", "question": "Will 18 January 2035 fall on a Thursday?", "label": "yes", "kind": "calendar", "split": "dev"}
+{"id": "phy-0033", "question": "Does water boil at 100 degrees Celsius at sea level?", "label": "yes", "kind": "physical", "split": "test"}
+{"id": "wor-0037", "question": "Is there a letter O in the word 'button'?", "label": "yes", "kind": "word", "split": "dev"}
+{"id": "wor-0038", "question": "Is T the last letter of 'basket'?", "label": "yes", "kind": "word", "split": "dev"}
+{"id": "num-0026", "question": "Is 193 a perfect square?", "label": "no", "kind": "number", "split": "dev"}
+{"id": "cmp-0040", "question": "Is the Rhine longer than the Volga?", "label": "no", "kind": "compare", "split": "test"}
+{"id": "pri-0053", "question": "Was my upstairs neighbour alone last night?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "tas-0055", "question": "Is sunrise better than sunset?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "tas-0056", "question": "Is jazz better than blues?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "pri-0054", "question": "Does my brother still have my charger?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "cap-0039", "question": "Is Buenos Aires the capital of Argentina?", "label": "yes", "kind": "capital", "split": "test"}
+{"id": "ope-0051", "question": "Which is the longest river in Europe?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "num-0027", "question": "Is 3250 a perfect square?", "label": "no", "kind": "number", "split": "test"}
+{"id": "num-0028", "question": "Would 520 be a multiple of 13?", "label": "yes", "kind": "number", "split": "test"}
+{"id": "ope-0052", "question": "Translate cat into Spanish", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "his-0024", "question": "Was the Berlin Wall built in 1961?", "label": "yes", "kind": "history", "split": "test"}
+{"id": "ani-0042", "question": "Can a chicken lay eggs?", "label": "yes", "kind": "animal", "split": "dev"}
+{"id": "fut-0057", "question": "Is Germany going to win the next football World Cup?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "fut-0058", "question": "Will the euro-dollar rate close higher next Friday than it did this Friday?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "num-0029", "question": "Is 27092 an even number?", "label": "yes", "kind": "number", "split": "dev"}
+{"id": "ani-0043", "question": "Does a bat lay eggs?", "label": "no", "kind": "animal", "split": "dev"}
+{"id": "cal-0043", "question": "Will 22 December 2030 be a Wednesday?", "label": "no", "kind": "calendar", "split": "test"}
+{"id": "cmp-0041", "question": "Would a horse be lighter than an adult human?", "label": "no", "kind": "compare", "split": "test"}
+{"id": "cal-0044", "question": "Will 18 November 2031 be a Tuesday?", "label": "yes", "kind": "calendar", "split": "dev"}
+{"id": "ope-0053", "question": "How do I boil an egg?", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "fut-0059", "question": "Is Liverpool going to score more goals than Manchester City the next time they meet?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "num-0030", "question": "Is 779 a prime number?", "label": "no", "kind": "number", "split": "test"}
+{"id": "wor-0039", "question": "Does the word 'penguin' have more than 5 letters?", "label": "yes", "kind": "word", "split": "test"}
+{"id": "num-0031", "question": "Is 70820 an odd number?", "label": "no", "kind": "number", "split": "dev"}
+{"id": "phy-0034", "question": "Will a bucket of water left outside for a week freeze if the air stays at 20 degrees Celsius?", "label": "no", "kind": "physical", "split": "dev"}
+{"id": "cal-0045", "question": "Will 30 October 2033 be a Sunday?", "label": "yes", "kind": "calendar", "split": "dev"}
+{"id": "pri-0055", "question": "Does my boss like my handwriting?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "che-0039", "question": "Is the atomic number of magnesium lower than that of uranium?", "label": "yes", "kind": "chemistry", "split": "test"}
+{"id": "phy-0035", "question": "Are there 20 ounces in a pound?", "label": "no", "kind": "physical", "split": "test"}
+{"id": "geo-0041", "question": "Is Johannesburg in the Southern Hemisphere?", "label": "yes", "kind": "geo", "split": "test"}
+{"id": "tas-0057", "question": "Would a front door look nicer in white than in cream?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "pri-0056", "question": "Will my accountant reply to my voicemail today?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "pri-0057", "question": "Will my bank manager reply to my WhatsApp message today?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "ope-0054", "question": "Why do cats purr?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "che-0040", "question": "Is nitrogen written as Ar in chemistry?", "label": "no", "kind": "chemistry", "split": "test"}
+{"id": "tas-0058", "question": "Is chocolate ice cream better than vanilla ice cream?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "cmp-0042", "question": "Would a hippopotamus be lighter than a blue whale?", "label": "yes", "kind": "compare", "split": "dev"}
+{"id": "cmp-0043", "question": "Would Iceland have more people than Sweden?", "label": "no", "kind": "compare", "split": "test"}
+{"id": "cap-0040", "question": "Is Dublin the capital city of Ireland?", "label": "yes", "kind": "capital", "split": "test"}
+{"id": "cap-0041", "question": "Is the capital of Saudi Arabia Riyadh?", "label": "yes", "kind": "capital", "split": "test"}
+{"id": "ope-0055", "question": "Explain photosynthesis", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "his-0025", "question": "Was the Berlin Wall built in 1971?", "label": "no", "kind": "history", "split": "test"}
+{"id": "his-0026", "question": "Did the Battle of Hastings take place in 1086?", "label": "no", "kind": "history", "split": "dev"}
+{"id": "tas-0059", "question": "Is vinyl better than streaming?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "cap-0042", "question": "Is the capital of Afghanistan Beijing?", "label": "no", "kind": "capital", "split": "test"}
+{"id": "his-0027", "question": "Did the sinking of the Titanic happen after the sealing of Magna Carta?", "label": "yes", "kind": "history", "split": "test"}
+{"id": "ari-0039", "question": "Would 39 x 90 come to 3500?", "label": "no", "kind": "arithmetic", "split": "test"}
+{"id": "num-0032", "question": "Is 743 a prime number?", "label": "yes", "kind": "number", "split": "test"}
+{"id": "pri-0058", "question": "Does my sister like my new jacket?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "ani-0044", "question": "Can a sheep lay eggs?", "label": "no", "kind": "animal", "split": "test"}
+{"id": "wor-0040", "question": "Is the word 'teacher' the same when spelled backwards?", "label": "no", "kind": "word", "split": "test"}
+{"id": "che-0041", "question": "Does sulfuric acid have the formula H2SO4?", "label": "yes", "kind": "chemistry", "split": "test"}
+{"id": "geo-0042", "question": "Is Stockholm in the Southern Hemisphere?", "label": "no", "kind": "geo", "split": "test"}
+{"id": "wor-0041", "question": "Can you find the letter U in 'library'?", "label": "no", "kind": "word", "split": "test"}
+{"id": "ope-0056", "question": "Tell me a story about a dragon", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "cmp-0044", "question": "Is Big Ben taller than the Eiffel Tower?", "label": "no", "kind": "compare", "split": "test"}
+{"id": "ani-0045", "question": "Is a lizard a reptile?", "label": "yes", "kind": "animal", "split": "dev"}
+{"id": "fut-0060", "question": "Is the coin toss at the start of the match going to come up heads?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "ari-0040", "question": "Would 1053 divided by 13 come to 90?", "label": "no", "kind": "arithmetic", "split": "test"}
+{"id": "cmp-0045", "question": "Is the Nile longer than the Volga?", "label": "yes", "kind": "compare", "split": "test"}
+{"id": "tas-0060", "question": "Is it silly to cry at a film?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "cal-0046", "question": "Was 24 April 1999 a Sunday?", "label": "no", "kind": "calendar", "split": "dev"}
+{"id": "geo-0043", "question": "Does Oslo lie south of Cairo?", "label": "no", "kind": "geo", "split": "dev"}
+{"id": "geo-0044", "question": "Is Helsinki further north than Athens?", "label": "yes", "kind": "geo", "split": "dev"}
+{"id": "tas-0061", "question": "Is it okay to tell a white lie to spare a friend's feelings?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "tas-0062", "question": "Does raisins belong in a salad?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "ari-0041", "question": "Is 1223 the answer to 13 x 94?", "label": "no", "kind": "arithmetic", "split": "dev"}
+{"id": "cap-0043", "question": "Is Bucharest the capital city of Norway?", "label": "no", "kind": "capital", "split": "test"}
+{"id": "cal-0047", "question": "Will 28 January 2027 fall on a Thursday?", "label": "yes", "kind": "calendar", "split": "dev"}
+{"id": "cap-0044", "question": "Would a traveller find the capital of Costa Rica in Mexico City?", "label": "no", "kind": "capital", "split": "test"}
+{"id": "num-0033", "question": "Is 779 prime?", "label": "no", "kind": "number", "split": "test"}
+{"id": "fut-0061", "question": "Will the next baby born in this hospital be a girl?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "geo-0045", "question": "Is Reykjavik further south than Buenos Aires?", "label": "no", "kind": "geo", "split": "test"}
+{"id": "wor-0042", "question": "Is the word 'mirror' longer than 7 letters?", "label": "no", "kind": "word", "split": "test"}
+{"id": "pri-0059", "question": "Can I trust my hairdresser with a secret?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "ari-0042", "question": "Is 559 - 226 equal to 333?", "label": "yes", "kind": "arithmetic", "split": "test"}
+{"id": "phy-0036", "question": "Does a decade last 100 years?", "label": "no", "kind": "physical", "split": "test"}
+{"id": "ari-0043", "question": "Does 573 minus 145 leave 428?", "label": "yes", "kind": "arithmetic", "split": "test"}
+{"id": "his-0028", "question": "Did the Second World War end in 1945?", "label": "yes", "kind": "history", "split": "dev"}
+{"id": "wor-0043", "question": "Is there a letter N in the word 'mountain'?", "label": "yes", "kind": "word", "split": "test"}
+{"id": "phy-0037", "question": "Are there 12 inches in a foot?", "label": "yes", "kind": "physical", "split": "dev"}
+{"id": "ani-0046", "question": "Would a zoologist call a cat an amphibian?", "label": "no", "kind": "animal", "split": "test"}
+{"id": "num-0034", "question": "Is 27691 an even number?", "label": "no", "kind": "number", "split": "test"}
+{"id": "tas-0063", "question": "Is butter better than olive oil?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "che-0042", "question": "Is hydrogen a solid at room temperature?", "label": "no", "kind": "chemistry", "split": "dev"}
+{"id": "ari-0044", "question": "Would 71 x 6 come to 426?", "label": "yes", "kind": "arithmetic", "split": "test"}
+{"id": "cap-0045", "question": "Is Tunis the capital of Libya?", "label": "no", "kind": "capital", "split": "test"}
+{"id": "tas-0064", "question": "Would a front door look nicer in turquoise than in lilac?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "cmp-0046", "question": "Is Neptune bigger than Jupiter?", "label": "no", "kind": "compare", "split": "test"}
+{"id": "ari-0045", "question": "Will 29 x 4 come out at 216?", "label": "no", "kind": "arithmetic", "split": "test"}
+{"id": "tas-0065", "question": "Is rock music better than pop music?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "pri-0060", "question": "Does my friend still have my jacket?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "fut-0062", "question": "Will the temperature in London reach 22 degrees Celsius on 27 July 2027?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "fut-0063", "question": "Will wheat close higher next Friday than it did this Friday?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "pri-0061", "question": "Has my partner noticed my late arrival?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "ari-0046", "question": "Is 459 divided by 9 equal to 51?", "label": "yes", "kind": "arithmetic", "split": "test"}
+{"id": "tas-0066", "question": "Is it a good idea to text my ex?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "pri-0062", "question": "Is there any bread left in my freezer?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "che-0043", "question": "Would you find gold as a liquid at room temperature?", "label": "no", "kind": "chemistry", "split": "dev"}
+{"id": "ani-0047", "question": "Can a rabbit lay eggs?", "label": "no", "kind": "animal", "split": "test"}
+{"id": "tas-0067", "question": "Is it strange to talk to plants?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "cap-0046", "question": "Is Belgrade the capital city of Serbia?", "label": "yes", "kind": "capital", "split": "test"}
+{"id": "phy-0038", "question": "Are there 100 centimetres in a metre?", "label": "yes", "kind": "physical", "split": "dev"}
+{"id": "ani-0048", "question": "Is a grasshopper classed as an insect?", "label": "yes", "kind": "animal", "split": "dev"}
+{"id": "cal-0048", "question": "Will 2038 have 366 days?", "label": "no", "kind": "calendar", "split": "test"}
+{"id": "cmp-0047", "question": "Would Iceland have fewer people than Australia?", "label": "yes", "kind": "compare", "split": "test"}
+{"id": "ope-0057", "question": "What is the capital of Kenya?", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "ari-0047", "question": "Does 846 plus 155 make 1001?", "label": "yes", "kind": "arithmetic", "split": "test"}
+{"id": "pri-0063", "question": "Is my boss watching television right now?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "cap-0047", "question": "Is Manila the capital city of the Philippines?", "label": "yes", "kind": "capital", "split": "test"}
+{"id": "cmp-0048", "question": "Is Jupiter farther from Earth than Neptune?", "label": "no", "kind": "compare", "split": "test"}
+{"id": "ari-0048", "question": "Does 302 plus 683 make 1085?", "label": "no", "kind": "arithmetic", "split": "dev"}
+{"id": "geo-0046", "question": "Is the Ganges in Asia?", "label": "yes", "kind": "geo", "split": "test"}
+{"id": "pri-0064", "question": "Did I lock the car?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "tas-0068", "question": "Should I go back to university?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "che-0044", "question": "Is nickel written as Hg in chemistry?", "label": "no", "kind": "chemistry", "split": "test"}
+{"id": "cal-0049", "question": "Does March last 30 days?", "label": "no", "kind": "calendar", "split": "test"}
+{"id": "fut-0064", "question": "Will the next flip of this coin match the one before it?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "pri-0065", "question": "Does my friend still have my ladder?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "ari-0049", "question": "Does 640 plus 382 make 1122?", "label": "no", "kind": "arithmetic", "split": "test"}
+{"id": "num-0035", "question": "Is 116 divisible by 4?", "label": "yes", "kind": "number", "split": "dev"}
+{"id": "cal-0050", "question": "Will 1 October 2028 fall on a Sunday?", "label": "yes", "kind": "calendar", "split": "test"}
+{"id": "cal-0051", "question": "Will 26 September 2026 be a Sunday?", "label": "no", "kind": "calendar", "split": "test"}
+{"id": "ope-0058", "question": "Write a story about a lost umbrella", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "wor-0044", "question": "Is P the first letter of the word 'pillow'?", "label": "yes", "kind": "word", "split": "test"}
+{"id": "num-0036", "question": "Is 2052 an odd number?", "label": "no", "kind": "number", "split": "test"}
+{"id": "cal-0052", "question": "Was 11 June 2008 a Saturday?", "label": "no", "kind": "calendar", "split": "dev"}
+{"id": "cal-0053", "question": "Does March come before December in the year?", "label": "yes", "kind": "calendar", "split": "dev"}
+{"id": "che-0045", "question": "Is the atomic number of chlorine lower than that of oxygen?", "label": "no", "kind": "chemistry", "split": "test"}
+{"id": "num-0037", "question": "Is 2601 the square of a whole number?", "label": "yes", "kind": "number", "split": "dev"}
+{"id": "fut-0065", "question": "Is copper going to close higher tomorrow than it did today?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "cmp-0049", "question": "Is the Empire State Building shorter than the Great Pyramid of Giza?", "label": "no", "kind": "compare", "split": "test"}
+{"id": "pri-0066", "question": "Is my sister asleep right now?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "wor-0045", "question": "Is the word 'holiday' shorter than 7 letters?", "label": "no", "kind": "word", "split": "test"}
+{"id": "ope-0059", "question": "Why do we yawn?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "che-0046", "question": "Is CO2 the chemical formula for carbon monoxide?", "label": "no", "kind": "chemistry", "split": "test"}
+{"id": "che-0047", "question": "Is mercury a liquid at room temperature?", "label": "yes", "kind": "chemistry", "split": "dev"}
+{"id": "ari-0050", "question": "Would 1242 divided by 18 come to 69?", "label": "yes", "kind": "arithmetic", "split": "test"}
+{"id": "tas-0069", "question": "Is Bonfire Night overrated?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "tas-0070", "question": "Is spring better than autumn?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "cap-0048", "question": "Is the capital of Senegal Luanda?", "label": "no", "kind": "capital", "split": "test"}
+{"id": "wor-0046", "question": "Is K the first letter of the word 'velvet'?", "label": "no", "kind": "word", "split": "test"}
+{"id": "cmp-0050", "question": "Would Sweden have more people than the United Kingdom?", "label": "no", "kind": "compare", "split": "dev"}
+{"id": "cap-0049", "question": "Is Luanda the capital of Angola?", "label": "yes", "kind": "capital", "split": "test"}
+{"id": "big-0017", "question": "Is 6826 greater than 6286?", "label": "yes", "kind": "bigger", "split": "test"}
+{"id": "tas-0071", "question": "Does pineapple belong on pizza?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "ari-0051", "question": "Will 634 - 499 come out at 135?", "label": "yes", "kind": "arithmetic", "split": "test"}
+{"id": "num-0038", "question": "Is 2023 a perfect square?", "label": "no", "kind": "number", "split": "test"}
+{"id": "ani-0049", "question": "Is an eagle able to fly?", "label": "yes", "kind": "animal", "split": "dev"}
+{"id": "ari-0052", "question": "Is 88 x 91 equal to 8017?", "label": "no", "kind": "arithmetic", "split": "test"}
+{"id": "ope-0060", "question": "Who painted the Mona Lisa?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "geo-0047", "question": "Is the Sahara Desert in Africa?", "label": "yes", "kind": "geo", "split": "test"}
+{"id": "ope-0061", "question": "Who built the pyramids?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "num-0039", "question": "Would 479 count as a prime number?", "label": "yes", "kind": "number", "split": "test"}
+{"id": "fut-0066", "question": "Will it snow in Chicago on 9 February 2027?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "geo-0048", "question": "Is Athens in the Southern Hemisphere?", "label": "no", "kind": "geo", "split": "test"}
+{"id": "big-0018", "question": "Is 4.7 larger than 4.79?", "label": "no", "kind": "bigger", "split": "dev"}
+{"id": "geo-0049", "question": "Does Bolivia have a sea coastline?", "label": "no", "kind": "geo", "split": "test"}
+{"id": "fut-0067", "question": "Would Ajax beat PSV if they met in a rematch next season?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "phy-0039", "question": "Do the angles of a triangle add up to 180 degrees?", "label": "yes", "kind": "physical", "split": "test"}
+{"id": "ani-0050", "question": "Does a lion count as a mammal?", "label": "yes", "kind": "animal", "split": "test"}
+{"id": "pri-0067", "question": "Is my colleague on holiday right now?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "cmp-0051", "question": "Is Belgium larger than Australia in area?", "label": "no", "kind": "compare", "split": "dev"}
+{"id": "fut-0068", "question": "Does gold finish next month higher than it starts?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "ope-0062", "question": "Give me a name for a puppy", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "fut-0069", "question": "Would South Africa win the Rugby World Cup if it were held next year?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "phy-0040", "question": "Does a pentagon have 5 sides?", "label": "yes", "kind": "physical", "split": "test"}
+{"id": "ope-0063", "question": "Why is ice slippery?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "ope-0064", "question": "What is the capital of Peru?", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "num-0040", "question": "Is 152 a multiple of 4?", "label": "yes", "kind": "number", "split": "dev"}
+{"id": "tas-0072", "question": "Is brunch overrated?", "label": "maybe", "kind": "taste", "split": "dev"}
+{"id": "ope-0065", "question": "banana", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "wor-0047", "question": "Does 'mountain' begin with M?", "label": "yes", "kind": "word", "split": "test"}
+{"id": "pri-0068", "question": "Did I lock the bike?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "che-0048", "question": "Is the atomic number of hydrogen lower than that of platinum?", "label": "yes", "kind": "chemistry", "split": "test"}
+{"id": "che-0049", "question": "Is lead a solid at room temperature?", "label": "yes", "kind": "chemistry", "split": "test"}
+{"id": "ope-0066", "question": "What is the capital of Norway?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "fut-0070", "question": "Is England going to win the next football World Cup?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "num-0041", "question": "Would 963 be a perfect square?", "label": "no", "kind": "number", "split": "test"}
+{"id": "che-0050", "question": "Is Ar the chemical symbol for chlorine?", "label": "no", "kind": "chemistry", "split": "dev"}
+{"id": "phy-0041", "question": "Are there 24 hours in a day?", "label": "yes", "kind": "physical", "split": "test"}
+{"id": "wor-0048", "question": "Is there a letter E in the word 'valley'?", "label": "yes", "kind": "word", "split": "test"}
+{"id": "che-0051", "question": "Is gold written as Au in chemistry?", "label": "yes", "kind": "chemistry", "split": "test"}
+{"id": "num-0042", "question": "Does 7 divide evenly into 225?", "label": "no", "kind": "number", "split": "test"}
+{"id": "ari-0053", "question": "Does 65 x 41 make 2665?", "label": "yes", "kind": "arithmetic", "split": "dev"}
+{"id": "ari-0054", "question": "Will 83 x 30 come out at 2490?", "label": "yes", "kind": "arithmetic", "split": "test"}
+{"id": "ope-0067", "question": "Tell me your favourite word", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "ope-0068", "question": "What is the capital of Brazil?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "ope-0069", "question": "What is the capital of Egypt?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "his-0029", "question": "Did the September 11 attacks take place in 2021?", "label": "no", "kind": "history", "split": "dev"}
+{"id": "che-0052", "question": "Does K stand for tin on the periodic table?", "label": "no", "kind": "chemistry", "split": "test"}
+{"id": "ope-0070", "question": "Summarise the plot of Hamlet", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "pri-0069", "question": "Will my old friend reply to my letter today?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "cap-0050", "question": "Is Stockholm the capital of Spain?", "label": "no", "kind": "capital", "split": "test"}
+{"id": "geo-0050", "question": "Does Iceland have a sea coastline?", "label": "yes", "kind": "geo", "split": "test"}
+{"id": "fut-0071", "question": "Will this coin come up tails on the next toss?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "wor-0049", "question": "Does the word 'library' have more than 7 letters?", "label": "no", "kind": "word", "split": "test"}
+{"id": "fut-0072", "question": "Will Spain win the next Women's World Cup?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "his-0030", "question": "Did the start of the French Revolution happen after the Battle of Waterloo?", "label": "no", "kind": "history", "split": "test"}
+{"id": "wor-0050", "question": "Does the word 'candle' have more than 3 letters?", "label": "yes", "kind": "word", "split": "test"}
+{"id": "cap-0051", "question": "Is the capital of Nepal Kathmandu?", "label": "yes", "kind": "capital", "split": "dev"}
+{"id": "wor-0051", "question": "Does the word 'valley' contain the letter D?", "label": "no", "kind": "word", "split": "test"}
+{"id": "che-0053", "question": "Is gold a liquid at room temperature?", "label": "no", "kind": "chemistry", "split": "test"}
+{"id": "geo-0051", "question": "Is the Nile located in Asia?", "label": "no", "kind": "geo", "split": "test"}
+{"id": "geo-0052", "question": "Is Italy a landlocked country?", "label": "no", "kind": "geo", "split": "dev"}
+{"id": "che-0054", "question": "Does C stand for carbon on the periodic table?", "label": "yes", "kind": "chemistry", "split": "dev"}
+{"id": "cmp-0052", "question": "Would a cheetah be faster than a snail?", "label": "yes", "kind": "compare", "split": "dev"}
+{"id": "big-0019", "question": "Is 1.46 smaller than 1.4?", "label": "no", "kind": "bigger", "split": "dev"}
+{"id": "cmp-0053", "question": "Is Ben Nevis taller than Mount Kosciuszko?", "label": "no", "kind": "compare", "split": "test"}
+{"id": "geo-0053", "question": "Is Rome north of Nairobi?", "label": "yes", "kind": "geo", "split": "test"}
+{"id": "his-0031", "question": "Did Constantinople fall to the Ottomans in 1453?", "label": "yes", "kind": "history", "split": "dev"}
+{"id": "ani-0051", "question": "Is a whale an insect?", "label": "no", "kind": "animal", "split": "test"}
+{"id": "phy-0042", "question": "Does light travel at about 300 kilometres per second?", "label": "no", "kind": "physical", "split": "test"}
+{"id": "phy-0043", "question": "Does the Earth take about 365 days to go around the Sun?", "label": "yes", "kind": "physical", "split": "dev"}
+{"id": "num-0043", "question": "Does 6 divide evenly into 288?", "label": "yes", "kind": "number", "split": "test"}
+{"id": "ani-0052", "question": "Would a zoologist call a spider an insect?", "label": "no", "kind": "animal", "split": "test"}
+{"id": "tas-0073", "question": "Should I adopt a cat?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "ope-0071", "question": "How do I bake bread?", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "cal-0054", "question": "Does July have 28 days?", "label": "no", "kind": "calendar", "split": "test"}
+{"id": "wor-0052", "question": "Is the word 'noon' the same when spelled backwards?", "label": "yes", "kind": "word", "split": "test"}
+{"id": "cal-0055", "question": "Will 25 June 2032 fall on a Tuesday?", "label": "no", "kind": "calendar", "split": "test"}
+{"id": "ope-0072", "question": "purple", "label": "maybe", "kind": "open", "split": "dev"}
+{"id": "wor-0053", "question": "Is there a letter A in the word 'engine'?", "label": "no", "kind": "word", "split": "dev"}
+{"id": "ari-0055", "question": "Is 76 x 23 equal to 1738?", "label": "no", "kind": "arithmetic", "split": "dev"}
+{"id": "wor-0054", "question": "Can you find the letter A in 'tomato'?", "label": "yes", "kind": "word", "split": "test"}
+{"id": "cap-0052", "question": "Is Oslo the capital city of Norway?", "label": "yes", "kind": "capital", "split": "dev"}
+{"id": "geo-0054", "question": "Would you find the Gobi Desert in Asia?", "label": "yes", "kind": "geo", "split": "test"}
+{"id": "tas-0074", "question": "Is tea better than coffee?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "ope-0073", "question": "How do I tie a tie?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "wor-0055", "question": "Can you find the letter P in 'pepper'?", "label": "yes", "kind": "word", "split": "test"}
+{"id": "phy-0044", "question": "Does a healthy adult human normally have 32 permanent teeth?", "label": "yes", "kind": "physical", "split": "test"}
+{"id": "cmp-0054", "question": "Would a mouse be lighter than an elephant?", "label": "yes", "kind": "compare", "split": "test"}
+{"id": "cmp-0055", "question": "Is Luxembourg smaller than Russia in area?", "label": "yes", "kind": "compare", "split": "dev"}
+{"id": "cmp-0056", "question": "Would Earth be smaller than Saturn?", "label": "yes", "kind": "compare", "split": "test"}
+{"id": "fut-0073", "question": "Is it going to rain in Wellington on 28 July 2027?", "label": "maybe", "kind": "future", "split": "test"}
+{"id": "cmp-0057", "question": "Would a tortoise be slower than a snail?", "label": "no", "kind": "compare", "split": "test"}
+{"id": "phy-0045", "question": "Will a bucket of water left outside for a week freeze if the air stays at 25 degrees Celsius?", "label": "no", "kind": "physical", "split": "dev"}
+{"id": "cmp-0058", "question": "Is a mouse lighter than a horse?", "label": "yes", "kind": "compare", "split": "test"}
+{"id": "pri-0070", "question": "Does my mother like my singing?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "cmp-0059", "question": "Would a cat be heavier than a hippopotamus?", "label": "no", "kind": "compare", "split": "dev"}
+{"id": "num-0044", "question": "Is 301 prime?", "label": "no", "kind": "number", "split": "test"}
+{"id": "pri-0071", "question": "Can I trust my roommate with a secret?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "ani-0053", "question": "Would a zoologist call a mosquito a reptile?", "label": "no", "kind": "animal", "split": "dev"}
+{"id": "cmp-0060", "question": "Is a snail slower than a walking person?", "label": "yes", "kind": "compare", "split": "test"}
+{"id": "fut-0074", "question": "Will it rain in Berlin on 5 April 2028?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "ope-0074", "question": "What is the capital of India?", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "ani-0054", "question": "Does a monkey count as a mammal?", "label": "yes", "kind": "animal", "split": "dev"}
+{"id": "tas-0075", "question": "Should I get a tattoo?", "label": "maybe", "kind": "taste", "split": "test"}
+{"id": "wor-0056", "question": "Does 'basket' read the same backwards as forwards?", "label": "no", "kind": "word", "split": "test"}
+{"id": "his-0032", "question": "Was Sputnik 1 launched in 1977?", "label": "no", "kind": "history", "split": "test"}
+{"id": "che-0055", "question": "Is nitrogen a liquid at room temperature?", "label": "no", "kind": "chemistry", "split": "dev"}
+{"id": "cap-0053", "question": "Does the United States have Havana as its capital?", "label": "no", "kind": "capital", "split": "test"}
+{"id": "phy-0046", "question": "Does a kilometre contain 1,024 metres?", "label": "no", "kind": "physical", "split": "test"}
+{"id": "pri-0072", "question": "Is there any cheese left in my lunchbox?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "pri-0073", "question": "Will my estate agent reply to my text message today?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "cap-0054", "question": "Would a traveller find the capital of South Korea in Seoul?", "label": "yes", "kind": "capital", "split": "dev"}
+{"id": "num-0045", "question": "Is 577 a prime number?", "label": "yes", "kind": "number", "split": "test"}
+{"id": "phy-0047", "question": "Are there 5,280 feet in a mile?", "label": "yes", "kind": "physical", "split": "test"}
+{"id": "phy-0048", "question": "Are there 10 ounces in a pound?", "label": "no", "kind": "physical", "split": "test"}
+{"id": "cap-0055", "question": "Is Tokyo the capital of Nepal?", "label": "no", "kind": "capital", "split": "dev"}
+{"id": "fut-0075", "question": "Would Ireland win the Rugby World Cup if it were held next year?", "label": "maybe", "kind": "future", "split": "dev"}
+{"id": "cap-0056", "question": "Is Suva the capital city of Fiji?", "label": "yes", "kind": "capital", "split": "test"}
+{"id": "ari-0056", "question": "Does 880 plus 353 make 1244?", "label": "no", "kind": "arithmetic", "split": "test"}
+{"id": "geo-0055", "question": "Is Rome in the Southern Hemisphere?", "label": "no", "kind": "geo", "split": "test"}
+{"id": "cal-0056", "question": "Was 13 March 1964 a Tuesday?", "label": "no", "kind": "calendar", "split": "dev"}
+{"id": "big-0020", "question": "Is 9.16 more than 9.2?", "label": "no", "kind": "bigger", "split": "test"}
+{"id": "ani-0055", "question": "Is a dragonfly classed as an insect?", "label": "yes", "kind": "animal", "split": "dev"}
+{"id": "pri-0074", "question": "Is my first love thinking about me right now?", "label": "maybe", "kind": "private", "split": "test"}
+{"id": "num-0046", "question": "Is 1222 a perfect square?", "label": "no", "kind": "number", "split": "dev"}
+{"id": "ope-0075", "question": "Write a limerick about a cat", "label": "maybe", "kind": "open", "split": "test"}
+{"id": "che-0056", "question": "Is the atomic number of platinum lower than that of helium?", "label": "no", "kind": "chemistry", "split": "test"}
+{"id": "pri-0075", "question": "Will my parcel arrive after lunch?", "label": "maybe", "kind": "private", "split": "dev"}
+{"id": "num-0047", "question": "Is 473 a prime number?", "label": "no", "kind": "number", "split": "test"}
+{"id": "ani-0056", "question": "Does a dog lay eggs?", "label": "no", "kind": "animal", "split": "dev"}
+{"id": "geo-0056", "question": "Is London further north than Sydney?", "label": "yes", "kind": "geo", "split": "test"}
+{"id": "num-0048", "question": "Is 907 prime?", "label": "yes", "kind": "number", "split": "dev"}
