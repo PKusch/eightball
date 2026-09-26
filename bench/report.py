@@ -149,6 +149,21 @@ def main(path):
             "Confidence error = the average gap between how sure the model said it was and how often it was right (0 is perfect).", "",
             f"- Before calibration: {ece(raw_pairs):.3f}", f"- After calibration: {ece(cal_pairs):.3f}", ""]
 
+    # the strictness dial: how much the ball says versus how often it is wrong when it says it
+    out += ["## The strictness dial", "",
+            "The ball only says a plain yes or no when it is at least this sure. The setting is chosen on the dev items, then measured on the test items. "
+            "A stricter ball says less and is wrong less often when it does speak.", "",
+            "| Wanted right when sure | Says yes or no on | Wrong when it says one | Right group overall |", "|---|---|---|---|"]
+    from eightball.calibrate import fit_threshold
+    for tgt in (0.75, 0.8, 0.85, 0.9, 0.95):
+        c2 = Calibration(temperature=cal.temperature, threshold=fit_threshold(dev, cal.temperature, tgt), model=cal.model)
+        res = [(it, choose(it["question"], Odds(item_odds(it), 1.0, per_order(it)), c2, text_mode="text" in it)) for it in test]
+        said = [(it, b) for it, b in res if b["category"] != "maybe"]
+        wr = sum(1 for it, b in said if b["category"] != it["label"]) / len(said) if said else 0.0
+        mark = " (default)" if tgt == TARGET else ""
+        out.append(f"| {int(tgt * 100)}%{mark} | {pct(len(said) / len(res))} | {pct(wr)} | {pct(sum(1 for it, b in res if b['category'] == it['label']) / len(res))} |")
+    out.append("")
+
     # per kind
     kinds = sorted({it["kind"] for it, *_ in rows})
     out += ["## By kind of question", "", "| Kind | Should say | Items | Plain answer right | Ball right | Ball said hazy |", "|---|---|---|---|---|---|"]

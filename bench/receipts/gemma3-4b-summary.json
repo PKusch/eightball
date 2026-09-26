@@ -1,0 +1,14 @@
+{
+  "model": "gemma3",
+  "n_test": 606,
+  "temperature": 4.25,
+  "threshold": 0.7742013530684521,
+  "acc_plain": 0.7046204620462047,
+  "acc_one_order": 0.6881188118811881,
+  "acc_shuffled": 0.6633663366336634,
+  "acc_ball": 0.5610561056105611,
+  "wrong_commit_plain": 0.3630705394190871,
+  "wrong_commit_one_order": 0.2679738562091503,
+  "wrong_commit_shuffled": 0.34908136482939633,
+  "wrong_commit_ball": 0.15060240963855423
+}
