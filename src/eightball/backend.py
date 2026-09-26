@@ -83,7 +83,9 @@ def parse_scores(data: dict, n: int = 3) -> list[float]:
 
 
 class OllamaBackend:
-    def __init__(self, model: str = "gemma3", host: str = "http://127.0.0.1:11434", timeout: float = 60):
+    def __init__(self, model: str = "gemma3", host: str = "http://127.0.0.1:11434", timeout: float = 60,
+                 keep_alive: str = "30m"):
+        self.keep_alive = keep_alive  # ask Ollama to keep the model in memory between questions
         self.model = model
         self.host = host.rstrip("/")
         self.timeout = timeout
@@ -119,7 +121,7 @@ class OllamaBackend:
     def scores(self, question: str, order: list[str]) -> list[float]:
         """Log-odds for the options, in the order they were shown (order is a permutation of yes/no/maybe)."""
         data = self._post({
-            "model": self.model, "prompt": build_prompt(question, order), "stream": False,
+            "model": self.model, "prompt": build_prompt(question, order), "stream": False, "keep_alive": self.keep_alive,
             "options": {"temperature": 0, "num_predict": 1},
             "logprobs": True, "top_logprobs": TOP_LOGPROBS,
         })
@@ -128,7 +130,11 @@ class OllamaBackend:
     def plain(self, question: str) -> str:
         """The usual way: let the model write one word. Used only as a yardstick in the benchmark."""
         data = self._post({
-            "model": self.model, "prompt": build_plain_prompt(question), "stream": False,
+            "model": self.model, "prompt": build_plain_prompt(question), "stream": False, "keep_alive": self.keep_alive,
             "options": {"temperature": 0, "num_predict": 4},
         })
         return parse_plain(str(data.get("response", "")))
+
+    def warm(self) -> None:
+        """Load the model now, so the first real question is not the one that pays for it."""
+        self._post({"model": self.model, "prompt": "", "stream": False, "keep_alive": self.keep_alive})

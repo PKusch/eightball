@@ -141,3 +141,21 @@ class Server(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class Warm(unittest.TestCase):
+    def test_keep_alive_is_sent_and_warm_loads(self):
+        from eightball.backend import OllamaBackend
+        sent = []
+
+        class Spy(OllamaBackend):
+            def _post(self, payload):
+                sent.append(payload)
+                return {"logprobs": [{"top_logprobs": [{"token": "A", "logprob": -0.1}]}], "response": "yes"}
+
+        b = Spy("m")
+        b.scores("Is it?", ["yes", "no", "maybe"])
+        b.plain("Is it?")
+        b.warm()
+        self.assertTrue(all(p["keep_alive"] == "30m" for p in sent))
+        self.assertEqual(len(sent), 3)

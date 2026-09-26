@@ -87,6 +87,13 @@ def make_handler(ball: Ball, cors: bool):
 
 
 def serve(ball: Ball, host: str = "127.0.0.1", port: int = 8787, cors: bool = False) -> None:
+    warm = getattr(ball.backend, "warm", None)
+    if warm:
+        print("loading the model so the first question is quick...", flush=True)
+        try:
+            warm()
+        except Exception as e:  # not fatal: the first question will surface the real error
+            print(f"could not preload the model ({e}); the first question may be slow", flush=True)
     httpd = ThreadingHTTPServer((host, port), make_handler(ball, cors))
     print(f"eightball on http://{host}:{port}  (backend: {getattr(ball.backend, 'name', '?')})")
     try:
