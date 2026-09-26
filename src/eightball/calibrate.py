@@ -42,7 +42,7 @@ def _nll(samples: list[tuple[dict[str, float], str]], t: float) -> float:
 
 def fit_temperature(samples: list[tuple[dict[str, float], str]]) -> float:
     """Best single temperature by grid search on the average log-loss (dependency-free)."""
-    grid = [round(0.3 + 0.05 * i, 2) for i in range(0, 95)]
+    grid = [round(0.3 + 0.05 * i, 2) for i in range(0, 95)] + [5.5 + 0.5 * i for i in range(0, 40)]
     return min(grid, key=lambda t: _nll(samples, t))
 
 

@@ -19,7 +19,7 @@ def _slug(model: str) -> str:
 
 
 def _backend(a):
-    return MockBackend() if a.backend == "mock" else OllamaBackend(a.model, a.host)
+    return MockBackend() if a.backend == "mock" else OllamaBackend(a.model, a.host, scoring=a.scoring)
 
 
 def _calibration(a) -> Calibration:
@@ -38,6 +38,7 @@ def _common(p):
     p.add_argument("--backend", choices=["ollama", "mock"], default="ollama")
     p.add_argument("--model", default="gemma3")
     p.add_argument("--host", default="http://127.0.0.1:11434", help="where Ollama is listening")
+    p.add_argument("--scoring", choices=["letter", "word"], default="letter", help="how the model's odds are read")
     p.add_argument("--calibration", help='a calibration file, or "none"; default: calibration/<model>.json if present')
 
 

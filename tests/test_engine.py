@@ -239,3 +239,34 @@ class TextMode(unittest.TestCase):
         p = build_text_prompt("Rent is 900.", "Is rent 900?", ["yes", "no", "maybe"])
         self.assertIn("TEXT:\nRent is 900.", p)
         self.assertIn("Not stated", p)
+
+
+class WordScoring(unittest.TestCase):
+    def test_word_prompt_lists_the_words_in_the_given_order(self):
+        from eightball.backend import build_word_prompt
+        p = build_word_prompt("Is it?", ["no", "maybe", "yes"])
+        self.assertLess(p.index("NO "), p.index("MAYBE "))
+        self.assertLess(p.index("MAYBE "), p.index("YES "))
+
+    def test_word_odds_line_up_with_the_order_and_pool_spellings(self):
+        from eightball.backend import parse_word_odds
+        data = {"logprobs": [{"top_logprobs": [
+            {"token": "YES", "logprob": -0.5}, {"token": "Yes", "logprob": -2.0},
+            {"token": "NO", "logprob": -1.5}, {"token": "MAY", "logprob": -4.0}]}]}
+        s = parse_word_odds(data, ["no", "maybe", "yes"])
+        self.assertGreater(s[2], s[0])          # yes (two spellings pooled) beats no
+        self.assertGreater(s[0], s[1])          # no beats maybe
+        self.assertGreater(s[2], -0.5)          # pooling raises it above the single best spelling
+
+    def test_word_backend_reads_words_not_letters(self):
+        from eightball.backend import OllamaBackend
+        class Spy(OllamaBackend):
+            def _post(self, payload):
+                self.prompt = payload["prompt"]
+                return {"logprobs": [{"top_logprobs": [{"token": "NO", "logprob": -0.1}]}]}
+        b = Spy("m", scoring="word")
+        s = b.scores("Is it?", ["yes", "no", "maybe"])
+        self.assertEqual(s.index(max(s)), 1)
+        self.assertIn("exactly one word", b.prompt)
+        with self.assertRaises(ValueError):
+            OllamaBackend("m", scoring="nope")

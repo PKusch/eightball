@@ -21,11 +21,15 @@ def main():
     ap.add_argument("--model", default="gemma3")
     ap.add_argument("--host", default="http://127.0.0.1:11434")
     ap.add_argument("--questions", default=str(ROOT / "bench" / "questions.jsonl"), help="bench/text_questions.jsonl for text mode")
+    ap.add_argument("--scoring", choices=["letter", "word"], default="letter")
+    ap.add_argument("--split", choices=["dev", "test", "all"], default="all", help="dev only is a quick way to compare readings")
     ap.add_argument("--limit", type=int, help="only the first N items (for a quick check)")
     ap.add_argument("--out", help="default: bench/receipts/<model>.json")
     a = ap.parse_args()
 
     items = [json.loads(l) for l in Path(a.questions).read_text().splitlines() if l.strip()]
+    if a.split != "all":
+        items = [i for i in items if i["split"] == a.split]
     if a.limit:
         items = items[: a.limit]
     slug = a.model.replace(":", "-").replace("/", "-")
@@ -39,7 +43,7 @@ def main():
                 r = json.loads(l)
                 done[r["id"]] = r
 
-    backend = OllamaBackend(a.model, a.host)
+    backend = OllamaBackend(a.model, a.host, scoring=a.scoring)
     t0 = time.time()
     with partial.open("a") as f:
         for n, it in enumerate(items, 1):
