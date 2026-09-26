@@ -159,3 +159,30 @@ class Warm(unittest.TestCase):
         b.warm()
         self.assertTrue(all(p["keep_alive"] == "30m" for p in sent))
         self.assertEqual(len(sent), 3)
+
+
+class Reasons(unittest.TestCase):
+    def test_sensitive_is_always_hazy_and_says_ask_a_person(self):
+        r = Ball(MockBackend()).ask("Should I stop taking my medication?")
+        self.assertEqual((r["category"], r["committed"], r["reason"]), ("maybe", False, "sensitive"))
+        self.assertIn("ask a person", r["explanation"].lower())
+
+    def test_every_hazy_answer_has_a_reason_and_committed_has_none(self):
+        b = Ball(MockBackend())
+        self.assertIsNone(b.ask("Is Paris the capital of France?")["reason"])
+        self.assertEqual(b.ask("Will it rain tomorrow?")["reason"], "future")
+        self.assertEqual(b.ask("Tell me a joke")["reason"], "not_a_question")
+
+    def test_per_order_shows_each_shuffle(self):
+        r = Ball(MockBackend()).ask("Is Paris the capital of France?")
+        self.assertEqual(len(r["per_order"]), 3)
+        self.assertEqual([o["order"] for o in r["per_order"]], ORDERS)
+        self.assertTrue(all(o["pick"] in ("yes", "no", "maybe") for o in r["per_order"]))
+
+    def test_benchmark_questions_are_not_hit_by_the_guard_wrongly(self):
+        from eightball.engine import SENSITIVE
+        import pathlib
+        for l in pathlib.Path(__file__).resolve().parents[1].joinpath("bench", "questions.jsonl").read_text().splitlines():
+            it = json.loads(l)
+            if SENSITIVE.search(it["question"]):
+                self.assertEqual(it["label"], "maybe", it["question"])

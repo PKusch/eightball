@@ -25,6 +25,15 @@ YES_NO_START = re.compile(
     r"wasn't|weren't|don't|doesn't|didn't|can't|won't|wouldn't|shouldn't)\b", re.I)
 
 
+# Health, safety, money and other people's private feelings: a toy should never sound sure about these.
+SENSITIVE = re.compile(
+    r"\b(doctor|medicine|medication|pills?|dose|overdose|pregnan\w*|cancer|diagnos\w*|symptoms?|therapy|therapist|"
+    r"depress\w*|suicid\w*|self[- ]harm|kill myself|hurt myself|lawyer|sue|lawsuit|invest\w*|mortgage|loan|"
+    r"divorce|break up with|propose|does (he|she|they) (love|like) me|love me)\b", re.I)
+
+NOTE_SENSITIVE = "This is about health, safety, money or someone's feelings. Please ask a person."
+
+
 def softmax(xs: list[float]) -> list[float]:
     m = max(xs)
     es = [math.exp(x - m) for x in xs]
@@ -61,31 +70,54 @@ def strength_of(category: str, confidence: float) -> int:
     return 1 + sum(err > cut for cut in LADDER[category])
 
 
-def hazy_phrase(question: str, top: str, probs: dict[str, float]) -> str:
+def hazy(question: str, top: str, probs: dict[str, float]) -> tuple[str, str]:
+    """The hazy phrase and, in plain words, why the ball went hazy."""
+    if SENSITIVE.search(question):
+        return "Better not tell you now", "sensitive"
     if not is_yes_no_question(question):
-        return "Concentrate and ask again"          # not something with a yes or no answer
+        return "Concentrate and ask again", "not_a_question"
     if top == "maybe":
-        return "Cannot predict now" if FUTURE.search(question) else "Better not tell you now"
+        return ("Cannot predict now", "future") if FUTURE.search(question) else ("Better not tell you now", "unknowable")
     other = "no" if top == "yes" else "yes"
     if probs[top] - probs[other] < 0.15:
-        return "Reply hazy, try again"              # torn between yes and no
-    return "Ask again later"                        # leaning one way but not sure enough
+        return "Reply hazy, try again", "torn"
+    return "Ask again later", "leaning"
+
+
+def hazy_phrase(question: str, top: str, probs: dict[str, float]) -> str:
+    return hazy(question, top, probs)[0]
+
+
+def explain(reason: str, leaning: str) -> str:
+    return {
+        "sensitive": NOTE_SENSITIVE,
+        "not_a_question": "That is not a yes/no question, so there is nothing to answer.",
+        "future": "It depends on the future, and nobody can know that.",
+        "unknowable": "The model does not think this can be known, or it is a private matter.",
+        "torn": "The model was torn between yes and no.",
+        "leaning": f"The model leaned {leaning} but was not sure enough to say so.",
+    }[reason]
 
 
 def choose(question: str, odds: Odds, cal: Calibration) -> dict:
     probs = cal.apply(odds.probs)
     top = max(KEYS, key=probs.get)
-    committed = top != "maybe" and probs[top] >= cal.threshold and is_yes_no_question(question)
+    sensitive = bool(SENSITIVE.search(question))
+    committed = top != "maybe" and probs[top] >= cal.threshold and is_yes_no_question(question) and not sensitive
+    reason = None
     if committed:
         category, strength = top, strength_of(top, probs[top])
         answer = ANSWERS[category][strength - 1]
     else:
-        category, answer = "maybe", hazy_phrase(question, top, probs)
+        category = "maybe"
+        answer, reason = hazy(question, top, probs)
         strength = ANSWERS["maybe"].index(answer) + 1
     return {
         "category": category, "answer": answer, "strength": strength,
         "confidence": round(probs[category] if committed else probs[top], 4),
         "committed": committed, "leaning": top,
+        "reason": reason, "explanation": explain(reason, top) if reason else None,
+        "per_order": [{"order": o, "pick": max(KEYS, key=p.get)} for o, p in zip(ORDERS, odds.per_order)],
         "probs": {k: round(probs[k], 4) for k in KEYS},
         "stability": round(odds.stability, 3),
     }

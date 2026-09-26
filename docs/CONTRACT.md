@@ -13,6 +13,9 @@
   "confidence": 0.71,                // calibrated chance that the model's top pick is right (0..1)
   "committed": true,                 // false = the ball is hazy: the model was not sure enough, or it is not a yes/no question
   "leaning": "yes",                  // the model's own top pick before the ball decided whether to commit
+  "reason": null,                    // why the ball went hazy: "sensitive" | "not_a_question" | "future" | "unknowable" | "torn" | "leaning"; null when committed
+  "explanation": null,               // the reason in one plain sentence, or null
+  "per_order": [{"order": ["yes","no","maybe"], "pick": "yes"}, ...],  // what each of the 3 shuffled readings picked on its own
   "probs": {"yes": 0.71, "no": 0.12, "maybe": 0.17},
   "stability": 1.0,                  // share of the option orderings that picked the same category
   "backend": "ollama:gemma3",
