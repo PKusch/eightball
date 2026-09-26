@@ -1,0 +1,6 @@
+{"question": "Is Paris the capital of France?", "label": "yes"}
+{"question": "Is Sydney the capital of Australia?", "label": "no"}
+{"question": "Will my team win on Saturday?", "label": "maybe"}
+{"question": "Does water freeze at 0 degrees Celsius at sea level?", "label": "yes"}
+{"question": "Is a whale a fish?", "label": "no"}
+{"question": "Is my neighbour asleep right now?", "label": "maybe"}

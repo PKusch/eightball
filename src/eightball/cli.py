@@ -56,6 +56,11 @@ def main(argv: list[str] | None = None) -> None:
     s.add_argument("--cors", action="store_true", help="let other web pages call this server (off by default)")
     _common(s)
 
+    sc = sub.add_parser("score", help="grade the ball on your own questions (a .jsonl file of {question, label})")
+    sc.add_argument("file")
+    sc.add_argument("--json", action="store_true")
+    _common(sc)
+
     c = sub.add_parser("calibrate", help="fit calibration from benchmark receipts (dev items only)")
     c.add_argument("--receipts", required=True)
     c.add_argument("--out", required=True)
@@ -71,7 +76,11 @@ def main(argv: list[str] | None = None) -> None:
             print(f"fitted on {cal.n_dev} dev items: temperature {cal.temperature}, threshold {cal.threshold} -> {args.out}")
             return
         ball = Ball(_backend(args), _calibration(args))
-        if args.cmd == "ask":
+        if args.cmd == "score":
+            from .score import load_items, render, score
+            res = score(ball, load_items(args.file))
+            print(json.dumps(res, indent=2) if args.json else render(res))
+        elif args.cmd == "ask":
             r = ball.ask(" ".join(args.question))
             print(json.dumps(r, indent=2) if args.json else f"{r['answer']}   ({r['category']}, {round(r['confidence'] * 100)}% sure)")
         else:

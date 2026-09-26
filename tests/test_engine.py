@@ -186,3 +186,27 @@ class Reasons(unittest.TestCase):
             it = json.loads(l)
             if SENSITIVE.search(it["question"]):
                 self.assertEqual(it["label"], "maybe", it["question"])
+
+
+class Score(unittest.TestCase):
+    def test_scores_your_own_questions(self):
+        import os, tempfile
+        from eightball.score import load_items, score
+        path = os.path.join(tempfile.mkdtemp(), "q.jsonl")
+        with open(path, "w") as f:
+            f.write('{"question": "Is Paris the capital of France?", "label": "yes"}\n')
+            f.write('{"question": "Will it rain tomorrow?", "label": "maybe"}\n')
+            f.write('{"question": "Is the moon made of cheese?", "label": "no"}\n')  # the mock says yes: a wrong-sure miss
+        res = score(Ball(MockBackend()), load_items(path))
+        self.assertEqual(res["n"], 3)
+        self.assertAlmostEqual(res["right"], 2 / 3)
+        self.assertAlmostEqual(res["wrong_when_sure"], 1 / 2)
+        self.assertEqual(res["misses"][0]["should_say"], "no")
+
+    def test_bad_file_is_explained(self):
+        import os, tempfile
+        from eightball.score import load_items
+        path = os.path.join(tempfile.mkdtemp(), "q.jsonl")
+        open(path, "w").write('{"question": "Is it?", "label": "sure"}\n')
+        with self.assertRaises(ValueError):
+            load_items(path)
