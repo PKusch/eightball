@@ -83,6 +83,9 @@ h1{margin:0;font-size:1.05rem;font-weight:600;letter-spacing:.32em;text-transfor
 /* status */
 .status{min-height:1.6em;margin:-6px 0 0;text-align:center;color:var(--muted);font-size:.95rem;max-width:34em}
 .status.err{color:#ffb4b4}
+.why{width:100%;max-width:34em;margin:-14px 0 0;text-align:center;color:var(--muted);font-size:.88rem}
+.why:empty{display:none}
+.why.sensitive{margin-top:-6px;color:var(--text);font-size:.95rem;padding:10px 16px;border-radius:12px;border:1px solid rgba(143,176,255,.4);background:rgba(143,176,255,.1)}
 
 /* form */
 form{width:100%;display:flex;flex-wrap:wrap;gap:10px}
@@ -120,6 +123,15 @@ details[open] summary::after{content:"\2212"}
 .bar b{text-align:right;font-variant-numeric:tabular-nums}
 .odds p{margin:0;font-size:.92rem;color:var(--text)}
 .odds small{color:var(--muted);font-size:.82rem}
+.shake{border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:8px}
+.shake h3{margin:0;font-size:.92rem;font-weight:600}
+.shake ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.shake li{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:2px 10px;padding:7px 10px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid transparent;font-size:.88rem}
+.shake li.off{border-color:rgba(236,200,113,.5)}
+.shake .ord{color:var(--muted)}
+.shake .pk{font-weight:700;white-space:nowrap}
+.shake .pk.yes{color:var(--yes)}.shake .pk.maybe{color:var(--maybe)}.shake .pk.no{color:var(--no)}
+.shake .pk em{font-style:normal;font-weight:500;color:var(--muted)}
 
 section h2{margin:0 0 10px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
 section{width:100%}
@@ -175,7 +187,8 @@ footer{max-width:34em;text-align:center;color:var(--muted);font-size:.88rem;marg
     </button>
   </div>
 
-  <p id="status" class="status">Ask a yes/no question, then shake the ball.</p>
+  <p id="status" class="status" aria-live="polite">Ask a yes/no question, then shake the ball.</p>
+  <p id="why" class="why" aria-live="polite"></p>
   <p id="live" class="sr-only" aria-live="polite" aria-atomic="true"></p>
 
   <form id="form" autocomplete="off">
@@ -215,21 +228,21 @@ footer{max-width:34em;text-align:center;color:var(--muted);font-size:.88rem;marg
 -->
 <script type="application/json" id="demo-data">
 [
-{"question": "Is Paris the capital of France?", "category": "yes", "answer": "It is certain", "strength": 1, "confidence": 0.96, "committed": true, "leaning": "yes", "probs": {"yes": 0.96, "no": 0.01, "maybe": 0.03}, "stability": 1.0, "backend": "placeholder", "elapsed_ms": 410},
+{"question": "Is Paris the capital of France?", "category": "yes", "answer": "It is certain", "strength": 1, "confidence": 0.96, "committed": true, "leaning": "yes", "reason": null, "explanation": null, "per_order": [{"order": ["yes","no","maybe"], "pick": "yes"}, {"order": ["maybe","yes","no"], "pick": "yes"}, {"order": ["no","maybe","yes"], "pick": "yes"}], "probs": {"yes": 0.96, "no": 0.01, "maybe": 0.03}, "stability": 1.0, "backend": "placeholder", "elapsed_ms": 410},
 {"question": "Does water boil at 100 degrees Celsius at sea level?", "category": "yes", "answer": "Without a doubt", "strength": 2, "confidence": 0.93, "committed": true, "leaning": "yes", "probs": {"yes": 0.93, "no": 0.02, "maybe": 0.05}, "stability": 1.0, "backend": "placeholder", "elapsed_ms": 432},
 {"question": "Is the Earth round?", "category": "yes", "answer": "Yes definitely", "strength": 3, "confidence": 0.9, "committed": true, "leaning": "yes", "probs": {"yes": 0.9, "no": 0.03, "maybe": 0.07}, "stability": 1.0, "backend": "placeholder", "elapsed_ms": 455},
 {"question": "Is 12 times 12 equal to 144?", "category": "yes", "answer": "It is decidedly so", "strength": 4, "confidence": 0.87, "committed": true, "leaning": "yes", "probs": {"yes": 0.87, "no": 0.04, "maybe": 0.09}, "stability": 1.0, "backend": "placeholder", "elapsed_ms": 470},
 {"question": "Is Tokyo the capital of Japan?", "category": "yes", "answer": "You may rely on it", "strength": 5, "confidence": 0.83, "committed": true, "leaning": "yes", "probs": {"yes": 0.83, "no": 0.05, "maybe": 0.12}, "stability": 1.0, "backend": "placeholder", "elapsed_ms": 498},
 {"question": "Is the Pacific the largest ocean?", "category": "yes", "answer": "As I see it, yes", "strength": 6, "confidence": 0.78, "committed": true, "leaning": "yes", "probs": {"yes": 0.78, "no": 0.07, "maybe": 0.15}, "stability": 1.0, "backend": "placeholder", "elapsed_ms": 512},
 {"question": "Do bees make honey?", "category": "yes", "answer": "Most likely", "strength": 7, "confidence": 0.72, "committed": true, "leaning": "yes", "probs": {"yes": 0.72, "no": 0.09, "maybe": 0.19}, "stability": 1.0, "backend": "placeholder", "elapsed_ms": 540},
-{"question": "Is a tomato technically a fruit?", "category": "yes", "answer": "Outlook good", "strength": 8, "confidence": 0.66, "committed": true, "leaning": "yes", "probs": {"yes": 0.66, "no": 0.13, "maybe": 0.21}, "stability": 0.67, "backend": "placeholder", "elapsed_ms": 566},
+{"question": "Is a tomato technically a fruit?", "category": "yes", "answer": "Outlook good", "strength": 8, "confidence": 0.66, "committed": true, "leaning": "yes", "reason": null, "explanation": null, "per_order": [{"order": ["yes","no","maybe"], "pick": "yes"}, {"order": ["maybe","yes","no"], "pick": "yes"}, {"order": ["no","maybe","yes"], "pick": "maybe"}], "probs": {"yes": 0.66, "no": 0.13, "maybe": 0.21}, "stability": 0.67, "backend": "placeholder", "elapsed_ms": 566},
 {"question": "Is Mount Everest the tallest mountain above sea level?", "category": "yes", "answer": "Yes", "strength": 9, "confidence": 0.61, "committed": true, "leaning": "yes", "probs": {"yes": 0.61, "no": 0.15, "maybe": 0.24}, "stability": 0.67, "backend": "placeholder", "elapsed_ms": 590},
 {"question": "Is chess older than the telephone?", "category": "yes", "answer": "Signs point to yes", "strength": 10, "confidence": 0.52, "committed": true, "leaning": "yes", "probs": {"yes": 0.52, "no": 0.2, "maybe": 0.28}, "stability": 0.67, "backend": "placeholder", "elapsed_ms": 633},
 {"question": "Will it rain in London next Tuesday?", "category": "maybe", "answer": "Reply hazy, try again", "strength": 1, "confidence": 0.7, "committed": true, "leaning": "maybe", "probs": {"yes": 0.12, "no": 0.18, "maybe": 0.7}, "stability": 1.0, "backend": "placeholder", "elapsed_ms": 601},
 {"question": "Does my neighbour like jazz?", "category": "maybe", "answer": "Ask again later", "strength": 2, "confidence": 0.63, "committed": true, "leaning": "maybe", "probs": {"yes": 0.17, "no": 0.2, "maybe": 0.63}, "stability": 1.0, "backend": "placeholder", "elapsed_ms": 588},
-{"question": "Will I get the job I applied for?", "category": "maybe", "answer": "Better not tell you now", "strength": 3, "confidence": 0.46, "committed": false, "leaning": "yes", "probs": {"yes": 0.46, "no": 0.2, "maybe": 0.34}, "stability": 0.67, "backend": "placeholder", "elapsed_ms": 644},
-{"question": "Will the stock market go up this year?", "category": "maybe", "answer": "Cannot predict now", "strength": 4, "confidence": 0.44, "committed": false, "leaning": "yes", "probs": {"yes": 0.44, "no": 0.18, "maybe": 0.38}, "stability": 0.67, "backend": "placeholder", "elapsed_ms": 620},
-{"question": "What should I have for dinner?", "category": "maybe", "answer": "Concentrate and ask again", "strength": 5, "confidence": 0.45, "committed": false, "leaning": "maybe", "probs": {"yes": 0.2, "no": 0.35, "maybe": 0.45}, "stability": 0.67, "backend": "placeholder", "elapsed_ms": 655},
+{"question": "Will I get the job I applied for?", "category": "maybe", "answer": "Better not tell you now", "strength": 3, "confidence": 0.46, "committed": false, "leaning": "yes", "reason": "future", "explanation": "This is about the future, and nobody can know that yet, so the ball stays hazy.", "per_order": [{"order": ["yes","no","maybe"], "pick": "yes"}, {"order": ["maybe","yes","no"], "pick": "yes"}, {"order": ["no","maybe","yes"], "pick": "maybe"}], "probs": {"yes": 0.46, "no": 0.2, "maybe": 0.34}, "stability": 0.67, "backend": "placeholder", "elapsed_ms": 644},
+{"question": "Will the stock market go up this year?", "category": "maybe", "answer": "Cannot predict now", "strength": 4, "confidence": 0.44, "committed": false, "leaning": "yes", "reason": "torn", "explanation": "The model could not settle between Yes and Cannot be known, so the ball stays hazy.", "per_order": [{"order": ["yes","no","maybe"], "pick": "yes"}, {"order": ["maybe","yes","no"], "pick": "maybe"}, {"order": ["no","maybe","yes"], "pick": "yes"}], "probs": {"yes": 0.44, "no": 0.18, "maybe": 0.38}, "stability": 0.67, "backend": "placeholder", "elapsed_ms": 620},
+{"question": "What should I have for dinner?", "category": "maybe", "answer": "Concentrate and ask again", "strength": 5, "confidence": 0.45, "committed": false, "leaning": "maybe", "reason": "not_a_question", "explanation": "This does not look like a yes/no question, so the ball cannot pick a side.", "per_order": [{"order": ["yes","no","maybe"], "pick": "maybe"}, {"order": ["maybe","yes","no"], "pick": "maybe"}, {"order": ["no","maybe","yes"], "pick": "no"}], "probs": {"yes": 0.2, "no": 0.35, "maybe": 0.45}, "stability": 0.67, "backend": "placeholder", "elapsed_ms": 655},
 {"question": "Is Sydney the capital of Australia?", "category": "no", "answer": "My reply is no", "strength": 1, "confidence": 0.89, "committed": true, "leaning": "no", "probs": {"yes": 0.04, "no": 0.89, "maybe": 0.07}, "stability": 1.0, "backend": "placeholder", "elapsed_ms": 470},
 {"question": "Is 91 a prime number?", "category": "no", "answer": "Very doubtful", "strength": 2, "confidence": 0.8, "committed": true, "leaning": "no", "probs": {"yes": 0.08, "no": 0.8, "maybe": 0.12}, "stability": 1.0, "backend": "placeholder", "elapsed_ms": 520},
 {"question": "Is the Sun smaller than the Earth?", "category": "no", "answer": "My sources say no", "strength": 3, "confidence": 0.77, "committed": true, "leaning": "no", "probs": {"yes": 0.09, "no": 0.77, "maybe": 0.14}, "stability": 1.0, "backend": "placeholder", "elapsed_ms": 505},
@@ -238,7 +251,8 @@ footer{max-width:34em;text-align:center;color:var(--muted);font-size:.88rem;marg
 {"question": "Will humans live on Mars by 2030?", "category": "maybe", "answer": "Cannot predict now", "strength": 4, "confidence": 0.6, "committed": true, "leaning": "maybe", "probs": {"yes": 0.15, "no": 0.25, "maybe": 0.6}, "stability": 1.0, "backend": "placeholder", "elapsed_ms": 590},
 {"question": "Is 91 divisible by 7?", "category": "yes", "answer": "Yes definitely", "strength": 3, "confidence": 0.9, "committed": true, "leaning": "yes", "probs": {"yes": 0.9, "no": 0.04, "maybe": 0.06}, "stability": 1.0, "backend": "placeholder", "elapsed_ms": 480},
 {"question": "Is the Moon made of cheese?", "category": "no", "answer": "My reply is no", "strength": 1, "confidence": 0.92, "committed": true, "leaning": "no", "probs": {"yes": 0.03, "no": 0.92, "maybe": 0.05}, "stability": 1.0, "backend": "placeholder", "elapsed_ms": 450},
-{"question": "Does my best friend secretly dislike me?", "category": "maybe", "answer": "Reply hazy, try again", "strength": 1, "confidence": 0.68, "committed": true, "leaning": "maybe", "probs": {"yes": 0.1, "no": 0.22, "maybe": 0.68}, "stability": 1.0, "backend": "placeholder", "elapsed_ms": 575}
+{"question": "Does my best friend secretly dislike me?", "category": "maybe", "answer": "Reply hazy, try again", "strength": 1, "confidence": 0.68, "committed": true, "leaning": "maybe", "probs": {"yes": 0.1, "no": 0.22, "maybe": 0.68}, "stability": 1.0, "backend": "placeholder", "elapsed_ms": 575},
+{"question": "Should I stop taking my medication?", "category": "maybe", "answer": "Better not tell you now", "strength": 3, "confidence": 0.5, "committed": false, "leaning": "maybe", "reason": "sensitive", "explanation": "This one matters too much for a toy. Please ask a person, such as a doctor or a pharmacist.", "probs": {"yes": 0.2, "no": 0.3, "maybe": 0.5}, "stability": 0.67, "backend": "placeholder", "elapsed_ms": 600}
 ]
 </script>
 
@@ -253,6 +267,7 @@ footer{max-width:34em;text-align:center;color:var(--muted);font-size:.88rem;marg
   };
   var CATS = ["yes", "maybe", "no"];
   var CAT_LABEL = { yes: "Yes", maybe: "Maybe", no: "No" };
+  var ORDER_LABEL = { yes: "Yes", no: "No", maybe: "Cannot be known" };
   var HAZY = "Reply hazy, try again";
   var FONT = 'ui-rounded, "Avenir Next", "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif';
   var EXAMPLES = [
@@ -261,9 +276,9 @@ footer{max-width:34em;text-align:center;color:var(--muted);font-size:.88rem;marg
     "Is 91 a prime number?",
     "Is Sydney the capital of Australia?",
     "Will it rain in London next Tuesday?",
-    "Does my neighbour like jazz?"
+    "Should I stop taking my medication?"
   ];
-  var SHAKE_MIN_MS = 1600, TIMEOUT_MS = 60000;
+  var SHAKE_MIN_MS = 1600, TIMEOUT_MS = 60000, WARM_MS = 3000;
 
   var KNOWN = {};
   CATS.forEach(function (c) {
@@ -273,12 +288,13 @@ footer{max-width:34em;text-align:center;color:var(--muted);font-size:.88rem;marg
   function $(id) { return document.getElementById(id); }
   var el = {
     stage: $("stage"), ball: $("ball"), win: $("win"), bubbles: $("bubbles"), dieText: $("dieText"),
-    status: $("status"), live: $("live"), form: $("form"), q: $("q"), askBtn: $("askBtn"), shakeBtn: $("shakeBtn"),
+    status: $("status"), why: $("why"), live: $("live"), form: $("form"), q: $("q"), askBtn: $("askBtn"), shakeBtn: $("shakeBtn"),
     chiprow: $("chiprow"), odds: $("odds"), chips: $("chips"), hist: $("hist"), histEmpty: $("histEmpty"),
     badge: $("badge"), badgeText: $("badgeText")
   };
 
   var busy = false;
+  var liveSeen = false; // true once a live answer has arrived
   var history = [];
   var mode = "probing"; // probing | live | demo
   var backendName = "";
@@ -451,7 +467,7 @@ footer{max-width:34em;text-align:center;color:var(--muted);font-size:.88rem;marg
   function getAnswer(question) {
     if (fileMode) { mode = "demo"; setBadge(); return replayOrMiss(question); }
     return liveAsk(question).then(function (d) {
-      mode = "live"; if (typeof d.backend === "string") backendName = d.backend; setBadge();
+      mode = "live"; liveSeen = true; if (typeof d.backend === "string") backendName = d.backend; setBadge();
       return d;
     }, function (err) {
       if (err && err.unreachable) { mode = "demo"; setBadge(); return replayOrMiss(question); }
@@ -461,9 +477,20 @@ footer{max-width:34em;text-align:center;color:var(--muted);font-size:.88rem;marg
 
   /* ---------- sanitise a response ---------- */
   function num01(x) { return typeof x === "number" && isFinite(x) && x >= 0 && x <= 1 ? x : null; }
+  var REASONS = { sensitive: 1, not_a_question: 1, future: 1, unknowable: 1, torn: 1, leaning: 1 };
+  function cleanPerOrder(list) {
+    if (!Array.isArray(list)) return null;
+    var out = [];
+    list.forEach(function (o) {
+      if (!o || !Array.isArray(o.order) || !o.order.length || typeof o.pick !== "string" || !ORDER_LABEL[o.pick]) return;
+      var ord = o.order.filter(function (c) { return typeof c === "string" && ORDER_LABEL[c]; });
+      if (ord.length === o.order.length && out.length < 6) out.push({ order: ord, pick: o.pick });
+    });
+    return out.length ? out : null;
+  }
   function cleanResult(d, question) {
     var known = d && typeof d.answer === "string" ? KNOWN[d.answer] : null;
-    if (!known) return { question: question, answer: HAZY, category: "maybe", strength: 1, len: 5, probs: null, confidence: null, stability: null, backend: null, elapsed: null, fallback: true };
+    if (!known) return { question: question, answer: HAZY, category: "maybe", strength: 1, len: 5, probs: null, confidence: null, stability: null, backend: null, elapsed: null, reason: null, explanation: null, perOrder: null, fallback: true };
     var probs = null;
     if (d.probs && typeof d.probs === "object") {
       var y = num01(d.probs.yes), m = num01(d.probs.maybe), n = num01(d.probs.no);
@@ -473,6 +500,9 @@ footer{max-width:34em;text-align:center;color:var(--muted);font-size:.88rem;marg
       question: question, answer: d.answer, category: known.category, strength: known.strength, len: known.len,
       probs: probs, confidence: num01(d.confidence), committed: d.committed !== false,
       leaning: (typeof d.leaning === "string" && CAT_LABEL[d.leaning]) ? d.leaning : null, stability: num01(d.stability),
+      reason: typeof d.reason === "string" && REASONS[d.reason] ? d.reason : null,
+      explanation: typeof d.explanation === "string" && d.explanation.trim() ? d.explanation.trim().slice(0, 300) : null,
+      perOrder: cleanPerOrder(d.per_order),
       backend: typeof d.backend === "string" ? d.backend : null,
       elapsed: typeof d.elapsed_ms === "number" && isFinite(d.elapsed_ms) ? d.elapsed_ms : null, fallback: false
     };
@@ -480,6 +510,8 @@ footer{max-width:34em;text-align:center;color:var(--muted);font-size:.88rem;marg
 
   /* ---------- rendering the result ---------- */
   var renderResult = safe(function (r) {
+    el.why.textContent = r.explanation || "";
+    el.why.className = "why" + (r.reason === "sensitive" && r.explanation ? " sensitive" : "");
     clear(el.chiprow);
     var chip = mk("span", "cat " + r.category, CAT_LABEL[r.category]);
     el.chiprow.appendChild(chip);
@@ -509,7 +541,7 @@ footer{max-width:34em;text-align:center;color:var(--muted);font-size:.88rem;marg
     }
     if (!r.committed) {
       var lean = r.leaning;
-      var msg = lean === "yes" || lean === "no"
+      var msg = r.explanation ? r.explanation : lean === "yes" || lean === "no"
         ? "The model leaned " + CAT_LABEL[lean] + (r.confidence !== null ? " (" + Math.round(r.confidence * 100) + "%)" : "") + " but was not sure enough to say so."
         : "The model was not sure this can be answered.";
       el.odds.appendChild(mk("p", null, msg));
@@ -518,6 +550,24 @@ footer{max-width:34em;text-align:center;color:var(--muted);font-size:.88rem;marg
       var k = Math.round(r.stability * 3);
       el.odds.appendChild(mk("p", null, "Same pick in " + k + " of 3 shuffles"));
       el.odds.appendChild(mk("small", null, "Each time, the model saw the answer options in a different order."));
+    }
+    if (r.perOrder) {
+      var target = r.committed ? r.category : (r.leaning || r.category);
+      var box = mk("div", "shake");
+      box.appendChild(mk("h3", null, "Shake test: does the order of the options matter?"));
+      var ul = mk("ul");
+      r.perOrder.forEach(function (o) {
+        var off = o.pick !== target;
+        var li = mk("li", off ? "off" : "");
+        li.appendChild(mk("span", "ord", "Saw: " + o.order.map(function (c) { return ORDER_LABEL[c]; }).join(", ")));
+        var pk = mk("span", "pk " + o.pick, "Picked " + ORDER_LABEL[o.pick]);
+        if (off) pk.appendChild(mk("em", null, " (differs)"));
+        li.appendChild(pk);
+        ul.appendChild(li);
+      });
+      box.appendChild(ul);
+      box.appendChild(mk("small", null, "Models lean towards whichever option they see first. The ball reads three orders and averages them so that habit cancels out."));
+      el.odds.appendChild(box);
     }
     if (mode === "demo") el.odds.appendChild(mk("small", null, "These odds come from a saved answer, not from a model running just now."));
     else if (r.backend || r.elapsed !== null) el.odds.appendChild(mk("small", null, "Answered" + (r.backend ? " by " + r.backend : "") + (r.elapsed !== null ? " in " + (r.elapsed / 1000).toFixed(1) + " s" : "") + "."));
@@ -555,7 +605,7 @@ footer{max-width:34em;text-align:center;color:var(--muted);font-size:.88rem;marg
     el.ball.setAttribute("aria-busy", on ? "true" : "false");
     el.win.classList.toggle("busy", on);
     el.stage.classList.toggle("shaking", on && !reduced());
-    if (on) { el.win.classList.remove("rising"); setStatus("The ball is thinking..."); }
+    if (on) { el.win.classList.remove("rising"); el.why.textContent = ""; el.why.className = "why"; setStatus("The ball is thinking..."); }
   }
   var nudge = safe(function () {
     setStatus("Type a question first, then shake the ball.");
@@ -571,7 +621,10 @@ footer{max-width:34em;text-align:center;color:var(--muted);font-size:.88rem;marg
     if (fileMode && !demoAnswer(question)) { setNote(REPLAY_MISS); setStatus(""); return; }
     setBusy(true);
     var t0 = Date.now(), data = null, err = null;
+    var warm = null;
+    if (!fileMode && !liveSeen) warm = setTimeout(function () { if (busy) setStatus("Waking the model up... the first question is the slowest"); }, WARM_MS);
     try { data = await getAnswer(question); } catch (e) { err = e || new Error("Something went wrong."); }
+    if (warm) clearTimeout(warm);
     try {
       var wait = (reduced() ? 500 : SHAKE_MIN_MS) - (Date.now() - t0);
       if (wait > 0) await sleep(wait);
