@@ -20,6 +20,24 @@ from eightball.receipts import item_odds  # noqa: E402
 TARGET = 0.9
 
 
+STOP = set("a an the is are was were be it its of to in on at for and or do does did can could will would has have had this that these those there their they you your with by from as not no any which what when who how".split())
+WORD = __import__("re").compile(r"[a-z0-9]+")
+
+
+def word_match(item):
+    """A no-model yardstick for text mode: if a question word is missing from the text, 'maybe'; else if
+    every number in the question appears in the text, 'yes'; otherwise 'no'. It sees only the text and the question."""
+    text = set(WORD.findall(item["text"].lower()))
+    q = [w for w in WORD.findall(item["question"].lower()) if w not in STOP]
+    stem = lambda w: w[:5]
+    text_stems = {stem(w) for w in text}
+    words = [w for w in q if not w.isdigit()]
+    nums = [w for w in q if w.isdigit()]
+    if any(stem(w) not in text_stems for w in words):
+        return "maybe"
+    return "yes" if all(n in text for n in nums) else "no"
+
+
 def per_order(item):
     return [dict(zip(o, softmax(item["raw"][i]))) for i, o in enumerate(ORDERS)]
 
@@ -33,7 +51,9 @@ def systems(item, cal):
     avg = item_odds(item)
     stab = sum(1 for p in po if top(p) == top(avg)) / 3
     ball = choose(item["question"], Odds(avg, stab, po), cal, text_mode="text" in item)
+    extra = {"word match": word_match(item)} if "text" in item else {}
     return {
+        **extra,
         "plain": item["plain"],
         "one order": top(po[0]),
         "shuffled": top(avg),
@@ -72,13 +92,15 @@ def main(path):
         s, ball, po, avg = systems(it, cal)
         rows.append((it, s, ball, po, avg))
 
-    names = ["plain", "one order", "shuffled", "ball"]
+    names = (["word match"] if "text" in test[0] else []) + ["plain", "one order", "shuffled", "ball"]
     out = [f"# Scoreboard: {r['model']}", "",
            f"{len(items)} questions; calibration fitted on {len(dev)} dev items "
            f"(temperature {cal.temperature}, commit threshold {cal.threshold:.3f}); every number below is from the other {len(test)} test items.", ""]
 
     # headline
-    out += ["| | Plain answer | One ordering | Shuffled | The ball (shuffled + calibrated) |", "|---|---|---|---|---|"]
+    heads = {"word match": "Word match (no model)", "plain": "Plain answer", "one order": "One ordering",
+             "shuffled": "Shuffled", "ball": "The ball (shuffled + calibrated)"}
+    out += ["| | " + " | ".join(heads[n] for n in names) + " |", "|---" * (len(names) + 1) + "|"]
 
     def acc(name):
         return sum(1 for it, s, *_ in rows if s[name] == it["label"]) / len(rows)
@@ -99,12 +121,13 @@ def main(path):
         out.append(f"| Right on {lab} items ({len(sub)}) | " + " | ".join(pct(sum(1 for it, s, *_ in sub if s[n] == lab) / len(sub)) for n in names) + " |")
     ms = statistics.median(i["ms_scores"] for i in test)
     mp = statistics.median(i["ms_plain"] for i in test)
-    out.append(f"| Typical time | {mp:.0f} ms | {ms/3:.0f} ms | {ms:.0f} ms | {ms:.0f} ms |")
+    times = {"word match": "0 ms", "plain": f"{mp:.0f} ms", "one order": f"{ms/3:.0f} ms", "shuffled": f"{ms:.0f} ms", "ball": f"{ms:.0f} ms"}
+    out.append("| Typical time | " + " | ".join(times[n] for n in names) + " |")
     out += ["", '"Plain answer" means asking the same model to write one word (YES, NO or MAYBE), the usual way.', ""]
 
     # significance
     out += ["## Gaps and whether they are outside noise", "", "Paired bootstrap over test items, 95% interval for (ball minus other). Outside noise means the interval excludes 0.", ""]
-    for other in ("plain", "one order", "shuffled"):
+    for other in [n for n in names if n != "ball"]:
         d = [(s["ball"] == it["label"]) - (s[other] == it["label"]) for it, s, *_ in rows]
         lo, hi = boot(d)
         out.append(f"- Right group, ball vs {other}: {100*sum(d)/len(d):+.1f} points [{100*lo:+.1f}, {100*hi:+.1f}] "
