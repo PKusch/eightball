@@ -1,6 +1,6 @@
 {
-  "temperature": 0.95,
-  "threshold": 0.6689347929995759,
+  "temperature": 2.95,
+  "threshold": 0.5124786347473723,
   "model": "gemma3",
   "n_dev": 192,
   "target": 0.9
