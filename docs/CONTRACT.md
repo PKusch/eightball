@@ -23,6 +23,9 @@
 }
 ```
 
+- Text mode: add `"text": "Rent is 900 euros. Deposit is 500 euros."` (under 6,000 characters) and the question is answered
+  only from that text. "Cannot be known" then means "the text does not say" (`reason` is `not_stated`) and the response
+  has `"text_mode": true`. The health/money guard is off in text mode because the question is about the text, not advice.
 - `GET /v1/answers` lists the 20 phrases: `[{"answer", "category", "strength"}]`.
 - `GET /healthz` returns `{"ok": true, "backend": "..."}`.
 - `GET /` serves `web/index.html`.

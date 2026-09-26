@@ -48,6 +48,8 @@ def main(argv: list[str] | None = None) -> None:
     a = sub.add_parser("ask", help="ask one question")
     a.add_argument("question", nargs="+")
     a.add_argument("--json", action="store_true", help="print the full answer as JSON")
+    a.add_argument("--text", help="answer about this text instead of from general knowledge")
+    a.add_argument("--text-file", help="answer about the text in this file")
     _common(a)
 
     s = sub.add_parser("serve", help="run the web page and the API")
@@ -81,7 +83,8 @@ def main(argv: list[str] | None = None) -> None:
             res = score(ball, load_items(args.file))
             print(json.dumps(res, indent=2) if args.json else render(res))
         elif args.cmd == "ask":
-            r = ball.ask(" ".join(args.question))
+            text = Path(args.text_file).read_text() if args.text_file else args.text
+            r = ball.ask(" ".join(args.question), text)
             print(json.dumps(r, indent=2) if args.json else f"{r['answer']}   ({r['category']}, {round(r['confidence'] * 100)}% sure)")
         else:
             from .server import serve

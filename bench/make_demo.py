@@ -38,7 +38,7 @@ def main(path):
         per = [dict(zip(o, softmax(it["raw"][k]))) for k, o in enumerate(ORDERS)]
         avg = item_odds(it)
         stab = sum(1 for p in per if max(KEYS, key=p.get) == max(KEYS, key=avg.get)) / 3
-        res = choose(it["question"], Odds(avg, stab, per), cal)
+        res = choose(it["question"], Odds(avg, stab, per), cal, text_mode="text" in it)
         entries.append({"question": it["question"], **res, "backend": f"{r['model']} (saved run)", "elapsed_ms": it["ms_scores"]})
     block = "[\n" + ",\n".join(json.dumps(e, ensure_ascii=False) for e in entries) + "\n]"
     page = ROOT / "web" / "index.html"

@@ -20,7 +20,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", default="gemma3")
     ap.add_argument("--host", default="http://127.0.0.1:11434")
-    ap.add_argument("--questions", default=str(ROOT / "bench" / "questions.jsonl"))
+    ap.add_argument("--questions", default=str(ROOT / "bench" / "questions.jsonl"), help="bench/text_questions.jsonl for text mode")
     ap.add_argument("--limit", type=int, help="only the first N items (for a quick check)")
     ap.add_argument("--out", help="default: bench/receipts/<model>.json")
     a = ap.parse_args()
@@ -46,10 +46,11 @@ def main():
             if it["id"] in done:
                 continue
             t = time.perf_counter()
-            raw = [backend.scores(it["question"], o) for o in ORDERS]
+            text = it.get("text")  # text-mode items carry the text the question is about
+            raw = [backend.scores(it["question"], o, text) if text else backend.scores(it["question"], o) for o in ORDERS]
             t_scores = (time.perf_counter() - t) * 1000
             t = time.perf_counter()
-            plain = backend.plain(it["question"])
+            plain = backend.plain(it["question"], text) if text else backend.plain(it["question"])
             t_plain = (time.perf_counter() - t) * 1000
             rec = {**it, "raw": raw, "plain": plain, "ms_scores": round(t_scores), "ms_plain": round(t_plain)}
             done[it["id"]] = rec

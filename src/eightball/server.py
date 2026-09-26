@@ -10,8 +10,9 @@ from .answers import all_answers
 from .backend import BackendError
 from .engine import Ball
 
-MAX_BODY = 8_000
+MAX_BODY = 16_000
 MAX_QUESTION = 500
+MAX_TEXT = 6_000
 PAGE = Path(__file__).resolve().parents[2] / "web" / "index.html"
 
 
@@ -75,11 +76,14 @@ def make_handler(ball: Ball, cors: bool):
                 return self._json(400, {"error": 'body must be {"question": "..."}'})
             if not question.strip():
                 return self._json(400, {"error": "ask a question"})
+            text = body.get("text")
+            if text is not None and (not isinstance(text, str) or len(text) > MAX_TEXT):
+                return self._json(400, {"error": f'"text" must be a string under {MAX_TEXT} characters'})
             if len(question) > MAX_QUESTION:
                 return self._json(400, {"error": f"keep the question under {MAX_QUESTION} characters"})
             try:
                 with lock:
-                    self._json(200, ball.ask(question))
+                    self._json(200, ball.ask(question, text))
             except BackendError as e:
                 self._json(502, {"error": str(e)})
 

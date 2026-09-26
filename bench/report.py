@@ -32,7 +32,7 @@ def systems(item, cal):
     po = per_order(item)
     avg = item_odds(item)
     stab = sum(1 for p in po if top(p) == top(avg)) / 3
-    ball = choose(item["question"], Odds(avg, stab, po), cal)
+    ball = choose(item["question"], Odds(avg, stab, po), cal, text_mode="text" in item)
     return {
         "plain": item["plain"],
         "one order": top(po[0]),

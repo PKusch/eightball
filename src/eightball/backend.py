@@ -24,6 +24,39 @@ class BackendError(RuntimeError):
     pass
 
 
+TEXT_OPTION_TEXT = {
+    "yes": "Yes: the text says so.",
+    "no": "No: the text says the opposite.",
+    "maybe": "Not stated: the text does not say.",
+}
+
+
+def build_text_prompt(text: str, question: str, order: list[str]) -> str:
+    lines = [
+        "You are the spirit inside a Magic 8 Ball. Read the text, then answer the question about it using "
+        "only what the text says. Reply with the letter of exactly one option.",
+        "",
+        "TEXT:",
+        text.strip(),
+        "",
+        "QUESTION:",
+        question.strip(),
+        "",
+        "OPTIONS:",
+    ]
+    lines += [f"{LETTERS[i]}. {TEXT_OPTION_TEXT[k]}" for i, k in enumerate(order)]
+    lines += ["", "Reply with the letter of your chosen option only, nothing else.", "ANSWER:"]
+    return "\n".join(lines)
+
+
+def build_plain_text_prompt(text: str, question: str) -> str:
+    return (
+        "Read the text, then answer the question about it using only what the text says. Answer with exactly one word: "
+        "YES if the text says so, NO if the text says the opposite, MAYBE if the text does not say.\n\n"
+        f"TEXT:\n{text.strip()}\n\nQUESTION:\n{question.strip()}\n\nANSWER:"
+    )
+
+
 def build_prompt(question: str, order: list[str]) -> str:
     lines = [
         "You are the spirit inside a Magic 8 Ball. A person asks you a question. "
@@ -118,19 +151,22 @@ class OllamaBackend:
         except ValueError as e:
             raise BackendError(f"Ollama sent a reply that is not JSON: {e}") from e
 
-    def scores(self, question: str, order: list[str]) -> list[float]:
-        """Log-odds for the options, in the order they were shown (order is a permutation of yes/no/maybe)."""
+    def scores(self, question: str, order: list[str], text: str | None = None) -> list[float]:
+        """Log-odds for the options, in the order they were shown (order is a permutation of yes/no/maybe).
+        With `text`, the question is about that text and "maybe" means the text does not say."""
+        prompt = build_prompt(question, order) if text is None else build_text_prompt(text, question, order)
         data = self._post({
-            "model": self.model, "prompt": build_prompt(question, order), "stream": False, "keep_alive": self.keep_alive,
+            "model": self.model, "prompt": prompt, "stream": False, "keep_alive": self.keep_alive,
             "options": {"temperature": 0, "num_predict": 1},
             "logprobs": True, "top_logprobs": TOP_LOGPROBS,
         })
         return parse_scores(data, len(order))
 
-    def plain(self, question: str) -> str:
+    def plain(self, question: str, text: str | None = None) -> str:
         """The usual way: let the model write one word. Used only as a yardstick in the benchmark."""
+        prompt = build_plain_prompt(question) if text is None else build_plain_text_prompt(text, question)
         data = self._post({
-            "model": self.model, "prompt": build_plain_prompt(question), "stream": False, "keep_alive": self.keep_alive,
+            "model": self.model, "prompt": prompt, "stream": False, "keep_alive": self.keep_alive,
             "options": {"temperature": 0, "num_predict": 4},
         })
         return parse_plain(str(data.get("response", "")))

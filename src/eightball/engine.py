@@ -53,10 +53,10 @@ class Odds:
     per_order: list[dict[str, float]] = field(default_factory=list)
 
 
-def read_odds(backend, question: str) -> Odds:
+def read_odds(backend, question: str, text: str | None = None) -> Odds:
     per_order = []
     for order in ORDERS:
-        raw = backend.scores(question, order)
+        raw = backend.scores(question, order) if text is None else backend.scores(question, order, text)
         per_order.append(dict(zip(order, softmax(raw))))
     probs = {k: sum(p[k] for p in per_order) / len(per_order) for k in KEYS}
     top = max(KEYS, key=probs.get)
@@ -84,6 +84,18 @@ def hazy(question: str, top: str, probs: dict[str, float]) -> tuple[str, str]:
     return "Ask again later", "leaning"
 
 
+def hazy_in_text(question: str, top: str, probs: dict[str, float]) -> tuple[str, str]:
+    """Hazy phrase when the question is about a supplied text: 'not stated' is the main reason."""
+    if not is_yes_no_question(question):
+        return "Concentrate and ask again", "not_a_question"
+    if top == "maybe":
+        return "Concentrate and ask again", "not_stated"
+    other = "no" if top == "yes" else "yes"
+    if probs[top] - probs[other] < 0.15:
+        return "Reply hazy, try again", "torn"
+    return "Ask again later", "leaning"
+
+
 def hazy_phrase(question: str, top: str, probs: dict[str, float]) -> str:
     return hazy(question, top, probs)[0]
 
@@ -94,15 +106,17 @@ def explain(reason: str, leaning: str) -> str:
         "not_a_question": "That is not a yes/no question, so there is nothing to answer.",
         "future": "It depends on the future, and nobody can know that.",
         "unknowable": "The model does not think this can be known, or it is a private matter.",
+        "not_stated": "The text does not say.",
         "torn": "The model was torn between yes and no.",
         "leaning": f"The model leaned {leaning} but was not sure enough to say so.",
     }[reason]
 
 
-def choose(question: str, odds: Odds, cal: Calibration) -> dict:
+def choose(question: str, odds: Odds, cal: Calibration, text_mode: bool = False) -> dict:
     probs = cal.apply(odds.probs)
     top = max(KEYS, key=probs.get)
-    sensitive = bool(SENSITIVE.search(question))
+    # about a supplied text, the question is not advice, so the health/money guard does not apply
+    sensitive = (not text_mode) and bool(SENSITIVE.search(question))
     committed = top != "maybe" and probs[top] >= cal.threshold and is_yes_no_question(question) and not sensitive
     reason = None
     if committed:
@@ -110,7 +124,7 @@ def choose(question: str, odds: Odds, cal: Calibration) -> dict:
         answer = ANSWERS[category][strength - 1]
     else:
         category = "maybe"
-        answer, reason = hazy(question, top, probs)
+        answer, reason = hazy_in_text(question, top, probs) if text_mode else hazy(question, top, probs)
         strength = ANSWERS["maybe"].index(answer) + 1
     return {
         "category": category, "answer": answer, "strength": strength,
@@ -128,11 +142,13 @@ class Ball:
         self.backend = backend
         self.calibration = calibration or Calibration()
 
-    def ask(self, question: str) -> dict:
+    def ask(self, question: str, text: str | None = None) -> dict:
         question = question.strip()
         if not question:
             raise ValueError("ask a question")
+        if text is not None and not text.strip():
+            text = None
         t0 = time.perf_counter()
-        reading = choose(question, read_odds(self.backend, question), self.calibration)
-        return {"question": question, **reading, "backend": getattr(self.backend, "name", "unknown"),
+        reading = choose(question, read_odds(self.backend, question, text), self.calibration, text_mode=text is not None)
+        return {"question": question, **({"text_mode": True} if text is not None else {}), **reading, "backend": getattr(self.backend, "name", "unknown"),
                 "elapsed_ms": round((time.perf_counter() - t0) * 1000)}

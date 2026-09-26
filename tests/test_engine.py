@@ -134,6 +134,11 @@ class Server(unittest.TestCase):
         with urllib.request.urlopen(f"http://127.0.0.1:{self.port}/healthz") as r:
             self.assertTrue(json.loads(r.read())["ok"])
 
+    def test_text_mode_over_http(self):
+        code, body = self.post(json.dumps({"question": "Is the deposit 500 euros?", "text": "Rent is 900. Deposit: unknown."}).encode())
+        self.assertEqual((code, body["reason"]), (200, "not_stated"))
+        self.assertEqual(self.post(json.dumps({"question": "Is it?", "text": 5}).encode())[0], 400)
+
     def test_no_cors_header_by_default(self):
         with urllib.request.urlopen(f"http://127.0.0.1:{self.port}/healthz") as r:
             self.assertIsNone(r.headers.get("Access-Control-Allow-Origin"))
@@ -210,3 +215,27 @@ class Score(unittest.TestCase):
         open(path, "w").write('{"question": "Is it?", "label": "sure"}\n')
         with self.assertRaises(ValueError):
             load_items(path)
+
+
+class TextMode(unittest.TestCase):
+    def test_not_stated_is_hazy_with_its_own_reason(self):
+        r = Ball(MockBackend()).ask("Is the deposit 500 euros?", text="Rent is 900 euros. Deposit: unknown.")
+        self.assertEqual((r["category"], r["reason"], r["text_mode"]), ("maybe", "not_stated", True))
+        self.assertEqual(r["explanation"], "The text does not say.")
+
+    def test_text_says_so(self):
+        r = Ball(MockBackend()).ask("Is the deposit 500 euros?", text="Rent is 900 euros. Deposit is 500 euros.")
+        self.assertEqual(r["category"], "yes")
+
+    def test_health_guard_does_not_apply_to_a_supplied_text(self):
+        r = Ball(MockBackend()).ask("Is the appointment about a medication review?", text="Your medication review is on Monday.")
+        self.assertNotEqual(r["reason"], "sensitive")
+
+    def test_blank_text_means_general_question(self):
+        self.assertNotIn("text_mode", Ball(MockBackend()).ask("Is Paris the capital of France?", text="   "))
+
+    def test_prompt_shows_the_text(self):
+        from eightball.backend import build_text_prompt
+        p = build_text_prompt("Rent is 900.", "Is rent 900?", ["yes", "no", "maybe"])
+        self.assertIn("TEXT:\nRent is 900.", p)
+        self.assertIn("Not stated", p)
