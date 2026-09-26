@@ -577,7 +577,7 @@ footer{max-width:34em;text-align:center;color:var(--muted);font-size:.88rem;marg
       el.odds.appendChild(mk("p", null, "Same pick in " + k + " of 3 shuffles"));
       el.odds.appendChild(mk("small", null, "Each time, the model saw the answer options in a different order."));
     }
-    if (r.perOrder) {
+    if (r.perOrder && r.perOrder.length > 1) {
       var target = r.committed ? r.category : (r.leaning || r.category);
       var box = mk("div", "shake");
       box.appendChild(mk("h3", null, "Shake test: does the order of the options matter?"));

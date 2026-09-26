@@ -22,16 +22,24 @@ def _backend(a):
     return MockBackend() if a.backend == "mock" else OllamaBackend(a.model, a.host, scoring=a.scoring)
 
 
-def _calibration(a) -> Calibration:
+def _calibration(a, text: bool = False) -> Calibration | None:
+    """The calibration file for this model and reading: calibration/<model>[-word][-text].json."""
     if a.calibration == "none":
-        return Calibration()
-    path = Path(a.calibration) if a.calibration else CAL_DIR / f"{_slug(a.model)}.json"
-    if path.exists():
+        return None if text else Calibration()
+    if a.calibration and not text:
+        path = Path(a.calibration)
+        if not path.exists():
+            sys.exit(f"eightball: calibration file not found: {path}")
         return Calibration.load(path)
     if a.calibration:
-        sys.exit(f"eightball: calibration file not found: {path}")
-    print(f"eightball: no calibration for {a.model} (looked for {path}); running uncalibrated", file=sys.stderr)
-    return Calibration()
+        return None  # an explicit file covers plain questions only; text mode falls back to it
+    path = CAL_DIR / (_slug(a.model) + ("-word" if a.scoring == "word" else "") + ("-text" if text else "") + ".json")
+    if path.exists():
+        return Calibration.load(path)
+    if not text:
+        print(f"eightball: no calibration for {a.model} ({a.scoring} reading; looked for {path}); running uncalibrated", file=sys.stderr)
+        return Calibration()
+    return None
 
 
 def _common(p):
@@ -78,7 +86,7 @@ def main(argv: list[str] | None = None) -> None:
             cal.save(args.out)
             print(f"fitted on {cal.n_dev} dev items: temperature {cal.temperature}, threshold {cal.threshold} -> {args.out}")
             return
-        ball = Ball(_backend(args), _calibration(args))
+        ball = Ball(_backend(args), _calibration(args), _calibration(args, text=True))
         if args.cmd == "score":
             from .score import load_items, render, score
             res = score(ball, load_items(args.file))

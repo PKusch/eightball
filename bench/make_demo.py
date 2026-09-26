@@ -15,7 +15,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from eightball.calibrate import fit  # noqa: E402
 from eightball.engine import ORDERS, Odds, choose, softmax  # noqa: E402
-from eightball.receipts import item_odds  # noqa: E402
+from eightball.receipts import item_odds, scoring_of, used_orders  # noqa: E402
 from eightball.calibrate import KEYS  # noqa: E402
 
 # kinds whose questions read naturally come first, because the page builds its example chips from the top
@@ -32,11 +32,11 @@ EXTRAS = [
 ]
 
 
-def live_extras(model, cal):
+def live_extras(model, cal, scoring):
     from eightball.backend import BackendError, OllamaBackend
     from eightball.engine import Ball
     try:
-        ball = Ball(OllamaBackend(model), cal)
+        ball = Ball(OllamaBackend(model, scoring=scoring), cal)
         return [ball.ask(q) | {"backend": f"{model} (saved run)"} for q in EXTRAS]
     except BackendError as e:
         print(f"skipping extras (no model reachable: {e})")
@@ -45,7 +45,9 @@ def live_extras(model, cal):
 
 def main(path):
     r = json.loads(Path(path).read_text())
-    dev = [(item_odds(i), i["label"]) for i in r["items"] if i["split"] == "dev"]
+    scoring = scoring_of(r)
+    n = used_orders(scoring)
+    dev = [(item_odds(i, scoring), i["label"]) for i in r["items"] if i["split"] == "dev"]
     cal = fit(dev, r["model"], 0.9)
     test = [i for i in r["items"] if i["split"] == "test"]
     rnd = random.Random(11)
@@ -57,11 +59,11 @@ def main(path):
     entries = []
     for it in picked:
         per = [dict(zip(o, softmax(it["raw"][k]))) for k, o in enumerate(ORDERS)]
-        avg = item_odds(it)
-        stab = sum(1 for p in per if max(KEYS, key=p.get) == max(KEYS, key=avg.get)) / 3
-        res = choose(it["question"], Odds(avg, stab, per), cal, text_mode="text" in it)
+        avg = item_odds(it, scoring)
+        stab = sum(1 for p in per[:n] if max(KEYS, key=p.get) == max(KEYS, key=avg.get)) / n if n > 1 else None
+        res = choose(it["question"], Odds(avg, stab, per[:n]), cal, text_mode="text" in it)
         entries.append({"question": it["question"], **res, "backend": f"{r['model']} (saved run)", "elapsed_ms": it["ms_scores"]})
-    entries = live_extras(r["model"], cal) + entries
+    entries = live_extras(r["model"], cal, scoring) + entries
     block = "[\n" + ",\n".join(json.dumps(e, ensure_ascii=False) for e in entries) + "\n]"
     page = ROOT / "web" / "index.html"
     html = page.read_text()

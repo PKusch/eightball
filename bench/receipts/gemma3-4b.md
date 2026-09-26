@@ -2,7 +2,7 @@
 
 900 questions; calibration fitted on 294 dev items (temperature 4.25, commit threshold 0.774); every number below is from the other 606 test items.
 
-| | Plain answer | One ordering | Shuffled | The ball (shuffled + calibrated) |
+| | Plain answer | One ordering | Three orders averaged | The ball (shuffled + calibrated) |
 |---|---|---|---|---|
 | Right group (yes / maybe / no) | 70.5% | 68.8% | 66.3% | 56.1% |
 | Said a plain yes or no | 79.5% | 50.5% | 62.9% | 27.4% |

@@ -63,7 +63,7 @@ def main():
             if n % 25 == 0:
                 print(f"{n}/{len(items)} items, {round(time.time() - t0)}s", flush=True)
 
-    result = {"model": a.model, "orders": ORDERS, "n": len(items), "items": [done[i["id"]] for i in items]}
+    result = {"model": a.model, "scoring": a.scoring, "orders": ORDERS, "n": len(items), "items": [done[i["id"]] for i in items]}
     out.write_text(json.dumps(result))
     partial.unlink()
     print(f"wrote {out} ({len(items)} items)")

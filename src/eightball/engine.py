@@ -12,6 +12,13 @@ from .calibrate import KEYS, Calibration
 # Every option takes every position once, so a model's habit of favouring "A" cancels out.
 ORDERS = [["yes", "no", "maybe"], ["no", "maybe", "yes"], ["maybe", "yes", "no"]]
 
+def orders_for(backend) -> list[list[str]]:
+    """Which option orders to read. Letter scoring rotates all three. Word scoring reads only the natural
+    order (yes, no, maybe): on the fitting questions, listing MAYBE second made the model almost never say it (6%),
+    so averaging in the other orders only hurt."""
+    return ORDERS if getattr(backend, "scoring", "letter") == "letter" else ORDERS[:1]
+
+
 # A phrase is said only when the chance of being wrong is below its cut-off. Strongest phrase first.
 # "It is certain" therefore needs a calibrated chance of being wrong under 1 in 100.
 LADDER = {
@@ -49,18 +56,19 @@ def is_yes_no_question(q: str) -> bool:
 @dataclass
 class Odds:
     probs: dict[str, float]      # the three shuffled readings averaged
-    stability: float             # share of the orderings whose own top pick matched the averaged top pick
+    stability: float | None      # share of the orderings whose own top pick matched the averaged top pick (None: one ordering)
     per_order: list[dict[str, float]] = field(default_factory=list)
 
 
 def read_odds(backend, question: str, text: str | None = None) -> Odds:
     per_order = []
-    for order in ORDERS:
+    orders = orders_for(backend)
+    for order in orders:
         raw = backend.scores(question, order) if text is None else backend.scores(question, order, text)
         per_order.append(dict(zip(order, softmax(raw))))
     probs = {k: sum(p[k] for p in per_order) / len(per_order) for k in KEYS}
     top = max(KEYS, key=probs.get)
-    stab = sum(1 for p in per_order if max(KEYS, key=p.get) == top) / len(per_order)
+    stab = sum(1 for p in per_order if max(KEYS, key=p.get) == top) / len(per_order) if len(orders) > 1 else None
     return Odds(probs, stab, per_order)
 
 
@@ -131,16 +139,17 @@ def choose(question: str, odds: Odds, cal: Calibration, text_mode: bool = False)
         "confidence": round(probs[category] if committed else probs[top], 4),
         "committed": committed, "leaning": top,
         "reason": reason, "explanation": explain(reason, top) if reason else None,
-        "per_order": [{"order": o, "pick": max(KEYS, key=p.get)} for o, p in zip(ORDERS, odds.per_order)],
+        "per_order": [{"order": list(o), "pick": max(KEYS, key=p.get)} for o, p in zip(ORDERS, odds.per_order)],
         "probs": {k: round(probs[k], 4) for k in KEYS},
-        "stability": round(odds.stability, 3),
+        "stability": None if odds.stability is None else round(odds.stability, 3),
     }
 
 
 class Ball:
-    def __init__(self, backend, calibration: Calibration | None = None):
+    def __init__(self, backend, calibration: Calibration | None = None, text_calibration: Calibration | None = None):
         self.backend = backend
         self.calibration = calibration or Calibration()
+        self.text_calibration = text_calibration  # questions about a supplied text behave differently, so they get their own
 
     def ask(self, question: str, text: str | None = None) -> dict:
         question = question.strip()
@@ -149,6 +158,7 @@ class Ball:
         if text is not None and not text.strip():
             text = None
         t0 = time.perf_counter()
-        reading = choose(question, read_odds(self.backend, question, text), self.calibration, text_mode=text is not None)
+        cal = (self.text_calibration or self.calibration) if text is not None else self.calibration
+        reading = choose(question, read_odds(self.backend, question, text), cal, text_mode=text is not None)
         return {"question": question, **({"text_mode": True} if text is not None else {}), **reading, "backend": getattr(self.backend, "name", "unknown"),
                 "elapsed_ms": round((time.perf_counter() - t0) * 1000)}

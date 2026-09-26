@@ -1,0 +1,17 @@
+{
+  "model": "gemma3",
+  "scoring": "word",
+  "n_test": 408,
+  "temperature": 2.95,
+  "threshold": 0.5124786347473723,
+  "acc_word_match": 0.5318627450980392,
+  "acc_plain": 0.9534313725490197,
+  "acc_one_order": 0.9583333333333334,
+  "acc_shuffled": 0.875,
+  "acc_ball": 0.9558823529411765,
+  "wrong_commit_word_match": 0.11827956989247312,
+  "wrong_commit_plain": 0.050359712230215826,
+  "wrong_commit_one_order": 0.0299625468164794,
+  "wrong_commit_shuffled": 0.1465798045602606,
+  "wrong_commit_ball": 0.03007518796992481
+}

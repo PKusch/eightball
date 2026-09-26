@@ -15,7 +15,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from eightball.calibrate import KEYS, Calibration, fit  # noqa: E402
 from eightball.engine import ORDERS, Odds, choose, softmax  # noqa: E402
-from eightball.receipts import item_odds  # noqa: E402
+from eightball.receipts import item_odds, scoring_of, used_orders  # noqa: E402
 
 TARGET = 0.9
 
@@ -46,17 +46,19 @@ def top(p):
     return max(KEYS, key=p.get)
 
 
-def systems(item, cal):
+def systems(item, cal, scoring):
+    n = used_orders(scoring)
     po = per_order(item)
-    avg = item_odds(item)
-    stab = sum(1 for p in po if top(p) == top(avg)) / 3
-    ball = choose(item["question"], Odds(avg, stab, po), cal, text_mode="text" in item)
+    avg = item_odds(item, scoring)          # what the ball uses
+    avg_all = item_odds(item, "letter")     # all three orders averaged, for the "shuffled" column
+    stab = sum(1 for p in po[:n] if top(p) == top(avg)) / n if n > 1 else None
+    ball = choose(item["question"], Odds(avg, stab, po[:n]), cal, text_mode="text" in item)
     extra = {"word match": word_match(item)} if "text" in item else {}
     return {
         **extra,
         "plain": item["plain"],
         "one order": top(po[0]),
-        "shuffled": top(avg),
+        "shuffled": top(avg_all),
         "ball": ball["category"],
     }, ball, po, avg
 
@@ -84,12 +86,13 @@ def boot(diffs, n=2000, seed=1):
 def main(path):
     r = json.loads(Path(path).read_text())
     items = r["items"]
-    dev = [(item_odds(i), i["label"]) for i in items if i["split"] == "dev"]
+    scoring = scoring_of(r)
+    dev = [(item_odds(i, scoring), i["label"]) for i in items if i["split"] == "dev"]
     test = [i for i in items if i["split"] == "test"]
     cal = fit(dev, r["model"], TARGET)
     rows = []
     for it in test:
-        s, ball, po, avg = systems(it, cal)
+        s, ball, po, avg = systems(it, cal, scoring)
         rows.append((it, s, ball, po, avg))
 
     names = (["word match"] if "text" in test[0] else []) + ["plain", "one order", "shuffled", "ball"]
@@ -98,8 +101,9 @@ def main(path):
            f"(temperature {cal.temperature}, commit threshold {cal.threshold:.3f}); every number below is from the other {len(test)} test items.", ""]
 
     # headline
+    ball_head = "The ball (shuffled + calibrated)" if scoring == "letter" else "The ball (natural order + calibrated)"
     heads = {"word match": "Word match (no model)", "plain": "Plain answer", "one order": "One ordering",
-             "shuffled": "Shuffled", "ball": "The ball (shuffled + calibrated)"}
+             "shuffled": "Three orders averaged", "ball": ball_head}
     out += ["| | " + " | ".join(heads[n] for n in names) + " |", "|---" * (len(names) + 1) + "|"]
 
     def acc(name):
@@ -121,7 +125,8 @@ def main(path):
         out.append(f"| Right on {lab} items ({len(sub)}) | " + " | ".join(pct(sum(1 for it, s, *_ in sub if s[n] == lab) / len(sub)) for n in names) + " |")
     ms = statistics.median(i["ms_scores"] for i in test)
     mp = statistics.median(i["ms_plain"] for i in test)
-    times = {"word match": "0 ms", "plain": f"{mp:.0f} ms", "one order": f"{ms/3:.0f} ms", "shuffled": f"{ms:.0f} ms", "ball": f"{ms:.0f} ms"}
+    times = {"word match": "0 ms", "plain": f"{mp:.0f} ms", "one order": f"{ms/3:.0f} ms", "shuffled": f"{ms:.0f} ms",
+             "ball": f"{ms:.0f} ms" if scoring == "letter" else f"{ms/3:.0f} ms"}
     out.append("| Typical time | " + " | ".join(times[n] for n in names) + " |")
     out += ["", '"Plain answer" means asking the same model to write one word (YES, NO or MAYBE), the usual way.', ""]
 
@@ -138,7 +143,8 @@ def main(path):
     disagree = sum(1 for it, s, ball, po, avg in rows if len({top(p) for p in po}) > 1) / len(rows)
     out += ["## Does reordering the options change the answer?", "",
             f"Reading the model in a single fixed order, its pick changed when the options were reordered on {pct(disagree)} of items. "
-            "The ball reads three orders and averages them, so its own answer does not depend on the order.", ""]
+            + ("The ball reads three orders and averages them, so its own answer does not depend on the order." if scoring == "letter" else
+               "In word mode the ball reads only the natural order (yes, no, maybe): on the fitting questions, other orders made the model almost stop saying maybe, so averaging them in hurt.") + "", ""]
     # calibration
     raw_pairs = [(avg[top(avg)], top(avg) == it["label"]) for it, s, ball, po, avg in rows]
     cal_pairs = []
@@ -157,7 +163,7 @@ def main(path):
     from eightball.calibrate import fit_threshold
     for tgt in (0.75, 0.8, 0.85, 0.9, 0.95):
         c2 = Calibration(temperature=cal.temperature, threshold=fit_threshold(dev, cal.temperature, tgt), model=cal.model)
-        res = [(it, choose(it["question"], Odds(item_odds(it), 1.0, per_order(it)), c2, text_mode="text" in it)) for it in test]
+        res = [(it, choose(it["question"], Odds(item_odds(it, scoring), None, per_order(it)[:used_orders(scoring)]), c2, text_mode="text" in it)) for it in test]
         said = [(it, b) for it, b in res if b["category"] != "maybe"]
         wr = sum(1 for it, b in said if b["category"] != it["label"]) / len(said) if said else 0.0
         mark = " (default)" if tgt == TARGET else ""
@@ -194,7 +200,7 @@ def main(path):
     out.append("")
 
     Path(path).with_suffix(".md").write_text("\n".join(out) + "\n")
-    summary = {"model": r["model"], "n_test": len(rows), "temperature": cal.temperature, "threshold": cal.threshold,
+    summary = {"model": r["model"], "scoring": scoring, "n_test": len(rows), "temperature": cal.temperature, "threshold": cal.threshold,
                **{f"acc_{n.replace(' ', '_')}": acc(n) for n in names}, **{f"wrong_commit_{n.replace(' ', '_')}": wrong_commit(n) for n in names}}
     Path(path).with_name(Path(path).stem + "-summary.json").write_text(json.dumps(summary, indent=2) + "\n")
     print("\n".join(out))

@@ -270,3 +270,33 @@ class WordScoring(unittest.TestCase):
         self.assertIn("exactly one word", b.prompt)
         with self.assertRaises(ValueError):
             OllamaBackend("m", scoring="nope")
+
+
+class OrdersPerScoring(unittest.TestCase):
+    def test_letters_rotate_all_three_words_read_one(self):
+        from eightball.engine import orders_for, read_odds
+        class W(MockBackend):
+            scoring = "word"
+        self.assertEqual(len(orders_for(MockBackend())), 3)
+        self.assertEqual(orders_for(W()), [["yes", "no", "maybe"]])
+        odds = read_odds(W(), "Is it so?")
+        self.assertIsNone(odds.stability)
+        r = Ball(W()).ask("Is it so?")
+        self.assertIsNone(r["stability"])
+        self.assertEqual(len(r["per_order"]), 1)
+
+    def test_old_receipts_count_as_letter_readings(self):
+        from eightball.receipts import scoring_of, used_orders
+        self.assertEqual(scoring_of({}), "letter")
+        self.assertEqual((used_orders("letter"), used_orders("word")), (3, 1))
+
+
+class TextCalibration(unittest.TestCase):
+    def test_text_questions_use_their_own_calibration(self):
+        class Lean(MockBackend):
+            def scores(self, q, order, text=None):
+                return [1.0 if k == "yes" else 0.0 for k in order]
+        strict, loose = Calibration(threshold=0.99), Calibration(threshold=0.1)
+        b = Ball(Lean(), strict, loose)
+        self.assertEqual(b.ask("Is this a good idea?")["category"], "maybe")               # general question: strict bar
+        self.assertEqual(b.ask("Is it there?", text="It is there.")["category"], "yes")    # about a text: its own bar
