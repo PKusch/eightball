@@ -22,6 +22,27 @@ from eightball.calibrate import KEYS  # noqa: E402
 NATURAL = ["capital", "animal", "geo", "future", "private", "taste", "chemistry", "physical", "open"]
 
 
+# Extra questions the benchmark does not contain (health guard, a non-question, a lottery). They are asked of the
+# real model once, when this script runs, and saved like the rest.
+EXTRAS = [
+    "Should I stop taking my medication?",
+    "Tell me a joke",
+    "Will I win the lottery next week?",
+    "Is it going to rain in London tomorrow?",
+]
+
+
+def live_extras(model, cal):
+    from eightball.backend import BackendError, OllamaBackend
+    from eightball.engine import Ball
+    try:
+        ball = Ball(OllamaBackend(model), cal)
+        return [ball.ask(q) | {"backend": f"{model} (saved run)"} for q in EXTRAS]
+    except BackendError as e:
+        print(f"skipping extras (no model reachable: {e})")
+        return []
+
+
 def main(path):
     r = json.loads(Path(path).read_text())
     dev = [(item_odds(i), i["label"]) for i in r["items"] if i["split"] == "dev"]
@@ -40,6 +61,7 @@ def main(path):
         stab = sum(1 for p in per if max(KEYS, key=p.get) == max(KEYS, key=avg.get)) / 3
         res = choose(it["question"], Odds(avg, stab, per), cal, text_mode="text" in it)
         entries.append({"question": it["question"], **res, "backend": f"{r['model']} (saved run)", "elapsed_ms": it["ms_scores"]})
+    entries = live_extras(r["model"], cal) + entries
     block = "[\n" + ",\n".join(json.dumps(e, ensure_ascii=False) for e in entries) + "\n]"
     page = ROOT / "web" / "index.html"
     html = page.read_text()
