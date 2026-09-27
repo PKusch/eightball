@@ -61,6 +61,22 @@ One dial: how sure the ball must be before it says a plain yes or no. Chosen on 
 | 85% | 36.8% | 21.5% |
 | 90% (the default) | 27.4% | 15.1% |
 
+## A bigger model
+
+Same 900 questions, gemma3 12B instead of 4B, each using its own better reading (letter scoring for 4B, word scoring for 12B, decided the same way as above and confirmed on the test set).
+
+| | gemma3 4B | gemma3 12B |
+|---|---|---|
+| Right group | 56.1% | 79.7% |
+| Said a plain yes or no | 27.4% | 51.7% |
+| Wrong when it says one | 15.1% | 9.3% |
+
+12B is a real jump, not noise (+23.6 points, 95% interval [+19.8, +27.2]). It answers more questions and is wrong less often on the ones it does answer.
+
+On text mode the two models end up about tied (95.6% for 4B with word scoring, 95.1% for 12B with letter scoring, a gap too small to call), but 12B is pickier: it was never wrong when it committed to yes or no, against 3.0% of the time for 4B.
+
+The two models do not even agree on which reading to use ([docs/SCORING.md](docs/SCORING.md) has the full table) - 4B wants letter scoring for general questions and word scoring for text, 12B wants the opposite. Measure your own model; do not assume either pattern.
+
 ## Text mode: give it a document
 
 ```bash
@@ -95,7 +111,7 @@ Each line looks like `{"question": "Is Paris the capital of France?", "label": "
 
 ## Next
 
-A bigger model (gemma3 12B) measured side by side with 4B.
+Bigger and different models are easy to add (`--model`, or point `--host` at another Ollama). What would help most now: real documents instead of templated ones for text mode, and hazy phrases that say *what part* of a longer text was missing, not just that something was.
 
 ## Layout
 
