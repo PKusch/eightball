@@ -1,0 +1,15 @@
+{
+  "model": "gemma3",
+  "scoring": "word",
+  "n_test": 606,
+  "temperature": 11.0,
+  "threshold": 0.8201829528165115,
+  "acc_plain": 0.7046204620462047,
+  "acc_one_order": 0.7161716171617162,
+  "acc_shuffled": 0.7392739273927392,
+  "acc_ball": 0.6155115511551155,
+  "wrong_commit_plain": 0.3630705394190871,
+  "wrong_commit_one_order": 0.35368421052631577,
+  "wrong_commit_shuffled": 0.3348115299334812,
+  "wrong_commit_ball": 0.135
+}
