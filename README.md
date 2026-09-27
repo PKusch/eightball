@@ -61,6 +61,16 @@ One dial: how sure the ball must be before it says a plain yes or no. Chosen on 
 | 85% | 36.8% | 21.5% |
 | 90% (the default) | 27.4% | 15.1% |
 
+## Text mode: give it a document
+
+```bash
+python -m eightball ask --scoring word --text-file rental_listing.txt "Are pets allowed?"
+```
+
+"Cannot be known" then means "the text does not say", and health/money questions are no longer treated as advice, since the question is about the text, not about you.
+
+`--scoring word` matters here: reading letters could barely say "no" about a text (right on 71.6% of test questions, wrong 34.9% of the time it committed). Reading the model's own YES/NO/MAYBE word instead got 95.6% right and was wrong only 3.0% of the time it committed, three times faster. On the general questions above, it is the other way around: letter scoring wins, which is why it stays the default there. [docs/SCORING.md](docs/SCORING.md) has the numbers and `bench/pick_scoring.py` picks between them from the fitting questions alone. Full tables: [bench/receipts/gemma3-4b-text.md](bench/receipts/gemma3-4b-text.md) and [bench/receipts/gemma3-4b-word-text.md](bench/receipts/gemma3-4b-word-text.md).
+
 ## Try it on your own questions
 
 Put questions and the right answers in a file, one per line, and see how often the ball is wrongly sure:
@@ -85,7 +95,7 @@ Each line looks like `{"question": "Is Paris the capital of France?", "label": "
 
 ## Next
 
-Text mode is built (`--text`, or `"text"` in the API) but its results are not in yet. A bigger model side by side is next.
+A bigger model (gemma3 12B) measured side by side with 4B.
 
 ## Layout
 
