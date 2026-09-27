@@ -1,4 +1,5 @@
 import json
+import pathlib
 import threading
 import unittest
 import urllib.request
@@ -300,3 +301,12 @@ class TextCalibration(unittest.TestCase):
         b = Ball(Lean(), strict, loose)
         self.assertEqual(b.ask("Is this a good idea?")["category"], "maybe")               # general question: strict bar
         self.assertEqual(b.ask("Is it there?", text="It is there.")["category"], "yes")    # about a text: its own bar
+
+
+class PickScoring(unittest.TestCase):
+    def test_picks_the_higher_dev_accuracy(self):
+        import subprocess, sys as _sys
+        out = subprocess.run([_sys.executable, "bench/pick_scoring.py", "bench/receipts/gemma3-4b-text.json",
+                              "bench/receipts/gemma3-4b-word-text.json"], capture_output=True, text=True, cwd=str(pathlib.Path(__file__).resolve().parents[1]))
+        self.assertEqual(out.returncode, 0)
+        self.assertIn("pick: word", out.stdout)
