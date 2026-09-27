@@ -310,3 +310,14 @@ class PickScoring(unittest.TestCase):
                               "bench/receipts/gemma3-4b-word-text.json"], capture_output=True, text=True, cwd=str(pathlib.Path(__file__).resolve().parents[1]))
         self.assertEqual(out.returncode, 0)
         self.assertIn("pick: word", out.stdout)
+
+
+class Compare(unittest.TestCase):
+    def test_compares_two_runs_on_shared_items(self):
+        import subprocess, sys as _sys
+        root = pathlib.Path(__file__).resolve().parents[1]
+        out = subprocess.run([_sys.executable, "bench/compare.py", "bench/receipts/gemma3-4b.json", "bench/receipts/gemma3-4b-word.json"],
+                             capture_output=True, text=True, cwd=str(root))
+        self.assertEqual(out.returncode, 0)
+        self.assertIn("shared test questions", out.stdout)
+        self.assertIn("Right group,", out.stdout)
