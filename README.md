@@ -91,4 +91,6 @@ Text mode is built (`--text`, or `"text"` in the API) but its results are not in
 
 `src/eightball` the ball, server and command line · `web/index.html` the page · `bench/` questions, runner, scoreboard, audit · `docs/CONTRACT.md` the API shape.
 
+[Changelog](CHANGELOG.md).
+
 MIT licensed.
