@@ -2,7 +2,11 @@
 
 Draws 3 random test questions per kind (fixed seed, no picking of flattering ones), asks the ball what it
 would have said using the calibration fitted on the dev items, and writes them into web/index.html.
-    python bench/make_demo.py bench/receipts/gemma3-4b.json
+    python bench/make_demo.py bench/receipts/gemma3-4b.json [bench/receipts/gemma3-4b-real-word.json]
+
+A second, optional receipts file (typically a real-document run) contributes a handful more entries,
+tagged with its own kind so the "Try these" chips and history can include a real document alongside
+the made-up ones.
 """
 import json
 import random
@@ -43,18 +47,18 @@ def live_extras(model, cal, scoring):
         return []
 
 
-def main(path):
+def sampled_entries(path, per_kind, seed, label_suffix=""):
     r = json.loads(Path(path).read_text())
     scoring = scoring_of(r)
     n = used_orders(scoring)
     dev = [(item_odds(i, scoring), i["label"]) for i in r["items"] if i["split"] == "dev"]
     cal = fit(dev, r["model"], 0.9)
     test = [i for i in r["items"] if i["split"] == "test"]
-    rnd = random.Random(11)
+    rnd = random.Random(seed)
     picked = []
     for kind in sorted({i["kind"] for i in test}):
         pool = [i for i in test if i["kind"] == kind]
-        picked += rnd.sample(pool, min(3, len(pool)))
+        picked += rnd.sample(pool, min(per_kind, len(pool)))
     picked.sort(key=lambda i: (NATURAL.index(i["kind"]) if i["kind"] in NATURAL else 99, i["id"]))
     entries = []
     for it in picked:
@@ -62,8 +66,16 @@ def main(path):
         avg = item_odds(it, scoring)
         stab = sum(1 for p in per[:n] if max(KEYS, key=p.get) == max(KEYS, key=avg.get)) / n if n > 1 else None
         res = choose(it["question"], Odds(avg, stab, per[:n]), cal, text_mode="text" in it)
-        entries.append({"question": it["question"], **res, "backend": f"{r['model']} (saved run)", "elapsed_ms": it["ms_scores"]})
-    entries = live_extras(r["model"], cal, scoring) + entries
+        entries.append({"question": it["question"], **res, "backend": f"{r['model']}{label_suffix} (saved run)", "elapsed_ms": it["ms_scores"]})
+    return entries, r["model"], cal, scoring
+
+
+def main(path, extra_path=None):
+    entries, model, cal, scoring = sampled_entries(path, per_kind=3, seed=11)
+    if extra_path:
+        extra_entries, _, _, _ = sampled_entries(extra_path, per_kind=2, seed=5, label_suffix=", real document")
+        entries += extra_entries
+    entries = live_extras(model, cal, scoring) + entries
     block = "[\n" + ",\n".join(json.dumps(e, ensure_ascii=False) for e in entries) + "\n]"
     page = ROOT / "web" / "index.html"
     html = page.read_text()
@@ -75,4 +87,4 @@ def main(path):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    main(sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else None)
