@@ -134,7 +134,7 @@ Bigger and different models are easy to add (`--model`, or point `--host` at ano
 
 ## Layout
 
-`src/eightball` the ball, server and command line · `web/index.html` the page · `bench/` questions, runner, scoreboard, audit · `docs/CONTRACT.md` the API shape.
+`src/eightball` the ball, server and command line · `web/index.html` the page · `bench/` questions (made-up and [real](bench/real/README.md)), runner, scoreboard, audit · `docs/CONTRACT.md` the API shape · `docs/SCORING.md` letter vs. word.
 
 [Changelog](CHANGELOG.md).
 
