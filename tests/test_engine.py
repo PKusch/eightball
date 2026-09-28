@@ -1,5 +1,6 @@
 import json
 import pathlib
+import sys
 import threading
 import unittest
 import urllib.request
@@ -321,3 +322,40 @@ class Compare(unittest.TestCase):
         self.assertEqual(out.returncode, 0)
         self.assertIn("shared test questions", out.stdout)
         self.assertIn("Right group,", out.stdout)
+
+
+class MakeDemo(unittest.TestCase):
+    def test_extra_receipts_file_adds_entries_with_their_own_label(self):
+        import importlib, os, tempfile
+        sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "bench"))
+        make_demo = importlib.import_module("make_demo")
+
+        def fake_receipts(model, questions, seed_letter):
+            from eightball.mock import MockBackend
+            from eightball.engine import ORDERS
+            b = MockBackend()
+            items = []
+            for i, (q, kind, label) in enumerate(questions):
+                it = {"id": f"{seed_letter}{i}", "question": q, "label": label, "kind": kind,
+                      "split": "dev" if i == 0 else "test", "text": "placeholder text"}
+                it["raw"] = [b.scores(q, o, it["text"]) for o in ORDERS]
+                it["ms_scores"] = 5
+                items.append(it)
+            return {"model": model, "scoring": "letter", "orders": ORDERS, "n": len(items), "items": items}
+
+        main_qs = [("Is it stated?", "k1", "yes"), ("Is it not there?", "k1", "no"),
+                   ("Is it stated?", "k1", "yes"), ("Is it not there?", "k1", "no")]
+        extra_qs = [("Is the real fact there?", "k2", "yes"), ("Is the real fact not there?", "k2", "no"),
+                    ("Is the real fact there?", "k2", "yes"), ("Is the real fact not there?", "k2", "no")]
+
+        d = tempfile.mkdtemp()
+        main_path = os.path.join(d, "main.json")
+        extra_path = os.path.join(d, "extra.json")
+        json.dump(fake_receipts("mock-main", main_qs, "m"), open(main_path, "w"))
+        json.dump(fake_receipts("mock-extra", extra_qs, "e"), open(extra_path, "w"))
+
+        main_entries, model, cal, scoring = make_demo.sampled_entries(main_path, per_kind=2, seed=1)
+        extra_entries, _, _, _ = make_demo.sampled_entries(extra_path, per_kind=2, seed=1, label_suffix=", real document")
+        self.assertTrue(all(", real document" in e["backend"] for e in extra_entries))
+        self.assertTrue(all(", real document" not in e["backend"] for e in main_entries))
+        self.assertGreater(len(extra_entries), 0)
