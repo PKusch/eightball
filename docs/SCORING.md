@@ -17,6 +17,10 @@ We measured both readings, on two models, on two kinds of question (general know
 
 In other words: 4B and 12B want the *opposite* reading for the same task. There is no rule like "always use word scoring for text" that holds across models. Full tables: [bench/receipts/gemma3-4b.md](../bench/receipts/gemma3-4b.md), [bench/receipts/gemma3-4b-word.md](../bench/receipts/gemma3-4b-word.md), [bench/receipts/gemma3-4b-text.md](../bench/receipts/gemma3-4b-text.md), [bench/receipts/gemma3-4b-word-text.md](../bench/receipts/gemma3-4b-word-text.md), [bench/receipts/gemma3-12b-word.md](../bench/receipts/gemma3-12b-word.md), [bench/receipts/gemma3-12b-text.md](../bench/receipts/gemma3-12b-text.md), [bench/receipts/gemma3-12b-word-text.md](../bench/receipts/gemma3-12b-word-text.md).
 
+## Confirmed on real documents
+
+Both models' choices above were made on made-up documents. When checked fresh on a small set of real ones (32 real job postings, 4 real leases - [bench/REAL_QUESTIONS.md](../bench/REAL_QUESTIONS.md)), each model picked the exact same reading again on that set's own fitting questions: 4B still wants word, 12B still wants letter. The pick travels; the accuracy doesn't always - see the README's "Does this hold up on real documents?" section.
+
 ## Which one should you use?
 
 Run both benchmarks for your model, then:

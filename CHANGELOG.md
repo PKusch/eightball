@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+- A real-document test set (129 hand-written questions over 32 real U.S. federal job postings and excerpts from 4 real SEC-filed leases, not templated). Each model picked the same reading it picked on made-up documents, confirmed fresh. 4B's accuracy genuinely drops on real text (95.6% to 83.3%, confidence intervals don't overlap); 12B barely moves (95.1% to 96.4%). Both never wrong when they committed, on a small sample.
 - Text mode measured: reading letters could barely say "no" in text mode (right group 71.6%, wrong 34.9% of the time it spoke, against 87.5% right just asking). Reading the model's own YES/NO/MAYBE word odds fixed it: 95.6% right, wrong only 3.0% of the time it spoke, and three times faster.
 - Word scoring (`--scoring word`): the model answers with a word instead of a letter and that word's odds are read. It reads only the natural order (yes, no, maybe); on the fitting questions, other orders made the model almost stop saying "maybe".
 - Text-mode questions get their own calibration file, separate from plain questions.
