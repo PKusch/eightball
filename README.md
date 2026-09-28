@@ -87,6 +87,23 @@ python -m eightball ask --scoring word --text-file rental_listing.txt "Are pets 
 
 `--scoring word` matters here: reading letters could barely say "no" about a text (right on 71.6% of test questions, wrong 34.9% of the time it committed). Reading the model's own YES/NO/MAYBE word instead got 95.6% right and was wrong only 3.0% of the time it committed, three times faster. On the general questions above, it is the other way around: letter scoring wins, which is why it stays the default there. [docs/SCORING.md](docs/SCORING.md) has the numbers and `bench/pick_scoring.py` picks between them from the fitting questions alone. Full tables: [bench/receipts/gemma3-4b-text.md](bench/receipts/gemma3-4b-text.md) and [bench/receipts/gemma3-4b-word-text.md](bench/receipts/gemma3-4b-word-text.md).
 
+## Does this hold up on real documents?
+
+Everything above is measured on documents I made up. To check that wasn't flattering the ball, I built a second, smaller test set from documents I didn't write: 32 real U.S. federal job postings (public domain) and excerpts from 4 real commercial leases that companies filed with the SEC (public record) - 129 hand-written questions, no keyword traps, described honestly in [bench/REAL_QUESTIONS.md](bench/REAL_QUESTIONS.md).
+
+Each model was checked fresh on this real set's own fitting questions rather than assuming the earlier choice carries over - and it picked the same reading both times (4B: word, 12B: letter).
+
+| | Right group | Wrong when it speaks |
+|---|---|---|
+| gemma3 4B, on made-up documents | 95.6% | 3.0% |
+| gemma3 4B, on real documents | 83.3% [75.0-90.5%] | 0 of 46 |
+| gemma3 12B, on made-up documents | 95.1% | 0.0% |
+| gemma3 12B, on real documents | 96.4% [91.7-100%] | 0 of 57 |
+
+In plain words: 4B's accuracy really does drop on real documents - a genuine gap, not noise, since the two ranges above don't overlap. 12B barely moves. Both models were never wrong on the real set when they committed to an answer, though with only 46-57 committed answers that's not enough to promise 0% forever - it's an encouraging small sample, not a guarantee.
+
+The real set has no keyword traps the way the made-up one does, so a naive word-matcher could look better here than it deserves to ([bench/REAL_QUESTIONS.md](bench/REAL_QUESTIONS.md) says by how much: 42.9%, against 53.2% on the made-up set). Read both tables together, not the real one alone.
+
 ## Try it on your own questions
 
 Put questions and the right answers in a file, one per line, and see how often the ball is wrongly sure:
@@ -111,7 +128,7 @@ Each line looks like `{"question": "Is Paris the capital of France?", "label": "
 
 ## Next
 
-Bigger and different models are easy to add (`--model`, or point `--host` at another Ollama). What would help most now: real documents instead of templated ones for text mode, and hazy phrases that say *what part* of a longer text was missing, not just that something was.
+Bigger and different models are easy to add (`--model`, or point `--host` at another Ollama). What would help most now: a bigger real-document set (129 is small; growing it means more hand reading, there's no generator for real text), and hazy phrases that say *what part* of a longer text was missing, not just that something was.
 
 ## Layout
 
