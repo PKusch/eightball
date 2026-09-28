@@ -80,8 +80,10 @@ The two models do not even agree on which reading to use ([docs/SCORING.md](docs
 ## Text mode: give it a document
 
 ```bash
-python -m eightball ask --scoring word --text-file rental_listing.txt "Are pets allowed?"
+python -m eightball ask --scoring word --text-file examples/real_lease_excerpt.txt "Is the Redwood City property on the first floor?"
 ```
+
+`examples/real_lease_excerpt.txt` is a real sublease excerpt (see [bench/real/README.md](bench/real/README.md) for where it's from) - try it on a question the excerpt doesn't answer, like "Does the sublease mention a security deposit amount?", and watch it go hazy instead of guessing.
 
 "Cannot be known" then means "the text does not say", and health/money questions are no longer treated as advice, since the question is about the text, not about you.
 
