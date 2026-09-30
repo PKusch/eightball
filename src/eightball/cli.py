@@ -98,5 +98,8 @@ def main(argv: list[str] | None = None) -> None:
         else:
             from .server import serve
             serve(ball, args.bind, args.port, args.cors)
-    except (BackendError, ValueError) as e:
+    except (BackendError, ValueError, OSError) as e:
+        # A mistyped --text-file, score file or --receipts path is the commonest
+        # slip; OSError (file missing, unreadable, a directory) ends in one plain
+        # line like every other error here, not a traceback.
         sys.exit(f"eightball: {e}")

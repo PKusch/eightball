@@ -8,6 +8,7 @@ from http.server import ThreadingHTTPServer
 
 from eightball.answers import ANSWERS, all_answers, category_of
 from eightball.calibrate import Calibration, fit, fit_temperature
+from eightball.cli import main as cli_main
 from eightball.engine import Ball, ORDERS, is_yes_no_question, strength_of
 from eightball.mock import MockBackend
 from eightball.server import make_handler
@@ -144,6 +145,23 @@ class Server(unittest.TestCase):
     def test_no_cors_header_by_default(self):
         with urllib.request.urlopen(f"http://127.0.0.1:{self.port}/healthz") as r:
             self.assertIsNone(r.headers.get("Access-Control-Allow-Origin"))
+
+
+class CliFileErrors(unittest.TestCase):
+    """A mistyped path is the commonest slip. Every command that reads a file
+    ends in one plain "eightball: ..." line, not a FileNotFoundError traceback."""
+
+    def _expect_clean_exit(self, argv):
+        with self.assertRaises(SystemExit) as cm:
+            cli_main(argv)
+        self.assertIsInstance(cm.exception.code, str, argv)
+        self.assertIn("eightball:", cm.exception.code)
+        self.assertNotIn("Traceback", cm.exception.code)
+
+    def test_missing_files_are_reported_not_raised(self):
+        self._expect_clean_exit(["ask", "will it", "--backend", "mock", "--text-file", "/no/such/file.txt"])
+        self._expect_clean_exit(["score", "/no/such/file.jsonl", "--backend", "mock"])
+        self._expect_clean_exit(["calibrate", "--receipts", "/no/such/file.jsonl", "--out", "/tmp/eightball-test-out.json"])
 
 
 if __name__ == "__main__":
