@@ -16,6 +16,15 @@ from eightball.backend import OllamaBackend  # noqa: E402
 from eightball.engine import ORDERS  # noqa: E402
 
 
+def _positive_int(v):
+    # --limit 0 is falsy, so the old `if a.limit` ran the whole set; a negative
+    # sliced items[:-n] and dropped from the end. Refuse a bad count at the argument.
+    n = int(v)
+    if n < 1:
+        raise argparse.ArgumentTypeError(f"must be at least 1, not {n}")
+    return n
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", default="gemma3")
@@ -23,14 +32,14 @@ def main():
     ap.add_argument("--questions", default=str(ROOT / "bench" / "questions.jsonl"), help="bench/text_questions.jsonl for text mode")
     ap.add_argument("--scoring", choices=["letter", "word"], default="letter")
     ap.add_argument("--split", choices=["dev", "test", "all"], default="all", help="dev only is a quick way to compare readings")
-    ap.add_argument("--limit", type=int, help="only the first N items (for a quick check)")
+    ap.add_argument("--limit", type=_positive_int, help="only the first N items (for a quick check)")
     ap.add_argument("--out", help="default: bench/receipts/<model>.json")
     a = ap.parse_args()
 
     items = [json.loads(l) for l in Path(a.questions).read_text().splitlines() if l.strip()]
     if a.split != "all":
         items = [i for i in items if i["split"] == a.split]
-    if a.limit:
+    if a.limit is not None:
         items = items[: a.limit]
     slug = a.model.replace(":", "-").replace("/", "-")
     out = Path(a.out) if a.out else ROOT / "bench" / "receipts" / f"{slug}.json"

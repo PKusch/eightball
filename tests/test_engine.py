@@ -1,3 +1,4 @@
+import importlib
 import json
 import os
 import pathlib
@@ -181,6 +182,25 @@ class Receipts(unittest.TestCase):
             json.dump(bad, open(path, "w"))
             with self.assertRaises(ValueError):
                 dev_samples(path)
+
+
+class BenchRunArguments(unittest.TestCase):
+    """bench/run.py --limit must be at least 1: 0 ran the whole set and a negative
+    sliced from the end. The rejection is at parse time, before any file or model
+    work, so this needs no model."""
+
+    def test_non_positive_limit_is_refused(self):
+        sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "bench"))
+        run = importlib.import_module("run")
+        saved = sys.argv
+        try:
+            for bad in ("0", "-3"):
+                sys.argv = ["run.py", "--limit", bad, "--backend", "mock"]
+                with self.assertRaises(SystemExit) as cm:
+                    run.main()
+                self.assertEqual(cm.exception.code, 2, bad)
+        finally:
+            sys.argv = saved
 
 
 class CliFileErrors(unittest.TestCase):
