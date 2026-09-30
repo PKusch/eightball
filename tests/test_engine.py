@@ -207,10 +207,10 @@ class BenchReceiptReaders(unittest.TestCase):
     """report.py and pick_scoring.py share receipts.dev_items and must, like it,
     end a malformed or missing file in one plain line, not a traceback."""
 
-    def _run(self, script, arg):
+    def _run(self, script, *args):
         import subprocess
         root = pathlib.Path(__file__).resolve().parents[1]
-        return subprocess.run([sys.executable, str(root / "bench" / script), arg],
+        return subprocess.run([sys.executable, str(root / "bench" / script), *args],
                               capture_output=True, text=True)
 
     def test_bad_and_missing_files_end_in_one_plain_line(self):
@@ -218,12 +218,19 @@ class BenchReceiptReaders(unittest.TestCase):
         bad = os.path.join(d, "bad.json")
         json.dump({"not": "receipts"}, open(bad, "w"))
         gone = os.path.join(d, "gone.json")
+        good = os.path.join(d, "good.json")
+        json.dump({"model": "m", "items": [], "scoring": "letter"}, open(good, "w"))
         for script, tag in (("report.py", "report:"), ("pick_scoring.py", "pick_scoring:")):
             for arg in (bad, gone):
                 r = self._run(script, arg)
                 self.assertNotEqual(r.returncode, 0, (script, arg))
                 self.assertNotIn("Traceback", r.stderr, (script, arg))
                 self.assertIn(tag, r.stderr, (script, arg))
+        for arg in (bad, gone):
+            r = self._run("compare.py", arg, good)
+            self.assertNotEqual(r.returncode, 0, arg)
+            self.assertNotIn("Traceback", r.stderr, arg)
+            self.assertIn("compare:", r.stderr, arg)
 
     def test_report_on_a_dev_only_file_says_so(self):
         root = pathlib.Path(__file__).resolve().parents[1]

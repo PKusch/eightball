@@ -11,16 +11,16 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
 from eightball.calibrate import KEYS, fit  # noqa: E402
-from eightball.receipts import item_odds, scoring_of  # noqa: E402
+from eightball.receipts import dev_items, item_odds, load, scoring_of  # noqa: E402
 
 TARGET = 0.9
 
 
 def read(path):
-    r = json.loads(Path(path).read_text())
+    r = load(path)
+    dev = dev_items(r, path)   # validates the receipts shape before anything reads it
     scoring = scoring_of(r)
     by_id = {i["id"]: i for i in r["items"]}
-    dev = [(item_odds(i, scoring), i["label"]) for i in r["items"] if i["split"] == "dev"]
     cal = fit(dev, r["model"], TARGET)
     label = r["model"] + (" (word)" if scoring == "word" else "")
     return label, by_id, cal, scoring
@@ -81,4 +81,7 @@ def main(path_a, path_b):
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         sys.exit(f"usage: {sys.argv[0]} <receipts-a.json> <receipts-b.json>")
-    main(sys.argv[1], sys.argv[2])
+    try:
+        main(sys.argv[1], sys.argv[2])
+    except (OSError, ValueError) as e:
+        sys.exit(f"compare: {e}")
