@@ -20,6 +20,8 @@ python -m eightball ask "Is Paris the capital of France?"
 python -m eightball serve --model gemma3   # then open http://127.0.0.1:8787
 ```
 
+No model handy? Add `--backend mock` to either command to try the plumbing with a stand-in that needs no Ollama.
+
 The page works without a model too: opened as a plain file it replays saved answers and says so on a badge.
 
 ## How it decides
