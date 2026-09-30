@@ -1,5 +1,7 @@
 import json
+import os
 import pathlib
+import tempfile
 import sys
 import threading
 import unittest
@@ -145,6 +147,40 @@ class Server(unittest.TestCase):
     def test_no_cors_header_by_default(self):
         with urllib.request.urlopen(f"http://127.0.0.1:{self.port}/healthz") as r:
             self.assertIsNone(r.headers.get("Access-Control-Allow-Origin"))
+
+
+class Receipts(unittest.TestCase):
+    """dev_samples reads calibration receipts. A valid file yields its dev items;
+    a valid-JSON file that is not receipts is named, not tracebacked."""
+
+    def _valid(self):
+        from eightball.mock import MockBackend
+        from eightball.engine import ORDERS
+        b = MockBackend()
+        items = []
+        for i, (q, lab) in enumerate([("Is it a?", "yes"), ("Is it b?", "no"), ("Is it c?", "yes")]):
+            items.append({"id": f"d{i}", "question": q, "label": lab, "split": "dev", "text": "t",
+                          "raw": [b.scores(q, o, "t") for o in ORDERS]})
+        return {"model": "mock", "scoring": "letter", "items": items}
+
+    def test_valid_receipts_yield_dev_items_and_calibrate(self):
+        from eightball.receipts import dev_samples
+        d = tempfile.mkdtemp()
+        path = os.path.join(d, "r.json")
+        json.dump(self._valid(), open(path, "w"))
+        samples, model = dev_samples(path)
+        self.assertEqual(model, "mock")
+        self.assertEqual(len(samples), 3)
+        self.assertEqual(fit(samples, model).n_dev, 3)
+
+    def test_a_non_receipts_json_file_is_named_not_raised(self):
+        from eightball.receipts import dev_samples
+        d = tempfile.mkdtemp()
+        for bad in ({"not": "receipts"}, {"model": "m", "items": [{"split": "dev", "label": "yes"}]}):
+            path = os.path.join(d, "bad.json")
+            json.dump(bad, open(path, "w"))
+            with self.assertRaises(ValueError):
+                dev_samples(path)
 
 
 class CliFileErrors(unittest.TestCase):

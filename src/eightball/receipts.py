@@ -31,5 +31,15 @@ def item_odds(item: dict, scoring: str = "letter") -> dict[str, float]:
 
 def dev_samples(path: str | Path) -> tuple[list[tuple[dict[str, float], str]], str]:
     r = load(path)
-    sc = scoring_of(r)
-    return [(item_odds(i, sc), i["label"]) for i in r["items"] if i["split"] == "dev"], r["model"]
+    # A file that is valid JSON but is not a receipts file is a plausible slip;
+    # name what is missing instead of raising KeyError/TypeError from deep inside.
+    if not isinstance(r, dict) or not isinstance(r.get("items"), list) or "model" not in r:
+        raise ValueError(f'{path}: not a receipts file (needs a "model" and an "items" list)')
+    samples = []
+    for i in r["items"]:
+        if not isinstance(i, dict) or i.get("split") != "dev":
+            continue
+        if not isinstance(i.get("raw"), list) or "label" not in i:
+            raise ValueError(f'{path}: a dev item is missing its "raw" odds or "label"')
+        samples.append((item_odds(i, scoring_of(r)), i["label"]))
+    return samples, r["model"]
