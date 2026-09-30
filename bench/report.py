@@ -89,6 +89,11 @@ def main(path):
     items = r["items"]
     scoring = scoring_of(r)
     test = [i for i in items if i["split"] == "test"]
+    if not test:
+        # The scoreboard is computed on the test items; a dev-only receipts file
+        # (e.g. *-dev.json, kept for pick_scoring) has none, and test[0] below
+        # would be an IndexError. Say what is wrong instead.
+        raise ValueError(f"{path}: no test items to score (this looks like a dev-only receipts file)")
     cal = fit(dev, r["model"], TARGET)
     rows = []
     for it in test:

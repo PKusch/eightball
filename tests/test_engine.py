@@ -225,6 +225,16 @@ class BenchReceiptReaders(unittest.TestCase):
                 self.assertNotIn("Traceback", r.stderr, (script, arg))
                 self.assertIn(tag, r.stderr, (script, arg))
 
+    def test_report_on_a_dev_only_file_says_so(self):
+        root = pathlib.Path(__file__).resolve().parents[1]
+        dev_only = next(root.glob("bench/receipts/*-dev.json"), None)
+        if dev_only is None:
+            self.skipTest("no dev-only receipts file committed")
+        r = self._run("report.py", str(dev_only))
+        self.assertNotEqual(r.returncode, 0)
+        self.assertNotIn("Traceback", r.stderr)
+        self.assertIn("no test items", r.stderr)
+
 
 class CliFileErrors(unittest.TestCase):
     """A mistyped path is the commonest slip. Every command that reads a file
