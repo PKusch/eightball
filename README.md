@@ -108,7 +108,7 @@ In plain words: 4B's accuracy really does drop on real documents - a genuine gap
 
 The real set has no keyword traps the way the made-up one does, so a naive word-matcher could look better here than it deserves to ([bench/REAL_QUESTIONS.md](bench/REAL_QUESTIONS.md) says by how much: 42.9%, against 53.2% on the made-up set). Read both tables together, not the real one alone.
 
-## Try it on your own questions
+## Grade it on your own questions
 
 Put questions and the right answers in a file, one per line, and see how often the ball is wrongly sure:
 
