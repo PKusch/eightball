@@ -29,17 +29,23 @@ def item_odds(item: dict, scoring: str = "letter") -> dict[str, float]:
     return {k: sum(p[k] for p in per) / len(per) for k in KEYS}
 
 
-def dev_samples(path: str | Path) -> tuple[list[tuple[dict[str, float], str]], str]:
-    r = load(path)
-    # A file that is valid JSON but is not a receipts file is a plausible slip;
-    # name what is missing instead of raising KeyError/TypeError from deep inside.
-    if not isinstance(r, dict) or not isinstance(r.get("items"), list) or "model" not in r:
+def dev_items(receipts: dict, path: str | Path = "receipts") -> list[tuple[dict[str, float], str]]:
+    """The (odds, label) dev samples from an already-loaded receipts dict, with the
+    shape checked. A file that is valid JSON but is not a receipts file is a plausible
+    slip; name what is missing instead of a KeyError/TypeError from deep inside."""
+    if not isinstance(receipts, dict) or not isinstance(receipts.get("items"), list) or "model" not in receipts:
         raise ValueError(f'{path}: not a receipts file (needs a "model" and an "items" list)')
+    sc = scoring_of(receipts)
     samples = []
-    for i in r["items"]:
+    for i in receipts["items"]:
         if not isinstance(i, dict) or i.get("split") != "dev":
             continue
         if not isinstance(i.get("raw"), list) or "label" not in i:
             raise ValueError(f'{path}: a dev item is missing its "raw" odds or "label"')
-        samples.append((item_odds(i, scoring_of(r)), i["label"]))
-    return samples, r["model"]
+        samples.append((item_odds(i, sc), i["label"]))
+    return samples
+
+
+def dev_samples(path: str | Path) -> tuple[list[tuple[dict[str, float], str]], str]:
+    r = load(path)
+    return dev_items(r, path), r["model"]

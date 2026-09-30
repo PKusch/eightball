@@ -2,7 +2,6 @@
 
     python bench/pick_scoring.py bench/receipts/gemma3-4b.json bench/receipts/gemma3-4b-word.json
 """
-import json
 import sys
 from pathlib import Path
 
@@ -10,19 +9,21 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
 from eightball.calibrate import KEYS, fit  # noqa: E402
-from eightball.receipts import item_odds, scoring_of  # noqa: E402
+from eightball.receipts import dev_items, load, scoring_of  # noqa: E402
 
 
 def dev_accuracy(path):
-    r = json.loads(Path(path).read_text())
+    r = load(path)
     scoring = scoring_of(r)
-    dev = [(item_odds(i, scoring), i["label"]) for i in r["items"] if i["split"] == "dev"]
+    dev = dev_items(r, path)
     cal = fit(dev, r["model"], 0.9)
     right = sum(1 for p, y in dev if max(KEYS, key=cal.apply(p).get) == y) / len(dev)
     return scoring, right
 
 
 def main(paths):
+    if not paths:
+        sys.exit("usage: python bench/pick_scoring.py <receipts.json> [<receipts.json> ...]")
     scored = [dev_accuracy(p) for p in paths]
     for (scoring, acc), p in zip(scored, paths):
         print(f"{scoring:>6}: {acc:.1%} right on the fitting questions ({p})")
@@ -31,4 +32,7 @@ def main(paths):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    try:
+        main(sys.argv[1:])
+    except (OSError, ValueError) as e:
+        sys.exit(f"pick_scoring: {e}")

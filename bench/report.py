@@ -15,7 +15,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from eightball.calibrate import KEYS, Calibration, fit  # noqa: E402
 from eightball.engine import ORDERS, Odds, choose, softmax  # noqa: E402
-from eightball.receipts import item_odds, scoring_of, used_orders  # noqa: E402
+from eightball.receipts import dev_items, item_odds, load, scoring_of, used_orders  # noqa: E402
 
 TARGET = 0.9
 
@@ -84,10 +84,10 @@ def boot(diffs, n=2000, seed=1):
 
 
 def main(path):
-    r = json.loads(Path(path).read_text())
+    r = load(path)
+    dev = dev_items(r, path)   # validates the receipts shape before anything reads it
     items = r["items"]
     scoring = scoring_of(r)
-    dev = [(item_odds(i, scoring), i["label"]) for i in items if i["split"] == "dev"]
     test = [i for i in items if i["split"] == "test"]
     cal = fit(dev, r["model"], TARGET)
     rows = []
@@ -207,4 +207,9 @@ def main(path):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1])
+    if len(sys.argv) < 2:
+        sys.exit("usage: python bench/report.py <receipts.json>")
+    try:
+        main(sys.argv[1])
+    except (OSError, ValueError) as e:
+        sys.exit(f"report: {e}")

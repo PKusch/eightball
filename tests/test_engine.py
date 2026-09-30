@@ -203,6 +203,29 @@ class BenchRunArguments(unittest.TestCase):
             sys.argv = saved
 
 
+class BenchReceiptReaders(unittest.TestCase):
+    """report.py and pick_scoring.py share receipts.dev_items and must, like it,
+    end a malformed or missing file in one plain line, not a traceback."""
+
+    def _run(self, script, arg):
+        import subprocess
+        root = pathlib.Path(__file__).resolve().parents[1]
+        return subprocess.run([sys.executable, str(root / "bench" / script), arg],
+                              capture_output=True, text=True)
+
+    def test_bad_and_missing_files_end_in_one_plain_line(self):
+        d = tempfile.mkdtemp()
+        bad = os.path.join(d, "bad.json")
+        json.dump({"not": "receipts"}, open(bad, "w"))
+        gone = os.path.join(d, "gone.json")
+        for script, tag in (("report.py", "report:"), ("pick_scoring.py", "pick_scoring:")):
+            for arg in (bad, gone):
+                r = self._run(script, arg)
+                self.assertNotEqual(r.returncode, 0, (script, arg))
+                self.assertNotIn("Traceback", r.stderr, (script, arg))
+                self.assertIn(tag, r.stderr, (script, arg))
+
+
 class CliFileErrors(unittest.TestCase):
     """A mistyped path is the commonest slip. Every command that reads a file
     ends in one plain "eightball: ..." line, not a FileNotFoundError traceback."""
