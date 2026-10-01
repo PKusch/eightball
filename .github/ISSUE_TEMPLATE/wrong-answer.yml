@@ -1,0 +1,25 @@
+name: A question the ball gets wrong
+description: It committed to a plain yes or no that is wrong, or went hazy when a person would not.
+body:
+  - type: input
+    id: question
+    attributes:
+      label: The question
+      placeholder: "Is 17 a prime number?"
+    validations:
+      required: true
+  - type: input
+    id: said
+    attributes:
+      label: What the ball said
+      description: The phrase, and the model and scoring you ran (`--model`, `--scoring`).
+      placeholder: '"Don''t count on it" — gemma3, letter'
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What it should say, and why
+      description: A sentence on the reasoning is worth more than the label. If it is a kind the model cannot do (arithmetic, calendar), say whether "hazy" would have been the honest answer.
+    validations:
+      required: true
