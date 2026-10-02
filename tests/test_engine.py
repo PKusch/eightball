@@ -231,6 +231,11 @@ class BenchReceiptReaders(unittest.TestCase):
             self.assertNotEqual(r.returncode, 0, arg)
             self.assertNotIn("Traceback", r.stderr, arg)
             self.assertIn("compare:", r.stderr, arg)
+        for arg in (bad, gone):
+            r = self._run("make_demo.py", arg)
+            self.assertNotEqual(r.returncode, 0, arg)
+            self.assertNotIn("Traceback", r.stderr, arg)
+            self.assertIn("make_demo:", r.stderr, arg)
 
     def test_report_on_a_dev_only_file_says_so(self):
         root = pathlib.Path(__file__).resolve().parents[1]

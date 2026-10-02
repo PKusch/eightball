@@ -19,7 +19,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from eightball.calibrate import fit  # noqa: E402
 from eightball.engine import ORDERS, Odds, choose, softmax  # noqa: E402
-from eightball.receipts import item_odds, scoring_of, used_orders  # noqa: E402
+from eightball.receipts import dev_items, item_odds, load, scoring_of, used_orders  # noqa: E402
 from eightball.calibrate import KEYS  # noqa: E402
 
 # kinds whose questions read naturally come first, because the page builds its example chips from the top
@@ -48,10 +48,10 @@ def live_extras(model, cal, scoring):
 
 
 def sampled_entries(path, per_kind, seed, label_suffix=""):
-    r = json.loads(Path(path).read_text())
+    r = load(path)
+    dev = dev_items(r, path)   # validates the receipts shape before anything reads it
     scoring = scoring_of(r)
     n = used_orders(scoring)
-    dev = [(item_odds(i, scoring), i["label"]) for i in r["items"] if i["split"] == "dev"]
     cal = fit(dev, r["model"], 0.9)
     test = [i for i in r["items"] if i["split"] == "test"]
     rnd = random.Random(seed)
@@ -87,4 +87,9 @@ def main(path, extra_path=None):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else None)
+    if len(sys.argv) < 2:
+        sys.exit("usage: python bench/make_demo.py <receipts.json> [<real-receipts.json>]")
+    try:
+        main(sys.argv[1], sys.argv[2] if len(sys.argv) > 2 else None)
+    except (OSError, ValueError) as e:
+        sys.exit(f"make_demo: {e}")
