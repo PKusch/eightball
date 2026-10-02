@@ -75,14 +75,16 @@ def main() -> None:
         facts = it["facts"]
         if it["label"] in ("yes", "no"):
             present = facts.get("present")
-            assert present, ("yes/no item needs facts.present", it["id"])
+            assert isinstance(present, list) and present and all(isinstance(x, str) for x in present), \
+                ("yes/no item needs facts.present as a non-empty list of strings", it["id"])
             for phrase in present:
                 n_present_checks += 1
                 assert phrase.lower() in text_lc, (
                     "grounding phrase not found in text", it["id"], phrase)
         elif it["label"] == "maybe":
             absent = facts.get("absent")
-            assert absent, ("maybe item needs facts.absent", it["id"])
+            assert isinstance(absent, list) and absent and all(isinstance(x, str) for x in absent), \
+                ("maybe item needs facts.absent as a non-empty list of strings", it["id"])
             for phrase in absent:
                 n_absent_checks += 1
                 assert phrase.lower() not in text_lc, (
