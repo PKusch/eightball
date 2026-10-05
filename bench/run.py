@@ -12,7 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
-from eightball.backend import OllamaBackend  # noqa: E402
+from eightball.backend import OllamaBackend, BackendError  # noqa: E402
 from eightball.engine import ORDERS  # noqa: E402
 
 
@@ -69,6 +69,8 @@ def main():
         items = items[: a.limit]
     slug = a.model.replace(":", "-").replace("/", "-")
     out = Path(a.out) if a.out else ROOT / "bench" / "receipts" / f"{slug}.json"
+    if out.is_dir():
+        sys.exit(f"run: --out {out} is a directory; give a file name")
     out.parent.mkdir(parents=True, exist_ok=True)
     partial = out.with_suffix(".partial.jsonl")
     done = {}
@@ -104,4 +106,9 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (BackendError, OSError, ValueError) as e:
+        # The commonest failure is Ollama not running, and its message already says
+        # what to do; it was buried under a traceback.
+        sys.exit(f"run: {e}")

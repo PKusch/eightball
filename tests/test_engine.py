@@ -281,6 +281,22 @@ class BenchResume(unittest.TestCase):
         self.assertEqual((sorted(done), dropped), (["a1", "a2"], 0))
         self.assertEqual(self.path.read_text(), text)
 
+    def test_a_run_with_no_ollama_or_a_directory_for_out_is_one_plain_line(self):
+        import subprocess
+        root = pathlib.Path(__file__).resolve().parents[1]
+        out = pathlib.Path(tempfile.mkdtemp())
+        cases = [
+            (["--out", str(out / "r.json"), "--limit", "1", "--host", "http://127.0.0.1:9"], "cannot reach Ollama"),
+            (["--out", str(out), "--limit", "1"], "is a directory"),
+        ]
+        for args, expect in cases:
+            r = subprocess.run([sys.executable, str(root / "bench" / "run.py"), *args],
+                               capture_output=True, text=True, env={**os.environ, "PYTHONPATH": str(root / "src")})
+            self.assertNotEqual(r.returncode, 0, args)
+            self.assertNotIn("Traceback", r.stderr, args)
+            self.assertIn("run:", r.stderr, args)
+            self.assertIn(expect, r.stderr, args)
+
     def test_lines_that_are_json_but_not_items_are_dropped_too(self):
         self.path.write_text('[1, 2]\n"text"\n{"no_id": 1}\n{"id": "a1"}\n')
         done, dropped = self.run.read_partial(self.path)
