@@ -16,6 +16,32 @@ from eightball.backend import OllamaBackend  # noqa: E402
 from eightball.engine import ORDERS  # noqa: E402
 
 
+def read_partial(path):
+    """The finished items from a partial file, keyed by id, and how many lines were dropped.
+
+    A run killed mid-write leaves a half-written last line, which is exactly when a
+    resume is wanted, and json.loads on it used to stop the resume with a traceback.
+    An unreadable line is dropped and its item is simply redone. The file is then
+    rewritten with only the good lines, each ending in a newline, because it is
+    reopened to append: a truncated tail left in place would swallow the next record
+    onto the same line and lose that one too."""
+    text = path.read_text()
+    done, kept, dropped = {}, [], 0
+    for line in text.splitlines():
+        if not line.strip():
+            continue
+        try:
+            r = json.loads(line)
+            done[r["id"]] = r
+        except (ValueError, KeyError, TypeError):
+            dropped += 1
+            continue
+        kept.append(line)
+    if dropped or (text and not text.endswith("\n")):
+        path.write_text("".join(line + "\n" for line in kept))
+    return done, dropped
+
+
 def _positive_int(v):
     # --limit 0 is falsy, so the old `if a.limit` ran the whole set; a negative
     # sliced items[:-n] and dropped from the end. Refuse a bad count at the argument.
@@ -47,10 +73,9 @@ def main():
     partial = out.with_suffix(".partial.jsonl")
     done = {}
     if partial.exists():
-        for l in partial.read_text().splitlines():
-            if l.strip():
-                r = json.loads(l)
-                done[r["id"]] = r
+        done, dropped = read_partial(partial)
+        if dropped:
+            print(f"dropped {dropped} unreadable line(s) from {partial.name} (a run interrupted mid-write); they will be redone", flush=True)
 
     backend = OllamaBackend(a.model, a.host, scoring=a.scoring)
     t0 = time.time()

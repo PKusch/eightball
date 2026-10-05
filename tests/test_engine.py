@@ -248,6 +248,45 @@ class BenchReceiptReaders(unittest.TestCase):
         self.assertIn("no test items", r.stderr)
 
 
+class BenchResume(unittest.TestCase):
+    """bench/run.py resumes from a .partial.jsonl. A run killed mid-write leaves a
+    half-written last line, and that is exactly when a resume is wanted."""
+
+    def setUp(self):
+        sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "bench"))
+        self.run = importlib.import_module("run")
+        self.path = pathlib.Path(tempfile.mkdtemp()) / "r.partial.jsonl"
+
+    def test_a_truncated_last_line_is_dropped_and_its_item_redone(self):
+        self.path.write_text('{"id": "a1", "raw": [[1]]}\n{"id": "a2", "ra')
+        done, dropped = self.run.read_partial(self.path)
+        self.assertEqual(sorted(done), ["a1"])
+        self.assertEqual(dropped, 1)
+
+    def test_the_file_is_rewritten_so_the_next_append_starts_on_a_clean_line(self):
+        # reopened in append mode, a truncated tail would swallow the next record onto
+        # its own line, and that record would be lost on the following resume too
+        self.path.write_text('{"id": "a1", "raw": [[1]]}\n{"id": "a2", "ra')
+        self.run.read_partial(self.path)
+        with self.path.open("a") as f:
+            f.write('{"id": "a3", "raw": [[3]]}\n')
+        done, dropped = self.run.read_partial(self.path)
+        self.assertEqual(sorted(done), ["a1", "a3"])
+        self.assertEqual(dropped, 0)
+
+    def test_a_whole_file_is_left_untouched(self):
+        text = '{"id": "a1", "raw": [[1]]}\n{"id": "a2", "raw": [[2]]}\n'
+        self.path.write_text(text)
+        done, dropped = self.run.read_partial(self.path)
+        self.assertEqual((sorted(done), dropped), (["a1", "a2"], 0))
+        self.assertEqual(self.path.read_text(), text)
+
+    def test_lines_that_are_json_but_not_items_are_dropped_too(self):
+        self.path.write_text('[1, 2]\n"text"\n{"no_id": 1}\n{"id": "a1"}\n')
+        done, dropped = self.run.read_partial(self.path)
+        self.assertEqual((sorted(done), dropped), (["a1"], 3))
+
+
 class CliPort(unittest.TestCase):
     """--port out of range reached bind() and raised OverflowError, which the
     handler (BackendError, ValueError, OSError) does not catch."""
