@@ -50,6 +50,15 @@ def _common(p):
     p.add_argument("--calibration", help='a calibration file, or "none"; default: calibration/<model>.json if present')
 
 
+def port(value: str) -> int:
+    """A TCP port. Out of range used to reach bind() and die with an OverflowError,
+    which is not an OSError, so it slipped past the handler as a traceback."""
+    n = int(value)
+    if not 0 <= n <= 65535:
+        raise argparse.ArgumentTypeError(f"must be between 0 and 65535, not {n}")
+    return n
+
+
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(prog="eightball", description="A Magic 8 Ball that reads a local model's odds.")
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -62,7 +71,7 @@ def main(argv: list[str] | None = None) -> None:
     _common(a)
 
     s = sub.add_parser("serve", help="run the web page and the API")
-    s.add_argument("--port", type=int, default=8787)
+    s.add_argument("--port", type=port, default=8787, help="1-65535, or 0 to let the system pick")
     s.add_argument("--bind", default="127.0.0.1")
     s.add_argument("--cors", action="store_true", help="let other web pages call this server (off by default)")
     _common(s)

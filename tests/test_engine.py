@@ -248,6 +248,17 @@ class BenchReceiptReaders(unittest.TestCase):
         self.assertIn("no test items", r.stderr)
 
 
+class CliPort(unittest.TestCase):
+    """--port out of range reached bind() and raised OverflowError, which the
+    handler (BackendError, ValueError, OSError) does not catch."""
+
+    def test_an_out_of_range_port_is_a_usage_error(self):
+        for bad in ("70000", "-1"):
+            with self.assertRaises(SystemExit) as cm:
+                cli_main(["serve", "--backend", "mock", "--port", bad])
+            self.assertEqual(cm.exception.code, 2, bad)
+
+
 class CliFileErrors(unittest.TestCase):
     """A mistyped path is the commonest slip. Every command that reads a file
     ends in one plain "eightball: ..." line, not a FileNotFoundError traceback."""
