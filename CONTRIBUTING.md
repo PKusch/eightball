@@ -19,8 +19,11 @@ checked by `bench/check_real_text_questions.py`.
 
 ```bash
 make test            # or: PYTHONPATH=src python -m unittest discover -s tests
-make check           # the question-set validators CI runs
+make check           # the question-set validators and the doc-link check CI runs
 ```
+
+A doc you move or a heading you rename breaks the links to it without any test failing,
+so `make check` also verifies every relative link and `#heading` in the markdown.
 
 No model is needed for the tests — they use a stand-in backend. For a real reading you
 need [Ollama](https://ollama.com) and a pulled model; see the README.
