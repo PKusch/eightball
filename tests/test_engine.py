@@ -153,6 +153,25 @@ class Server(unittest.TestCase):
             self.assertIn(code, (200, 400), body[:40])
             self.assertIsInstance(payload, dict, body[:40])
 
+    def test_a_body_too_deeply_nested_to_parse_is_a_400_not_a_dropped_connection(self):
+        """json.loads raises RecursionError on deep nesting (about a thousand levels on Python
+        3.11, which CI runs). It is not a ValueError, so it escaped the handler and the
+        connection was dropped with no answer. Simulated here so it fails on every version,
+        not only the ones whose parser happens to be that shallow."""
+        from unittest import mock
+        req = urllib.request.Request(f"http://127.0.0.1:{self.port}/v1/ask", data=b'{"question": "Is x?"}',
+                                     headers={"Content-Type": "application/json"})
+        # json.loads is one global function, so the patch must end before this test parses
+        # the reply with it: read the raw bytes inside, parse outside.
+        with mock.patch("eightball.server.json.loads", side_effect=RecursionError("maximum recursion depth exceeded")):
+            try:
+                with urllib.request.urlopen(req) as r:
+                    code, raw = r.status, r.read()
+            except urllib.error.HTTPError as e:
+                code, raw = e.code, e.read()
+        self.assertEqual(code, 400)
+        self.assertIn("error", json.loads(raw))
+
     def test_a_bad_content_length_is_a_400(self):
         import http.client
         for value in ("abc", "-5", "0"):

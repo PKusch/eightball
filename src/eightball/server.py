@@ -72,7 +72,11 @@ def make_handler(ball: Ball, cors: bool):
                 question = body["question"]
                 if not isinstance(question, str):
                     raise TypeError
-            except (ValueError, KeyError, TypeError):
+            except (ValueError, KeyError, TypeError, RecursionError):
+                # RecursionError is what json.loads raises on a body nested deeper than the
+                # interpreter allows (about a thousand levels on Python 3.11). It is not a
+                # ValueError, so it used to escape, kill the handler thread, and drop the
+                # connection without an answer.
                 return self._json(400, {"error": 'body must be {"question": "..."}'})
             if not question.strip():
                 return self._json(400, {"error": "ask a question"})

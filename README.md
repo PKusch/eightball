@@ -120,7 +120,7 @@ Each line looks like `{"question": "Is Paris the capital of France?", "label": "
 
 ## Tests
 
-53 automated tests (`make test`) run on every push, on Python 3.11 to 3.13. They check the 20 answers and their 10/5/5 split, that shuffling cancels a first-place lean, that a weak yes turns hazy, the server's error handling, text mode, the scoring command, and that the command line and the benchmark scripts report a bad or missing file in one plain line.
+54 automated tests (`make test`) run on every push, on Python 3.11 to 3.13. They check the 20 answers and their 10/5/5 split, that shuffling cancels a first-place lean, that a weak yes turns hazy, the server's error handling, text mode, the scoring command, and that the command line and the benchmark scripts report a bad or missing file in one plain line.
 
 ## Known limits
 
