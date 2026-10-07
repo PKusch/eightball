@@ -43,3 +43,4 @@ check:
 	$(PY) bench/check_questions.py
 	$(PY) bench/check_text_questions.py
 	$(PY) bench/check_real_text_questions.py
+	$(PY) bench/check_links.py

@@ -12,8 +12,9 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - run: PYTHONPATH=src python -m unittest discover -s tests
-      - name: data checkers (labels must still check out)
+      - name: data checkers (labels must still check out) and doc links
         run: |
           python bench/check_questions.py
           python bench/check_text_questions.py
           python bench/check_real_text_questions.py
+          python bench/check_links.py
