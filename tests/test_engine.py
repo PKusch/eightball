@@ -134,6 +134,37 @@ class Server(unittest.TestCase):
         self.assertEqual(self.post(b'{"question": "  "}')[0], 400)
         self.assertEqual(self.post(json.dumps({"question": "x" * 600}).encode())[0], 400)
 
+    def test_odd_bodies_always_get_a_clean_answer(self):
+        """Strangers can send anything. Whatever arrives, the server answers 200 or 400 with
+        a JSON body: it never drops the connection or lets a handler thread die."""
+        import random
+        odd = [b"", b"null", b"[]", b"{}", b"42", b'"str"', b"{", b"\xff\xfe", b"\x00\x00",
+               b'{"question": null}', b'{"question": ["a"]}', b'{"question": {"a": 1}}',
+               b'{"question": "Is x?", "text": 5}', b'{"question": "Is x?", "text": []}',
+               b'{"question": "\\ud800"}',                     # a lone surrogate
+               b'{"question": "Is \\u0000 x?"}',
+               b'{"question":"Is x?","question":"Is y?"}',      # a repeated key
+               b'[{"question":"Is x?"}]',
+               b'{"question": "Is x?", "extra": ' + b"[" * 3000 + b"]" * 3000 + b"}"]
+        rnd = random.Random(1)
+        odd += [bytes(rnd.randrange(256) for _ in range(rnd.randrange(0, 60))) for _ in range(200)]
+        for body in odd:
+            code, payload = self.post(body)          # post() fails if the body of the answer is not JSON
+            self.assertIn(code, (200, 400), body[:40])
+            self.assertIsInstance(payload, dict, body[:40])
+
+    def test_a_bad_content_length_is_a_400(self):
+        import http.client
+        for value in ("abc", "-5", "0"):
+            c = http.client.HTTPConnection("127.0.0.1", self.port, timeout=5)
+            try:
+                c.putrequest("POST", "/v1/ask")
+                c.putheader("Content-Length", value)
+                c.endheaders()
+                self.assertEqual(c.getresponse().status, 400, value)
+            finally:
+                c.close()
+
     def test_answers_and_health(self):
         with urllib.request.urlopen(f"http://127.0.0.1:{self.port}/v1/answers") as r:
             self.assertEqual(len(json.loads(r.read())), 20)
