@@ -78,11 +78,11 @@ def main(path, extra_path=None):
     entries = live_extras(model, cal, scoring) + entries
     block = "[\n" + ",\n".join(json.dumps(e, ensure_ascii=False) for e in entries) + "\n]"
     page = ROOT / "web" / "index.html"
-    html = page.read_text()
+    html = page.read_text(encoding="utf-8")
     html, n = re.subn(r'(<script type="application/json" id="demo-data">).*?(</script>)',
                       lambda m: m.group(1) + "\n" + block + "\n" + m.group(2), html, count=1, flags=re.S)
     assert n == 1, "demo-data block not found"
-    page.write_text(html)
+    page.write_text(html, encoding="utf-8")
     print(f"wrote {len(entries)} saved answers into {page}")
 
 

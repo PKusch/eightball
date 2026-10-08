@@ -204,10 +204,10 @@ def main(path):
         out.append(f"| (all hazy phrases together) | {total_hazy} | {pct(sum(sum(v) for v in hazy) / total_hazy)} |")
     out.append("")
 
-    Path(path).with_suffix(".md").write_text("\n".join(out) + "\n")
+    Path(path).with_suffix(".md").write_text("\n".join(out) + "\n", encoding="utf-8")
     summary = {"model": r["model"], "scoring": scoring, "n_test": len(rows), "temperature": cal.temperature, "threshold": cal.threshold,
                **{f"acc_{n.replace(' ', '_')}": acc(n) for n in names}, **{f"wrong_commit_{n.replace(' ', '_')}": wrong_commit(n) for n in names}}
-    Path(path).with_name(Path(path).stem + "-summary.json").write_text(json.dumps(summary, indent=2) + "\n")
+    Path(path).with_name(Path(path).stem + "-summary.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
     print("\n".join(out))
 
 

@@ -25,7 +25,7 @@ def read_partial(path):
     rewritten with only the good lines, each ending in a newline, because it is
     reopened to append: a truncated tail left in place would swallow the next record
     onto the same line and lose that one too."""
-    text = path.read_text()
+    text = path.read_text(encoding="utf-8")
     done, kept, dropped = {}, [], 0
     for line in text.splitlines():
         if not line.strip():
@@ -38,7 +38,7 @@ def read_partial(path):
             continue
         kept.append(line)
     if dropped or (text and not text.endswith("\n")):
-        path.write_text("".join(line + "\n" for line in kept))
+        path.write_text("".join(line + "\n" for line in kept), encoding="utf-8")
     return done, dropped
 
 
@@ -62,7 +62,7 @@ def main():
     ap.add_argument("--out", help="default: bench/receipts/<model>.json")
     a = ap.parse_args()
 
-    items = [json.loads(l) for l in Path(a.questions).read_text().splitlines() if l.strip()]
+    items = [json.loads(l) for l in Path(a.questions).read_text(encoding="utf-8").splitlines() if l.strip()]
     if a.split != "all":
         items = [i for i in items if i["split"] == a.split]
     if a.limit is not None:
@@ -81,7 +81,7 @@ def main():
 
     backend = OllamaBackend(a.model, a.host, scoring=a.scoring)
     t0 = time.time()
-    with partial.open("a") as f:
+    with partial.open("a", encoding="utf-8") as f:
         for n, it in enumerate(items, 1):
             if it["id"] in done:
                 continue
@@ -100,7 +100,7 @@ def main():
                 print(f"{n}/{len(items)} items, {round(time.time() - t0)}s", flush=True)
 
     result = {"model": a.model, "scoring": a.scoring, "orders": ORDERS, "n": len(items), "items": [done[i["id"]] for i in items]}
-    out.write_text(json.dumps(result))
+    out.write_text(json.dumps(result), encoding="utf-8")
     partial.unlink()
     print(f"wrote {out} ({len(items)} items)")
 

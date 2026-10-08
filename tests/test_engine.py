@@ -388,6 +388,29 @@ class FilesFromOtherEditors(unittest.TestCase):
         self.assertEqual(Calibration.load(out).threshold, 0.7)
 
 
+class BenchUnderNonUtf8Default(unittest.TestCase):
+    """The real-document questions hold non-ASCII text from job postings and leases. bench/run.py
+    read them with the platform default, so on a machine whose default is not UTF-8 (ASCII here,
+    a Windows code page there) it failed before it got as far as asking the model anything."""
+
+    def test_the_real_questions_are_read_as_utf8(self):
+        import subprocess
+        root = pathlib.Path(__file__).resolve().parents[1]
+        env = {**os.environ, "PYTHONPATH": str(root / "src"), "LC_ALL": "C", "PYTHONUTF8": "0",
+               "PYTHONCOERCECLOCALE": "0", "PYTHONIOENCODING": "utf-8"}
+        probe = subprocess.run([sys.executable, "-c", "import locale; print(locale.getpreferredencoding(False))"],
+                               env=env, capture_output=True, text=True)
+        self.assertNotIn("utf", probe.stdout.lower(), "the test proves nothing if the default is UTF-8")
+        out = pathlib.Path(tempfile.mkdtemp()) / "r.json"
+        r = subprocess.run([sys.executable, str(root / "bench" / "run.py"), "--questions",
+                            str(root / "bench" / "real_text_questions.jsonl"), "--out", str(out),
+                            "--limit", "1", "--host", "http://127.0.0.1:9"],
+                           env=env, capture_output=True, text=True, encoding="utf-8")
+        # Reaching the Ollama check means the questions were read; the old error was a decode
+        self.assertIn("cannot reach Ollama", r.stderr)
+        self.assertNotIn("codec can't decode", r.stderr)
+
+
 class CliPort(unittest.TestCase):
     """--port out of range reached bind() and raised OverflowError, which the
     handler (BackendError, ValueError, OSError) does not catch."""

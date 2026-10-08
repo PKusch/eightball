@@ -27,7 +27,7 @@ class Calibration:
         return {k: w[k] / z for k in KEYS}
 
     def save(self, path: str | Path) -> None:
-        Path(path).write_text(json.dumps(asdict(self), indent=2) + "\n")
+        Path(path).write_text(json.dumps(asdict(self), indent=2) + "\n", encoding="utf-8")
 
     @classmethod
     def load(cls, path: str | Path) -> "Calibration":
