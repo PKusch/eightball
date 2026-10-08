@@ -353,6 +353,41 @@ class BenchResume(unittest.TestCase):
         self.assertEqual((sorted(done), dropped), (["a1"], 3))
 
 
+class FilesFromOtherEditors(unittest.TestCase):
+    """A file saved by Excel or Notepad on Windows starts with a UTF-8 byte order mark and may
+    use CRLF. The mark made json.loads fail on line 1 with a message about the line's format,
+    which was true of nothing a person could see. Files are also read as UTF-8 whatever the
+    machine's own code page, so a question with an accent survives."""
+
+    def write(self, text: str, bom: bool = True) -> str:
+        path = os.path.join(tempfile.mkdtemp(), "f.txt")
+        with open(path, "wb") as f:
+            f.write((b"\xef\xbb\xbf" if bom else b"") + text.encode("utf-8"))
+        return path
+
+    def test_a_score_file_with_a_byte_order_mark_loads(self):
+        from eightball.score import load_items
+        path = self.write('{"question": "Is Paris the capital of France?", "label": "yes"}\r\n')
+        self.assertEqual(load_items(path)[0]["label"], "yes")
+
+    def test_non_ascii_questions_are_read_as_utf8(self):
+        from eightball.score import load_items
+        path = self.write('{"question": "Is Zürich in Switzerland?", "label": "yes"}\n', bom=False)
+        self.assertEqual(load_items(path)[0]["question"], "Is Zürich in Switzerland?")
+
+    def test_receipts_and_calibration_files_with_a_mark_load(self):
+        from eightball.receipts import load
+        path = self.write('{"model": "m", "items": []}')
+        self.assertEqual(load(path)["model"], "m")
+        cal = Calibration(temperature=1.5, threshold=0.7, model="m", n_dev=3, target=0.9)
+        out = os.path.join(tempfile.mkdtemp(), "c.json")
+        cal.save(out)
+        raw = open(out, "rb").read()
+        with open(out, "wb") as f:
+            f.write(b"\xef\xbb\xbf" + raw)
+        self.assertEqual(Calibration.load(out).threshold, 0.7)
+
+
 class CliPort(unittest.TestCase):
     """--port out of range reached bind() and raised OverflowError, which the
     handler (BackendError, ValueError, OSError) does not catch."""

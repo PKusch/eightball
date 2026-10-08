@@ -31,7 +31,7 @@ class Calibration:
 
     @classmethod
     def load(cls, path: str | Path) -> "Calibration":
-        d = json.loads(Path(path).read_text())
+        d = json.loads(Path(path).read_text(encoding="utf-8-sig"))
         return cls(**{k: d[k] for k in cls.__dataclass_fields__ if k in d})
 
 

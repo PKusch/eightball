@@ -101,7 +101,7 @@ def main(argv: list[str] | None = None) -> None:
             res = score(ball, load_items(args.file))
             print(json.dumps(res, indent=2) if args.json else render(res))
         elif args.cmd == "ask":
-            text = Path(args.text_file).read_text() if args.text_file else args.text
+            text = Path(args.text_file).read_text(encoding="utf-8-sig") if args.text_file else args.text
             r = ball.ask(" ".join(args.question), text)
             print(json.dumps(r, indent=2) if args.json else f"{r['answer']}   ({r['category']}, {round(r['confidence'] * 100)}% sure)")
         else:

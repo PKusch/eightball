@@ -9,7 +9,7 @@ from .calibrate import KEYS
 
 
 def load(path: str | Path) -> dict:
-    return json.loads(Path(path).read_text())
+    return json.loads(Path(path).read_text(encoding="utf-8-sig"))
 
 
 def scoring_of(receipts: dict) -> str:

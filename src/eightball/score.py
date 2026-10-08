@@ -11,7 +11,7 @@ LABELS = ("yes", "no", "maybe")
 
 def load_items(path: str | Path) -> list[dict]:
     items = []
-    for n, line in enumerate(Path(path).read_text().splitlines(), 1):
+    for n, line in enumerate(Path(path).read_text(encoding="utf-8-sig").splitlines(), 1):
         if not line.strip():
             continue
         try:
