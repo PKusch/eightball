@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+- The health, safety and money guard knows more everyday words: heart attack, chest pain, antibiotics and painkillers, bleach and poison, drinking and driving, cheating, bitcoin, stocks, savings and debt. Each group has a test. It is still a word list, and the README says what that costs both ways.
 - A bad or missing file now ends in one plain line, never a traceback: `ask --text-file`, `score`, `calibrate --receipts`, and the `bench/` scripts (`run`, `report`, `pick_scoring`, `compare`). The four benchmark scripts share one validated receipts reader, and `report` on a dev-only receipts file says so instead of crashing.
 - A real-document test set (129 hand-written questions over 32 real U.S. federal job postings and excerpts from 4 real SEC-filed leases, not templated). Each model picked the same reading it picked on made-up documents, confirmed fresh. 4B's accuracy genuinely drops on real text (95.6% to 83.3%, confidence intervals don't overlap); 12B barely moves (95.1% to 96.4%). Both never wrong when they committed, on a small sample.
 - Text mode measured: reading letters could barely say "no" in text mode (right group 71.6%, wrong 34.9% of the time it spoke, against 87.5% right just asking). Reading the model's own YES/NO/MAYBE word odds fixed it: 95.6% right, wrong only 3.0% of the time it spoke, and three times faster.
