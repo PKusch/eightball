@@ -488,6 +488,22 @@ class Reasons(unittest.TestCase):
                 self.assertEqual(it["label"], "maybe", it["question"])
 
 
+class GuardNearMisses(unittest.TestCase):
+    def assert_hazy_sensitive(self, *questions):
+        for q in questions:
+            r = Ball(MockBackend()).ask(q)
+            self.assertEqual((r["committed"], r["reason"]), (False, "sensitive"), q)
+
+    def test_common_health_words_go_hazy(self):
+        self.assert_hazy_sensitive(
+            "Am I having a heart attack?",
+            "Is chest pain serious?",
+            "Should I take antibiotics for a cold?",
+            "Can ibuprofen hurt my stomach?",
+            "Am I allergic to penicillin?",
+        )
+
+
 class Score(unittest.TestCase):
     def test_scores_your_own_questions(self):
         import os, tempfile

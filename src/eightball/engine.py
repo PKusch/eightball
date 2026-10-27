@@ -36,6 +36,7 @@ YES_NO_START = re.compile(
 SENSITIVE = re.compile(
     r"\b(doctor|medicine|medication|pills?|dose|overdose|pregnan\w*|cancer|diagnos\w*|symptoms?|therapy|therapist|"
     r"depress\w*|suicid\w*|self[- ]harm|kill myself|hurt myself|lawyer|sue|lawsuit|invest\w*|mortgage|loan|"
+    r"heart attack|chest pain|stroke|antibiotics?|ibuprofen|paracetamol|aspirin|allerg\w*|"
     r"divorce|break up with|propose|does (he|she|they) (love|like) me|love me)\b", re.I)
 
 NOTE_SENSITIVE = "This is about health, safety, money or someone's feelings. Please ask a person."
