@@ -511,6 +511,15 @@ class GuardNearMisses(unittest.TestCase):
             "Are these mushrooms poisonous?",
         )
 
+    def test_money_and_relationship_decisions_go_hazy(self):
+        self.assert_hazy_sensitive(
+            "Is my girlfriend cheating on me?",
+            "Should I buy bitcoin?",
+            "Should I put my savings in stocks?",
+            "Should I quit my job?",
+            "Should I pay off my debt first?",
+        )
+
 
 class Score(unittest.TestCase):
     def test_scores_your_own_questions(self):
