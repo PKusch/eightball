@@ -35,9 +35,10 @@ YES_NO_START = re.compile(
 # Health, safety, money and other people's private feelings: a toy should never sound sure about these.
 SENSITIVE = re.compile(
     r"\b(doctor|medicine|medication|pills?|dose|overdose|pregnan\w*|cancer|diagnos\w*|symptoms?|therapy|therapist|"
-    r"depress\w*|suicid\w*|self[- ]harm|kill myself|hurt myself|lawyer|sue (me|him|her|them|us|my|our|your|the|a|an|someone|somebody)|lawsuit|invest\w*|mortgage|loans?(?! ?words?)|"
+    r"depress\w*|suicid\w*|self[- ]harm|kill myself|hurt myself|lawyer|(?-i:sue) (me|him|her|them|us|my|our|your|the|a|an|someone|somebody)|lawsuit|invest\w*|mortgage|loans?(?! ?words?)|"
     r"heart attack|chest pain|stroke|antibiotics?|ibuprofen|paracetamol|aspirin|allerg\w*|"
     r"bleach|poison\w*|chok\w*|drive after|safe to (mix|eat|drink|swim|take|combine)|"
+    r"panic attack|anxi\w*|eating disorder|abus\w*|custody|arrested|visa application|"
     r"cheat\w*|crypto\w*|bitcoin|stocks?|savings|debt|tax return|quit my job|"
     r"divorce|break up with|propose|does (he|she|they) (love|like) me|love me)\b", re.I)
 

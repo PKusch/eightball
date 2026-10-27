@@ -520,6 +520,15 @@ class GuardNearMisses(unittest.TestCase):
             "Should I pay off my debt first?",
         )
 
+    def test_mental_health_and_legal_trouble_go_hazy(self):
+        self.assert_hazy_sensitive(
+            "Am I having a panic attack?",
+            "Do I have an eating disorder?",
+            "Will I get custody of the kids?",
+            "Is my partner abusive?",
+            "Could I be arrested for this?",
+        )
+
     def test_a_name_or_a_word_that_looks_like_a_money_term_is_not_caught(self):
         from eightball.engine import SENSITIVE
         for q in ["Is Sue the capital of Spain?", "Is 'loan word' the right term for a borrowed word?"]:
