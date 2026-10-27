@@ -520,6 +520,13 @@ class GuardNearMisses(unittest.TestCase):
             "Should I pay off my debt first?",
         )
 
+    def test_a_name_or_a_word_that_looks_like_a_money_term_is_not_caught(self):
+        from eightball.engine import SENSITIVE
+        for q in ["Is Sue the capital of Spain?", "Is 'loan word' the right term for a borrowed word?"]:
+            self.assertIsNone(SENSITIVE.search(q), q)
+        for q in ["Can I sue my landlord?", "Should I take out a loan?", "Is a loan from my brother a good idea?"]:
+            self.assertIsNotNone(SENSITIVE.search(q), q)
+
 
 class Score(unittest.TestCase):
     def test_scores_your_own_questions(self):

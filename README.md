@@ -120,7 +120,7 @@ Each line looks like `{"question": "Is Paris the capital of France?", "label": "
 
 ## Tests
 
-61 automated tests (`make test`) run on every push, on Python 3.11 to 3.13. They check the 20 answers and their 10/5/5 split, that shuffling cancels a first-place lean, that a weak yes turns hazy, the server's error handling, that everyday health, safety, money and relationship questions go hazy, text mode, the scoring command, and that the command line and the benchmark scripts report a bad or missing file in one plain line.
+62 automated tests (`make test`) run on every push, on Python 3.11 to 3.13. They check the 20 answers and their 10/5/5 split, that shuffling cancels a first-place lean, that a weak yes turns hazy, the server's error handling, that everyday health, safety, money and relationship questions go hazy, text mode, the scoring command, and that the command line and the benchmark scripts report a bad or missing file in one plain line.
 
 ## Known limits
 
@@ -128,7 +128,7 @@ Each line looks like `{"question": "Is Paris the capital of France?", "label": "
 - Some kinds have few questions (history 22, bigger 14 in the test half), so their numbers are rough.
 - The questions are built from templates, so they are cleaner than real life. A model can also learn a template.
 - "Cannot be known" is a design choice: "Will Brazil win the World Cup?" is labelled that way, though someone could call it "very doubtful".
-- Health, safety, money and feelings questions always go hazy with "please ask a person", whatever the model thinks. The guard is a word list, so it errs loud: "Is Sue the capital of Spain?" goes hazy because of the name, and a sensitive question phrased with words not on the list gets through.
+- Health, safety, money and feelings questions always go hazy with "please ask a person", whatever the model thinks. The guard is a word list, so it errs loud: "Is the Dose river in Italy?" goes hazy because of one word, and a sensitive question phrased with words not on the list gets through.
 
 ## Next
 
