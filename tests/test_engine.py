@@ -503,6 +503,14 @@ class GuardNearMisses(unittest.TestCase):
             "Am I allergic to penicillin?",
         )
 
+    def test_everyday_safety_questions_go_hazy(self):
+        self.assert_hazy_sensitive(
+            "Is it safe to mix bleach and ammonia?",
+            "Can I drive after two beers?",
+            "Is it safe to eat chicken that smells a bit off?",
+            "Are these mushrooms poisonous?",
+        )
+
 
 class Score(unittest.TestCase):
     def test_scores_your_own_questions(self):
