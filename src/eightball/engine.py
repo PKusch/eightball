@@ -40,6 +40,8 @@ SENSITIVE = re.compile(
     r"bleach|poison\w*|chok\w*|drive after|safe to (mix|eat|drink|swim|take|combine)|"
     r"diabet\w*|tumou?r|fever|blood pressure|infect\w*|covid|autis\w*|antidepress\w*|tylenol|painkillers?|"
     r"surger\w*|vaccin\w*|(this|my|the) mole|rash|lump|"
+    r"leave my (husband|wife|partner)|sign this contract|lose my (house|home|job)|fire (him|her|them)|"
+    r"police|gun|ladder|baby alone|"
     r"panic attack|anxi\w*|eating disorder|abus\w*|custody|arrested|visa application|"
     r"cheat\w*|crypto\w*|bitcoin|stocks?|savings|debt|tax return|quit my job|"
     r"divorce|break up with|propose|does (he|she|they) (love|like) me|love me)\b", re.I)

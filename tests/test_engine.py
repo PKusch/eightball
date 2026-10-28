@@ -548,6 +548,15 @@ class GuardNearMisses(unittest.TestCase):
             "Is this rash serious?",
         )
 
+    def test_big_life_and_safety_decisions_go_hazy(self):
+        self.assert_hazy_sensitive(
+            "Should I leave my husband?",
+            "Should I sign this contract?",
+            "Am I going to lose my house?",
+            "Should I report this to the police?",
+            "Is it safe to use a ladder in the rain?",
+        )
+
     def test_a_name_or_a_word_that_looks_like_a_money_term_is_not_caught(self):
         from eightball.engine import SENSITIVE
         for q in ["Is a mole a small mammal?", "Is Sue the capital of Spain?", "Is 'loan word' the right term for a borrowed word?"]:
