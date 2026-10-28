@@ -529,6 +529,17 @@ class GuardNearMisses(unittest.TestCase):
             "Could I be arrested for this?",
         )
 
+    def test_named_conditions_and_medicines_go_hazy(self):
+        self.assert_hazy_sensitive(
+            "Do I have diabetes?",
+            "Is my lump a tumour?",
+            "Do I have a fever?",
+            "Is my blood pressure too high?",
+            "Do I have COVID?",
+            "Should I stop my antidepressants?",
+            "Can I take Tylenol with alcohol?",
+        )
+
     def test_a_name_or_a_word_that_looks_like_a_money_term_is_not_caught(self):
         from eightball.engine import SENSITIVE
         for q in ["Is Sue the capital of Spain?", "Is 'loan word' the right term for a borrowed word?"]:
