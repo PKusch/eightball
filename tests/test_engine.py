@@ -540,9 +540,17 @@ class GuardNearMisses(unittest.TestCase):
             "Can I take Tylenol with alcohol?",
         )
 
+    def test_procedures_and_symptoms_go_hazy(self):
+        self.assert_hazy_sensitive(
+            "Should I have surgery?",
+            "Should I get a vaccine?",
+            "Is this mole dangerous?",
+            "Is this rash serious?",
+        )
+
     def test_a_name_or_a_word_that_looks_like_a_money_term_is_not_caught(self):
         from eightball.engine import SENSITIVE
-        for q in ["Is Sue the capital of Spain?", "Is 'loan word' the right term for a borrowed word?"]:
+        for q in ["Is a mole a small mammal?", "Is Sue the capital of Spain?", "Is 'loan word' the right term for a borrowed word?"]:
             self.assertIsNone(SENSITIVE.search(q), q)
         for q in ["Can I sue my landlord?", "Should I take out a loan?", "Is a loan from my brother a good idea?"]:
             self.assertIsNotNone(SENSITIVE.search(q), q)
