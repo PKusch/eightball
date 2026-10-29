@@ -511,6 +511,16 @@ class GuardNearMisses(unittest.TestCase):
             "Are these mushrooms poisonous?",
         )
 
+    def test_conditions_and_legal_trouble_go_hazy(self):
+        self.assert_hazy_sensitive(
+            "Will I have to file for bankruptcy?",
+            "Can my landlord evict me this month?",
+            "Could I be deported?",
+            "Is this a seizure?",
+            "Do I need a restraining order?",
+            "Will I get laid off in spring?",
+        )
+
     def test_money_and_relationship_decisions_go_hazy(self):
         self.assert_hazy_sensitive(
             "Is my girlfriend cheating on me?",
