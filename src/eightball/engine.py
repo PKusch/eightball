@@ -44,6 +44,8 @@ SENSITIVE = re.compile(
     r"police|gun|ladder|baby alone|"
     r"panic attack|anxi\w*|eating disorder|abus\w*|custody|arrested|visa application|"
     r"bankrupt\w*|evict\w*|deport\w*|miscarriage|seizures?|asthma|bipolar|restraining order|laid off|"
+    r"hiv|stds?|concussion|abortion|meds|booster|chest tightness|baby breathing|dying|"
+    r"scam\w*|(?-i:sued)|illegal|is it legal|legally|"
     r"cheat\w*|crypto\w*|bitcoin|stocks?|savings|debt|tax return|quit my job|"
     r"divorce|break up with|propose|does (he|she|they) (love|like) me|love me)\b", re.I)
 

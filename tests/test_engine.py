@@ -511,6 +511,18 @@ class GuardNearMisses(unittest.TestCase):
             "Are these mushrooms poisonous?",
         )
 
+    def test_fifth_round_health_and_legal_words_go_hazy(self):
+        self.assert_hazy_sensitive(
+            "Do I have HIV?",
+            "Do I have a concussion?",
+            "Should I stop taking my meds?",
+            "Is this chest tightness serious?",
+            "Is my dog dying?",
+            "Am I being scammed?",
+            "Am I going to be sued?",
+            "Is it legal to record a call?",
+        )
+
     def test_ordinary_questions_are_not_caught_by_the_guard(self):
         for q in ["Should I order pizza tonight?", "Is my cat plotting something?",
                   "Should I paint the door green?", "Should I learn the guitar?",
