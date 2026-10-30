@@ -511,6 +511,13 @@ class GuardNearMisses(unittest.TestCase):
             "Are these mushrooms poisonous?",
         )
 
+    def test_ordinary_questions_are_not_caught_by_the_guard(self):
+        for q in ["Should I order pizza tonight?", "Is my cat plotting something?",
+                  "Should I paint the door green?", "Should I learn the guitar?",
+                  "Is it a good day for a picnic?", "Should I stay in bed?"]:
+            r = Ball(MockBackend()).ask(q)
+            self.assertNotEqual(r["reason"], "sensitive", q)
+
     def test_conditions_and_legal_trouble_go_hazy(self):
         self.assert_hazy_sensitive(
             "Will I have to file for bankruptcy?",
