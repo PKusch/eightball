@@ -523,10 +523,24 @@ class GuardNearMisses(unittest.TestCase):
             "Is it legal to record a call?",
         )
 
+    def test_sixth_round_illness_addiction_crime_and_money_go_hazy(self):
+        self.assert_hazy_sensitive(
+            "Do I have the flu?",
+            "Is it normal to hear voices?",
+            "Am I addicted to my phone?",
+            "Should I go to rehab?",
+            "Should I report a crime?",
+            "Should I retire early?",
+            "Should I buy a house?",
+            "Should I lend my brother money?",
+            "Am I too old to have a baby?",
+        )
+
     def test_ordinary_questions_are_not_caught_by_the_guard(self):
         for q in ["Should I order pizza tonight?", "Is my cat plotting something?",
                   "Should I paint the door green?", "Should I learn the guitar?",
-                  "Is it a good day for a picnic?", "Should I stay in bed?"]:
+                  "Is it a good day for a picnic?", "Should I stay in bed?",
+                  "Should I borrow a book?", "Is the fluffy cat asleep?"]:
             r = Ball(MockBackend()).ask(q)
             self.assertNotEqual(r["reason"], "sensitive", q)
 
