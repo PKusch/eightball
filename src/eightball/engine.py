@@ -48,6 +48,8 @@ SENSITIVE = re.compile(
     r"scam\w*|(?-i:sued)|illegal|is it legal|legally|"
     r"flu|influenza|voices|addict\w*|rehab|drinking problem|crimes?|retire\w*|buy a (house|home)|"
     r"(lend|borrow)\w*\b[^?]{0,20}\bmoney|have a baby|fertility|"
+    r"carbon monoxide (leak\w*|alarm|poison\w*)|mou?ld|hitchhik\w*|melatonin|apn?oea|fast for|cleanse|space heater|walk to school alone|"
+    r"have (children|kids)|sell my (house|home|flat)|get married|job offer|move in with|"
     r"cheat\w*|crypto\w*|bitcoin|stocks?|savings|debt|tax return|quit my job|"
     r"divorce|break up with|propose|does (he|she|they) (love|like) me|love me)\b", re.I)
 

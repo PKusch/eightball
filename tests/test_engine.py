@@ -536,11 +536,27 @@ class GuardNearMisses(unittest.TestCase):
             "Am I too old to have a baby?",
         )
 
+    def test_seventh_round_home_safety_diet_and_big_life_choices_go_hazy(self):
+        self.assert_hazy_sensitive(
+            "Is carbon monoxide leaking?",
+            "Is mold in my flat dangerous?",
+            "Is it safe to use a space heater overnight?",
+            "Is it safe to hitchhike?",
+            "Can I take melatonin every night?",
+            "Is it okay to fast for a week?",
+            "Should I have children?",
+            "Should I sell my house?",
+            "Should I get married?",
+            "Should I take the job offer?",
+            "Should I move in with my partner?",
+        )
+
     def test_ordinary_questions_are_not_caught_by_the_guard(self):
         for q in ["Should I order pizza tonight?", "Is my cat plotting something?",
                   "Should I paint the door green?", "Should I learn the guitar?",
                   "Is it a good day for a picnic?", "Should I stay in bed?",
-                  "Should I borrow a book?", "Is the fluffy cat asleep?"]:
+                  "Should I borrow a book?", "Is the fluffy cat asleep?",
+                  "Should I paint the room mauve?", "Is the moulded plastic chair comfy?"]:
             r = Ball(MockBackend()).ask(q)
             self.assertNotEqual(r["reason"], "sensitive", q)
 
