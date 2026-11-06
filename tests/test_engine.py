@@ -100,6 +100,25 @@ class Calib(unittest.TestCase):
         Calibration(1.4, 0.7, "m", 10, 0.9).save(p)
         self.assertEqual(Calibration.load(p).threshold, 0.7)
 
+    def test_a_calibration_file_without_its_numbers_is_refused(self):
+        # It used to load as "no calibration", so the ball ran uncalibrated
+        # without a word: a different confidence dressed as the calibrated one.
+        d = tempfile.mkdtemp()
+        for name, body in [("empty", ""), ("shape", '{"x": 1}'), ("list", "[1]"),
+                           ("zero", '{"temperature": 0, "threshold": 0.5}'),
+                           ("over", '{"temperature": 2, "threshold": 1.5}'),
+                           ("text", '{"temperature": "2", "threshold": 0.5}')]:
+            p = os.path.join(d, name + ".json")
+            pathlib.Path(p).write_text(body, encoding="utf-8")
+            with self.subTest(name), self.assertRaises(ValueError) as e:
+                Calibration.load(p)
+            self.assertIn(p, str(e.exception))
+
+    def test_every_committed_calibration_file_loads(self):
+        for p in sorted(pathlib.Path(__file__).resolve().parents[1].glob("calibration/*.json")):
+            with self.subTest(p.name):
+                Calibration.load(p)
+
 
 class Server(unittest.TestCase):
     @classmethod

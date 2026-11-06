@@ -31,8 +31,25 @@ class Calibration:
 
     @classmethod
     def load(cls, path: str | Path) -> "Calibration":
-        d = json.loads(Path(path).read_text(encoding="utf-8-sig"))
+        """A calibration file, or a ValueError naming the file and what is wrong.
+        A file missing its two numbers used to load as "no calibration" and the
+        ball ran uncalibrated without saying so."""
+        try:
+            d = json.loads(Path(path).read_text(encoding="utf-8-sig"))
+        except json.JSONDecodeError as e:
+            raise ValueError(f"{path} is not a calibration file: {e}") from None
+        if not isinstance(d, dict):
+            raise ValueError(f"{path} is not a calibration file (expected an object with temperature and threshold)")
+        t, th = d.get("temperature"), d.get("threshold")
+        if not _number(t) or not t > 0:
+            raise ValueError(f"{path}: temperature must be a number above 0, got {t!r}")
+        if not _number(th) or not 0 <= th <= 1:
+            raise ValueError(f"{path}: threshold must be a number from 0 to 1, got {th!r}")
         return cls(**{k: d[k] for k in cls.__dataclass_fields__ if k in d})
+
+
+def _number(x) -> bool:
+    return isinstance(x, (int, float)) and not isinstance(x, bool) and math.isfinite(x)
 
 
 def _nll(samples: list[tuple[dict[str, float], str]], t: float) -> float:
