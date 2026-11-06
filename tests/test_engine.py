@@ -441,6 +441,17 @@ class CliPort(unittest.TestCase):
             self.assertEqual(cm.exception.code, 2, bad)
 
 
+class CliTarget(unittest.TestCase):
+    def test_a_calibration_target_outside_0_to_1_is_a_usage_error(self):
+        # Checked at parse time, so no receipts file is needed and none is written.
+        out = os.path.join(tempfile.mkdtemp(), "c.json")
+        for bad in ("1.5", "0", "-0.2", "nan", "90"):
+            with self.subTest(bad), self.assertRaises(SystemExit) as cm:
+                cli_main(["calibrate", "--receipts", "nowhere.json", "--out", out, "--target", bad])
+            self.assertEqual(cm.exception.code, 2, bad)
+        self.assertFalse(os.path.exists(out))
+
+
 class CliFileErrors(unittest.TestCase):
     """A mistyped path is the commonest slip. Every command that reads a file
     ends in one plain "eightball: ..." line, not a FileNotFoundError traceback."""

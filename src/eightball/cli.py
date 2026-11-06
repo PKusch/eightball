@@ -59,6 +59,15 @@ def port(value: str) -> int:
     return n
 
 
+def accuracy(value: str) -> float:
+    """An accuracy to aim for, above 0 and at most 1. 1.5 or nan used to fit a
+    threshold for a target no ball can reach, and save it as if it had."""
+    x = float(value)
+    if not 0 < x <= 1:  # also false for nan
+        raise argparse.ArgumentTypeError(f"must be above 0 and at most 1 (0.9 means 90%), not {value}")
+    return x
+
+
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(prog="eightball", description="A Magic 8 Ball that reads a local model's odds.")
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -84,7 +93,7 @@ def main(argv: list[str] | None = None) -> None:
     c = sub.add_parser("calibrate", help="fit calibration from benchmark receipts (dev items only)")
     c.add_argument("--receipts", required=True)
     c.add_argument("--out", required=True)
-    c.add_argument("--target", type=float, default=0.9, help="accuracy wanted when the ball commits to yes or no")
+    c.add_argument("--target", type=accuracy, default=0.9, help="accuracy wanted when the ball commits to yes or no")
 
     args = ap.parse_args(argv)
     try:
