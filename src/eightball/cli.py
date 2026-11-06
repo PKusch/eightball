@@ -111,6 +111,11 @@ def main(argv: list[str] | None = None) -> None:
             print(json.dumps(res, indent=2) if args.json else render(res))
         elif args.cmd == "ask":
             text = Path(args.text_file).read_text(encoding="utf-8-sig") if args.text_file else args.text
+            if args.text_file and not text.strip():
+                # The ball reads blank text as "no text" and answers from general
+                # knowledge, which is right for an empty box on the page but not
+                # for a file someone named on purpose.
+                sys.exit(f"eightball: {args.text_file} has no text to answer about")
             r = ball.ask(" ".join(args.question), text)
             print(json.dumps(r, indent=2) if args.json else f"{r['answer']}   ({r['category']}, {round(r['confidence'] * 100)}% sure)")
         else:

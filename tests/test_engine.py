@@ -468,6 +468,13 @@ class CliFileErrors(unittest.TestCase):
         self._expect_clean_exit(["score", "/no/such/file.jsonl", "--backend", "mock"])
         self._expect_clean_exit(["calibrate", "--receipts", "/no/such/file.jsonl", "--out", "/tmp/eightball-test-out.json"])
 
+    def test_an_empty_text_file_is_named_not_answered_from_general_knowledge(self):
+        p = os.path.join(tempfile.mkdtemp(), "blank.txt")
+        pathlib.Path(p).write_text("  \n\n", encoding="utf-8")
+        with self.assertRaises(SystemExit) as cm:
+            cli_main(["ask", "is the rent due monthly", "--backend", "mock", "--text-file", p])
+        self.assertEqual(cm.exception.code, f"eightball: {p} has no text to answer about")
+
 
 if __name__ == "__main__":
     unittest.main()

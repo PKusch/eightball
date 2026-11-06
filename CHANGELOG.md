@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+- `ask --text-file` with an empty file says so, instead of quietly answering from general knowledge as if no file had been given.
 - `calibrate --target` must be above 0 and at most 1. A target of 1.5, 90 or nan used to be fitted and saved as if it could be reached.
 - A calibration file missing its temperature or threshold, or with one out of range, is refused in one line. It used to load as no calibration, so the ball ran uncalibrated without saying so.
 - The health, safety and money guard knows more everyday words: heart attack, chest pain, antibiotics and painkillers, bleach and poison, drinking and driving, cheating, bitcoin, stocks, savings and debt, panic attacks, eating disorders, abuse, custody and arrest, named conditions and medicines (diabetes, fever, COVID, antidepressants), surgery and vaccines, and big life and safety decisions (leaving a partner, signing a contract, the police, ladders), plus bankruptcy, eviction, deportation, seizures, HIV, concussion, dying, scams, being sued and legality, and the flu, voices, addiction, rehab, crime, retiring, buying a house lending money, then carbon monoxide leaks, mould, hitchhiking, melatonin, fasting, having children, selling a house, marriage, job offers and moving in together. Each group has a test. It is still a word list, and the README says what that costs both ways.
