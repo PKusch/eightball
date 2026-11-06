@@ -476,9 +476,6 @@ class CliFileErrors(unittest.TestCase):
         self.assertEqual(cm.exception.code, f"eightball: {p} has no text to answer about")
 
 
-if __name__ == "__main__":
-    unittest.main()
-
 
 class Warm(unittest.TestCase):
     def test_keep_alive_is_sent_and_warm_loads(self):
@@ -825,3 +822,7 @@ class MakeDemo(unittest.TestCase):
         self.assertTrue(all(", real document" in e["backend"] for e in extra_entries))
         self.assertTrue(all(", real document" not in e["backend"] for e in main_entries))
         self.assertGreater(len(extra_entries), 0)
+
+
+if __name__ == "__main__":
+    unittest.main()
