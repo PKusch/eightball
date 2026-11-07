@@ -824,5 +824,14 @@ class MakeDemo(unittest.TestCase):
         self.assertGreater(len(extra_entries), 0)
 
 
+class AsciiConsole(unittest.TestCase):
+    def test_the_link_checker_runs_on_a_console_that_is_not_utf8(self):
+        import subprocess
+        root = pathlib.Path(__file__).resolve().parents[1]
+        env = dict(os.environ, LC_ALL="C", PYTHONUTF8="0", PYTHONCOERCECLOCALE="0", PYTHONIOENCODING="ascii")
+        r = subprocess.run([sys.executable, "bench/check_links.py"], cwd=root, env=env, capture_output=True)
+        self.assertEqual(r.returncode, 0, r.stderr.decode("utf-8", "replace")[-300:])
+
+
 if __name__ == "__main__":
     unittest.main()

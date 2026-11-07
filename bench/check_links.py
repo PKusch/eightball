@@ -8,6 +8,10 @@ file path stays right, so the heading is checked too, the way GitHub builds it.
 """
 from __future__ import annotations
 import re, sys
+# It prints check marks; a console that cannot show them must not turn a
+# clean run into a crash.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(errors="replace")
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
