@@ -448,6 +448,14 @@ class CliTextSource(unittest.TestCase):
         self.assertEqual(cm.exception.code, 2)
 
 
+class CliBind(unittest.TestCase):
+    def test_an_address_that_cannot_be_used_is_named_in_one_line(self):
+        with self.assertRaises(SystemExit) as cm:
+            cli_main(["serve", "--backend", "mock", "--bind", "nonsense.invalid", "--port", "0"])
+        self.assertIsInstance(cm.exception.code, str)
+        self.assertIn("cannot listen on nonsense.invalid:0", cm.exception.code)
+
+
 class CliTarget(unittest.TestCase):
     def test_a_calibration_target_outside_0_to_1_is_a_usage_error(self):
         # Checked at parse time, so no receipts file is needed and none is written.

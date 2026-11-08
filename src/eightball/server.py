@@ -95,6 +95,12 @@ def make_handler(ball: Ball, cors: bool):
 
 
 def serve(ball: Ball, host: str = "127.0.0.1", port: int = 8787, cors: bool = False) -> None:
+    # Open the port first: a mistyped --bind used to fail only after the slow
+    # model load, with an error ("nodename nor servname") that named no address.
+    try:
+        httpd = ThreadingHTTPServer((host, port), make_handler(ball, cors))
+    except OSError as e:
+        raise OSError(f"cannot listen on {host}:{port}: {e.strerror or e}") from None
     warm = getattr(ball.backend, "warm", None)
     if warm:
         print("loading the model so the first question is quick...", flush=True)
@@ -102,7 +108,6 @@ def serve(ball: Ball, host: str = "127.0.0.1", port: int = 8787, cors: bool = Fa
             warm()
         except Exception as e:  # not fatal: the first question will surface the real error
             print(f"could not preload the model ({e}); the first question may be slow", flush=True)
-    httpd = ThreadingHTTPServer((host, port), make_handler(ball, cors))
     print(f"eightball on http://{host}:{port}  (backend: {getattr(ball.backend, 'name', '?')})")
     try:
         httpd.serve_forever()
