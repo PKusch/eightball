@@ -115,7 +115,7 @@ class Calib(unittest.TestCase):
             self.assertIn(p, str(e.exception))
 
     def test_every_committed_calibration_file_loads(self):
-        for p in sorted(pathlib.Path(__file__).resolve().parents[1].glob("calibration/*.json")):
+        for p in sorted(pathlib.Path(__file__).resolve().parents[1].glob("src/eightball/calibration/*.json")):
             with self.subTest(p.name):
                 Calibration.load(p)
 

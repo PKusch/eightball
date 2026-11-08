@@ -1,6 +1,7 @@
 # Changelog
 
 ## Unreleased
+- The calibration files moved into the package (`src/eightball/calibration/`), so a copy installed with pip is calibrated. It used to find none, warn, and answer with a different confidence (96% where the calibrated ball says 56%). CI now installs the package and checks this.
 - `ask --text-file` with an empty file says so, instead of quietly answering from general knowledge as if no file had been given.
 - `calibrate --target` must be above 0 and at most 1. A target of 1.5, 90 or nan used to be fitted and saved as if it could be reached.
 - A calibration file missing its temperature or threshold, or with one out of range, is refused in one line. It used to load as no calibration, so the ball ran uncalibrated without saying so.

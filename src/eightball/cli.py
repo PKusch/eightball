@@ -11,7 +11,9 @@ from .calibrate import Calibration, fit
 from .engine import Ball
 from .mock import MockBackend
 
-CAL_DIR = Path(__file__).resolve().parents[2] / "calibration"
+# Inside the package, so a pip-installed copy ships its calibration too; it used
+# to sit at the repository root, and an installed ball ran uncalibrated.
+CAL_DIR = Path(__file__).resolve().parent / "calibration"
 
 
 def _slug(model: str) -> str:
@@ -47,7 +49,7 @@ def _common(p):
     p.add_argument("--model", default="gemma3")
     p.add_argument("--host", default="http://127.0.0.1:11434", help="where Ollama is listening")
     p.add_argument("--scoring", choices=["letter", "word"], default="letter", help="how the model's odds are read")
-    p.add_argument("--calibration", help='a calibration file, or "none"; default: calibration/<model>.json if present')
+    p.add_argument("--calibration", help='a calibration file, or "none"; default: the shipped src/eightball/calibration/<model>.json if present')
 
 
 def port(value: str) -> int:

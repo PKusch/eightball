@@ -18,3 +18,12 @@ jobs:
           python bench/check_text_questions.py
           python bench/check_real_text_questions.py
           python bench/check_links.py
+      - name: an installed copy ships its calibration
+        # Run from outside the repository, so only what pip installed is found.
+        # Before the calibration moved into the package, this printed
+        # "no calibration ... running uncalibrated" and a different confidence.
+        run: |
+          python -m pip install --quiet .
+          cd "$RUNNER_TEMP"
+          eightball ask "is water wet?" --backend mock 2> err.txt
+          test ! -s err.txt || { cat err.txt; exit 1; }
