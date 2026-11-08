@@ -77,8 +77,10 @@ def main(argv: list[str] | None = None) -> None:
     a = sub.add_parser("ask", help="ask one question")
     a.add_argument("question", nargs="+")
     a.add_argument("--json", action="store_true", help="print the full answer as JSON")
-    a.add_argument("--text", help="answer about this text instead of from general knowledge")
-    a.add_argument("--text-file", help="answer about the text in this file")
+    # one source of text: --text-file used to win over --text without a word
+    src = a.add_mutually_exclusive_group()
+    src.add_argument("--text", help="answer about this text instead of from general knowledge")
+    src.add_argument("--text-file", help="answer about the text in this file")
     _common(a)
 
     s = sub.add_parser("serve", help="run the web page and the API")

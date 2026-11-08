@@ -441,6 +441,13 @@ class CliPort(unittest.TestCase):
             self.assertEqual(cm.exception.code, 2, bad)
 
 
+class CliTextSource(unittest.TestCase):
+    def test_text_and_text_file_together_is_a_usage_error(self):
+        with self.assertRaises(SystemExit) as cm:
+            cli_main(["ask", "is it", "--backend", "mock", "--text", "a", "--text-file", "b.txt"])
+        self.assertEqual(cm.exception.code, 2)
+
+
 class CliTarget(unittest.TestCase):
     def test_a_calibration_target_outside_0_to_1_is_a_usage_error(self):
         # Checked at parse time, so no receipts file is needed and none is written.
