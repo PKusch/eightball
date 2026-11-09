@@ -2,3 +2,9 @@ __pycache__/
 *.pyc
 .DS_Store
 *.partial.jsonl
+
+# a local pip install or build (CI runs pip install . since the calibration moved into the package)
+build/
+dist/
+*.egg-info/
+.venv/
