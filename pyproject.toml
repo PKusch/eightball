@@ -1,6 +1,6 @@
 [project]
 name = "eightball"
-version = "0.1.0"
+version = "0.2.0"
 description = "A Magic 8 Ball that reads a local model's odds and answers with one of the classic 20 phrases."
 requires-python = ">=3.11"
 license = { text = "MIT" }

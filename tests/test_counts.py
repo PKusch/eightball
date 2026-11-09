@@ -17,5 +17,19 @@ class ReadmeQuotesTheRealTestCount(unittest.TestCase):
         self.assertEqual(set(quoted), {n}, f"README.md quotes {quoted}; the suite has {n}")
 
 
+
+class OneVersion(unittest.TestCase):
+    """The version is written in pyproject.toml and in the package; the
+    changelog must have a section for it."""
+
+    def test_the_package_pyproject_and_changelog_agree(self):
+        import sys
+        sys.path.insert(0, str(ROOT / "src"))
+        from eightball import __version__
+        project = re.search(r'^version = "([^"]+)"', (ROOT / "pyproject.toml").read_text(encoding="utf-8"), re.M).group(1)
+        self.assertEqual(__version__, project)
+        self.assertRegex((ROOT / "CHANGELOG.md").read_text(encoding="utf-8"), rf"(?m)^## {re.escape(project)}\b")
+
+
 if __name__ == "__main__":
     unittest.main()

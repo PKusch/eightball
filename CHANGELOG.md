@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.2.0 (2026-11-09)
 - `serve` with an address it cannot use says which address, and says it before loading the model rather than after.
 - `ask --text` and `--text-file` together is refused; the file used to win without a word.
 - The calibration files moved into the package (`src/eightball/calibration/`), so a copy installed with pip is calibrated. It used to find none, warn, and answer with a different confidence (96% where the calibrated ball says 56%). CI now installs the package and checks this.
